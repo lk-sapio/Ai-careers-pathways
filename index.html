@@ -381,8 +381,15 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      min-height: calc(100dvh - 72px);
-      padding: var(--space-16) var(--space-6);
+      min-height: min(calc(100dvh - 72px), 840px);
+      padding: clamp(var(--space-10), 8vh, var(--space-16)) var(--space-6);
+    }
+
+    @media (min-width: 900px) {
+      .intro-stage {
+        justify-content: flex-start;
+        padding-top: clamp(var(--space-16), 16vh, var(--space-24));
+      }
     }
 
     .intro-eyebrow {
@@ -950,6 +957,12 @@
       color: var(--color-success);
     }
 
+    .myth-btn.myth-selected-unknown {
+      background: color-mix(in srgb, var(--color-warning) 12%, transparent);
+      border-color: var(--color-warning);
+      color: var(--color-warning);
+    }
+
     .myth-verdict {
       display: none;
       margin-top: var(--space-3);
@@ -971,25 +984,18 @@
       border-left: 3px solid var(--color-success);
     }
 
-    .myth-badge {
-      font-size: var(--text-xs);
-      font-weight: 700;
-      padding: var(--space-1) var(--space-3);
-      border-radius: var(--radius-full);
-      flex-shrink: 0;
-      align-self: flex-start;
+    .myth-verdict.verdict-unknown {
+      background: color-mix(in srgb, var(--color-warning) 10%, var(--color-surface));
+      border-left: 3px solid var(--color-warning);
     }
-
-    .badge-myth { background: color-mix(in srgb, var(--color-error) 15%, transparent); color: var(--color-error); }
-    .badge-fact { background: color-mix(in srgb, var(--color-success) 15%, transparent); color: var(--color-success); }
 
     /* ============================================================
        EXPOSURE SPECTRUM (Stage 3)
     ============================================================ */
     .spectrum-track {
       position: relative;
-      margin: var(--space-8) 0;
-      padding: 0 var(--space-4);
+      margin: var(--space-6) 0;
+      padding: 0 var(--space-2);
     }
 
     .spectrum-bar {
@@ -1005,11 +1011,17 @@
       font-size: var(--text-xs);
       color: var(--color-text-muted);
       font-weight: 600;
+      gap: var(--space-3);
+    }
+
+    .spectrum-guess-labels span:nth-child(2) {
+      text-align: center;
+      flex: 1;
     }
 
     .career-sort-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
       gap: var(--space-3);
       margin-bottom: var(--space-6);
     }
@@ -1020,44 +1032,131 @@
       border-radius: var(--radius-lg);
       padding: var(--space-4);
       cursor: pointer;
-      text-align: center;
+      text-align: left;
       transition: all var(--transition-interactive);
       position: relative;
+      min-height: 124px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: var(--space-2);
     }
 
-    .career-sort-card:not(.answered):hover {
+    .career-sort-card:hover,
+    .career-sort-card.active {
       border-color: var(--color-primary);
       box-shadow: var(--shadow-md);
       transform: translateY(-2px);
     }
 
+    .career-sort-card.answered {
+      cursor: pointer;
+    }
+
     .career-sort-card .career-icon {
-      font-size: 1.75rem;
-      margin-bottom: var(--space-2);
+      font-size: 1.6rem;
+      margin-bottom: var(--space-1);
     }
 
     .career-sort-card .career-name {
-      font-size: var(--text-sm);
-      font-weight: 600;
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .career-sort-card .career-meta {
+      font-size: 0.73rem;
+      color: var(--color-text-muted);
+      line-height: 1.35;
     }
 
     .career-sort-card .career-exposure {
       display: none;
       font-size: var(--text-xs);
-      color: var(--color-text-muted);
-      margin-top: var(--space-1);
+      font-weight: 700;
+      margin-top: var(--space-2);
     }
 
     .career-sort-card.answered .career-exposure { display: block; }
-
-    .career-sort-card.answered {
-      cursor: default;
-    }
 
     /* Exposure level colours */
     .exp-high  { border-color: var(--color-exposed); }
     .exp-med   { border-color: var(--color-warning); }
     .exp-low   { border-color: var(--color-protected); }
+
+    .career-guess-panel {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5);
+      margin-bottom: var(--space-4);
+    }
+
+    .career-guess-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: var(--space-2);
+    }
+
+    .career-guess-subtitle {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .career-slider {
+      width: 100%;
+      appearance: none;
+      background: transparent;
+      margin: var(--space-3) 0 var(--space-2);
+    }
+
+    .career-slider::-webkit-slider-runnable-track {
+      height: 12px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(to right, var(--color-protected), var(--color-surface-dynamic), var(--color-exposed));
+    }
+
+    .career-slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 22px;
+      height: 22px;
+      margin-top: -5px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      border: 2px solid var(--color-surface-2);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .career-slider::-moz-range-track {
+      height: 12px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(to right, var(--color-protected), var(--color-surface-dynamic), var(--color-exposed));
+    }
+
+    .career-slider::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      border: 2px solid var(--color-surface-2);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .career-slider:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    .career-guess-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      margin-top: var(--space-4);
+    }
 
     .career-detail-box {
       display: none;
@@ -1222,8 +1321,12 @@
     ============================================================ */
     .card-sort-area {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: var(--space-4);
+    }
+
+    @media (max-width: 900px) {
+      .card-sort-area { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 640px) {
@@ -1247,9 +1350,10 @@
       text-align: center;
     }
 
-    .sort-col-new      { color: var(--color-stage5); border-color: var(--color-stage5); }
-    .sort-col-reshape  { color: var(--color-stage3); border-color: var(--color-stage3); }
-    .sort-col-change   { color: var(--color-stage2); border-color: var(--color-stage2); }
+    .sort-col-longstanding  { color: var(--color-stage2); border-color: var(--color-stage2); }
+    .sort-col-reshape-light { color: var(--color-stage4); border-color: var(--color-stage4); }
+    .sort-col-reshape-heavy { color: var(--color-stage3); border-color: var(--color-stage3); }
+    .sort-col-new           { color: var(--color-stage5); border-color: var(--color-stage5); }
 
     .sortable-job-card {
       background: var(--color-surface);
@@ -1271,7 +1375,7 @@
     }
 
     .sortable-job-card.placed {
-      opacity: 0.6;
+      opacity: 1;
       cursor: default;
     }
 
@@ -1356,115 +1460,19 @@
     .guess-opt:disabled { cursor: default; }
 
     /* Skills challenge */
-    .skills-drag-area {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-2);
-      padding: var(--space-4);
-      background: var(--color-surface);
-      border: 1px dashed var(--color-border);
-      border-radius: var(--radius-xl);
-      min-height: 60px;
+    .skills-quiz-wrap {
       margin-bottom: var(--space-4);
     }
 
-    .skill-chip {
-      background: var(--color-surface-offset);
-      border: 1.5px solid var(--color-border);
-      border-radius: var(--radius-full);
-      padding: var(--space-2) var(--space-4);
-      font-size: var(--text-sm);
-      font-weight: 500;
-      cursor: pointer;
-      transition: all var(--transition-interactive);
-    }
-
-    .skill-chip.transferable {
-      border-color: var(--color-success);
-      background: color-mix(in srgb, var(--color-success) 12%, var(--color-surface));
-      color: var(--color-success);
-    }
-
-    .skill-chip.specialist {
-      border-color: var(--color-stage1);
-      background: color-mix(in srgb, var(--color-stage1) 12%, var(--color-surface));
-      color: var(--color-stage1);
-    }
-
     /* ============================================================
-       FINAL PATHWAYS (Stage 6)
+       STAGE 6 CASE STUDIES
     ============================================================ */
-    .priority-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: var(--space-3);
-      margin-bottom: var(--space-6);
-    }
-
-    .priority-card {
-      background: var(--color-surface);
-      border: 1.5px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      padding: var(--space-4);
-      text-align: center;
-      cursor: pointer;
-      transition: all var(--transition-interactive);
-      user-select: none;
-    }
-
-    .priority-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-sm); }
-
-    .priority-card.selected {
-      border-color: var(--color-primary);
-      background: var(--color-primary-light);
-    }
-
-    .priority-icon { font-size: 1.75rem; margin-bottom: var(--space-2); }
-    .priority-label { font-size: var(--text-sm); font-weight: 600; }
-
-    .pathway-result-card {
+    .case-study-panel {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-xl);
       padding: var(--space-6);
-      margin-bottom: var(--space-4);
-    }
-
-    .pathway-result-header {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      margin-bottom: var(--space-4);
-    }
-
-    .pathway-result-icon {
-      font-size: 2rem;
-      width: 52px; height: 52px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: var(--radius-lg);
-      flex-shrink: 0;
-    }
-
-    .pathway-result-name {
-      font-family: var(--font-display);
-      font-size: var(--text-lg);
-      font-weight: 700;
-    }
-
-    .pathway-sections {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-3);
-    }
-
-    @media (max-width: 560px) {
-      .pathway-sections { grid-template-columns: 1fr; }
-    }
-
-    .pathway-section {
-      background: var(--color-surface-offset);
-      border-radius: var(--radius-lg);
-      padding: var(--space-4);
+      margin-top: var(--space-4);
     }
 
     .pathway-section-label {
@@ -1514,6 +1522,20 @@
       font-size: var(--text-xs);
       color: var(--color-text-faint);
       margin-top: var(--space-3);
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--color-divider);
+      padding: var(--space-4) var(--space-6) var(--space-6);
+      text-align: center;
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+    }
+
+    .site-footer a {
+      color: var(--color-text-muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
     }
 
     /* ============================================================
@@ -1988,58 +2010,11 @@
         <!-- Myth / Fact cards -->
         <p class="instruction-label">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
-          Myth or Fact? Decide for each statement, then see the evidence.
+          Judge each statement, then reveal the evidence. Some are myths, some are facts, and some are still uncertain.
         </p>
 
-        <div class="myth-cards" role="list">
-          <!-- Card 1 -->
-          <div class="myth-card" role="listitem" data-testid="myth-card-1">
-            <div>
-              <p class="myth-statement">"AI will completely replace most jobs within the next decade."</p>
-              <div class="myth-buttons" role="group" aria-label="Is this a myth or fact?">
-                <button class="myth-btn" data-testid="myth-btn-1-myth" onclick="judgeMyth(this, 1, 'myth')">Myth</button>
-                <button class="myth-btn" data-testid="myth-btn-1-fact" onclick="judgeMyth(this, 1, 'fact')">Fact</button>
-              </div>
-              <div class="myth-verdict" id="myth-verdict-1"></div>
-            </div>
-            <span class="myth-badge badge-myth" aria-hidden="true">MYTH</span>
-          </div>
-          <!-- Card 2 -->
-          <div class="myth-card" role="listitem" data-testid="myth-card-2">
-            <div>
-              <p class="myth-statement">"AI mostly changes <em>tasks within</em> jobs, rather than replacing entire occupations."</p>
-              <div class="myth-buttons" role="group" aria-label="Is this a myth or fact?">
-                <button class="myth-btn" data-testid="myth-btn-2-myth" onclick="judgeMyth(this, 2, 'myth')">Myth</button>
-                <button class="myth-btn" data-testid="myth-btn-2-fact" onclick="judgeMyth(this, 2, 'fact')">Fact</button>
-              </div>
-              <div class="myth-verdict" id="myth-verdict-2"></div>
-            </div>
-            <span class="myth-badge badge-fact" aria-hidden="true">FACT</span>
-          </div>
-          <!-- Card 3 -->
-          <div class="myth-card" role="listitem" data-testid="myth-card-3">
-            <div>
-              <p class="myth-statement">"Being in a job that's 'exposed' to AI means you'll probably lose it."</p>
-              <div class="myth-buttons" role="group" aria-label="Is this a myth or fact?">
-                <button class="myth-btn" data-testid="myth-btn-3-myth" onclick="judgeMyth(this, 3, 'myth')">Myth</button>
-                <button class="myth-btn" data-testid="myth-btn-3-fact" onclick="judgeMyth(this, 3, 'fact')">Fact</button>
-              </div>
-              <div class="myth-verdict" id="myth-verdict-3"></div>
-            </div>
-            <span class="myth-badge badge-myth" aria-hidden="true">MYTH</span>
-          </div>
-          <!-- Card 4 -->
-          <div class="myth-card" role="listitem" data-testid="myth-card-4">
-            <div>
-              <p class="myth-statement">"Workers in AI-exposed jobs still mainly need management and communication skills — not deep technical AI skills."</p>
-              <div class="myth-buttons" role="group" aria-label="Is this a myth or fact?">
-                <button class="myth-btn" data-testid="myth-btn-4-myth" onclick="judgeMyth(this, 4, 'myth')">Myth</button>
-                <button class="myth-btn" data-testid="myth-btn-4-fact" onclick="judgeMyth(this, 4, 'fact')">Fact</button>
-              </div>
-              <div class="myth-verdict" id="myth-verdict-4"></div>
-            </div>
-            <span class="myth-badge badge-fact" aria-hidden="true">FACT</span>
-          </div>
+        <div class="myth-cards" role="list" id="myth-cards-grid">
+          <!-- Filled by JS -->
         </div>
 
         <div class="stage-nav">
@@ -2055,29 +2030,39 @@
       <div class="stage-inner">
         <span class="stage-badge" style="color:var(--color-stage3);border-color:var(--color-stage3);">Stage 3 of 6</span>
         <h2 class="stage-title">Exposure, Risk &amp; Opportunity</h2>
-        <p class="stage-subtitle">Some careers are more exposed to AI than others — but exposure is not the same as decline. Tap a career cluster to see where it sits and what that actually means.</p>
+        <p class="stage-subtitle">Choose a career area, decide where it sits on the exposure spectrum, then check the evidence. Keep three things separate: exposure, complementarity, and growth.</p>
 
-        <!-- Key concept callout -->
         <div class="evidence-note" style="border-left:3px solid var(--color-primary);margin-bottom:var(--space-8);">
-          <strong>Three things to keep separate:</strong> (1) <strong>Exposure</strong> — how many tasks AI can assist with. (2) <strong>Complementarity</strong> — how much human skill adds value alongside AI. (3) <strong>Demand growth</strong> — whether the sector is expanding or shrinking overall. A career can be highly exposed and still be a strong opportunity.
+          <strong>Three things to keep separate:</strong> (1) <strong>Exposure</strong> — how many tasks AI can assist with. (2) <strong>Complementarity</strong> — how much human skill adds value alongside AI. (3) <strong>Demand growth</strong> — whether the sector is expanding or shrinking overall. A career can be quite exposed and still be a strong opportunity.
         </div>
 
-        <!-- Spectrum -->
-        <div class="spectrum-track" aria-label="AI exposure spectrum from less exposed to more exposed">
-          <div class="spectrum-bar"></div>
-          <div class="spectrum-ends">
-            <span>🛡️ Less exposed to AI task automation</span>
-            <span>⚡ More exposed to AI task automation</span>
-          </div>
-        </div>
-
-        <!-- Career grid -->
         <p class="instruction-label">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          Tap a career cluster to place it on the spectrum and see the evidence
+          Step 1: tap a sector below. Step 2: place it on the slider. Step 3: reveal the feedback.
         </p>
         <div class="career-sort-grid" role="list" id="career-grid">
           <!-- Filled by JS -->
+        </div>
+
+        <div class="career-guess-panel" id="career-guess-panel" aria-live="polite">
+          <div class="career-guess-header">
+            <h3 class="career-guess-title">Place the selected sector on the slider</h3>
+            <p class="career-guess-subtitle" id="career-guess-subtitle">Choose a sector card to begin.</p>
+          </div>
+
+          <div class="spectrum-track" aria-label="AI exposure spectrum from less exposed to more exposed">
+            <input type="range" class="career-slider" id="career-slider" min="0" max="2" step="1" value="1" disabled data-testid="input-career-slider" aria-label="Choose low, medium, or high exposure">
+            <div class="spectrum-ends spectrum-guess-labels">
+              <span>🛡️ Lower</span>
+              <span>⚖️ Medium</span>
+              <span>⚡ Higher</span>
+            </div>
+          </div>
+
+          <div class="career-guess-actions">
+            <button class="btn btn-secondary" id="check-career-btn" data-testid="button-check-career-placement" onclick="checkCareerPlacement()" disabled>Check my answer</button>
+            <span class="stage-nav-info" id="career-guess-helper">No answer revealed until you decide.</span>
+          </div>
         </div>
 
         <div class="career-detail-box" id="career-detail" aria-live="polite"></div>
@@ -2106,13 +2091,22 @@
           <!-- Filled by JS -->
         </div>
 
+        <p class="instruction-label" style="margin-top:var(--space-4);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Then pick what matters most to you.
+        </p>
+        <div class="interest-grid" role="group" aria-label="Select your priorities" id="priority-grid">
+          <!-- Filled by JS -->
+        </div>
+
         <button class="btn btn-primary" id="show-clusters-btn" data-testid="button-show-clusters" onclick="showClusters()" style="margin-bottom:var(--space-6);">
-          Show my opportunity clusters →
+          Show my future options →
         </button>
 
         <div id="opportunity-results" hidden aria-live="polite">
           <hr class="section-sep">
-          <h3 style="font-family:var(--font-display);font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-6);">Based on your interests, explore these areas:</h3>
+          <h3 style="font-family:var(--font-display);font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-2);">Based on your interests and priorities, explore these areas:</h3>
+          <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-6);">These suggestions are not predictions. They are possible directions worth exploring, with different routes in and different kinds of AI impact.</p>
           <div class="opportunity-clusters" id="clusters-output">
           </div>
           <div class="evidence-note mt-6">
@@ -2142,20 +2136,23 @@
         <!-- Card sort -->
         <p class="instruction-label">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-          Tap a job card, then tap a column to sort it
+          Tap a job card, then tap the category you think fits best. If you are wrong, you will see exactly why.
         </p>
 
         <div class="job-pool" id="sort-job-pool" role="list" aria-label="Jobs to sort"></div>
 
         <div class="card-sort-area" role="group" aria-label="Sort columns">
+          <div class="sort-column sort-col-longstanding" id="sort-col-longstanding" role="group" aria-label="Longstanding roles">
+            <p class="sort-column-label sort-col-longstanding">🏛️ Longstanding</p>
+          </div>
+          <div class="sort-column sort-col-reshape-light" id="sort-col-reshape-light" role="group" aria-label="Roles reshaping slightly">
+            <p class="sort-column-label sort-col-reshape-light">🌤️ Reshaping slightly</p>
+          </div>
+          <div class="sort-column sort-col-reshape-heavy" id="sort-col-reshape-heavy" role="group" aria-label="Roles reshaping considerably">
+            <p class="sort-column-label sort-col-reshape-heavy">🌊 Reshaping considerably</p>
+          </div>
           <div class="sort-column sort-col-new" id="sort-col-new" role="group" aria-label="Genuinely new roles">
-            <p class="sort-column-label sort-col-new">🆕 Genuinely New</p>
-          </div>
-          <div class="sort-column sort-col-reshape" id="sort-col-reshape" role="group" aria-label="Reshaped roles">
-            <p class="sort-column-label sort-col-reshape">🔄 Reshaped</p>
-          </div>
-          <div class="sort-column sort-col-change" id="sort-col-change" role="group" aria-label="Long-standing but changing roles">
-            <p class="sort-column-label sort-col-change">🌀 Long-standing &amp; Changing</p>
+            <p class="sort-column-label sort-col-new">🆕 Genuinely new</p>
           </div>
         </div>
 
@@ -2175,9 +2172,9 @@
 
         <!-- Skills that travel -->
         <h3 style="font-family:var(--font-display);font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-3);">Which skills travel across many roles?</h3>
-        <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-4);">Tap each skill chip to classify it — does it travel widely across different jobs, or is it very specialist?</p>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-4);">Read one skill at a time, then choose whether it travels widely across jobs or is more specialist. You will get immediate feedback after each choice.</p>
 
-        <div class="skills-drag-area" id="skills-sort-area" role="group" aria-label="Skill chips to classify">
+        <div id="skills-sort-area" class="skills-quiz-wrap" role="group" aria-label="Skill classification quiz">
           <!-- Filled by JS -->
         </div>
 
@@ -2197,33 +2194,36 @@
       </div>
     </section>
 
-    <!-- ==================== STAGE 6: Your Future Pathways ==================== -->
-    <section id="stage-6" class="stage" aria-label="Stage 6: Your future pathways">
+    <!-- ==================== STAGE 6: Reality Check ==================== -->
+    <section id="stage-6" class="stage" aria-label="Stage 6: AI and careers reality check">
       <div class="stage-inner">
         <span class="stage-badge" style="color:var(--color-stage6);border-color:var(--color-stage6);">Stage 6 of 6</span>
-        <h2 class="stage-title">Your Future Pathways</h2>
-        <p class="stage-subtitle">This is not a personality test or career predictor — it's a starting point for reflection. Choose what matters most to you, and explore what that could mean.</p>
+        <h2 class="stage-title">Reality Check</h2>
+        <p class="stage-subtitle">These provocations are designed to challenge easy narratives. Some point to risk. Some point to opportunity. Most point to both at once.</p>
+
+        <div class="evidence-note" style="border-left:3px solid var(--color-stage6);margin-bottom:var(--space-8);">
+          <strong>Important:</strong> the future is not one story. AI is creating new specialist roles, changing established professional work, and still leaving strong growth in care, teaching, trades, and technical fields.
+        </div>
 
         <p class="instruction-label">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          What matters most to you? Select all that apply.
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 1 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          Step 1: choose one provocation. Step 2: decide which headline you think is most accurate. Step 3: reveal the evidence and see why it matters.
         </p>
 
-        <div class="priority-grid" role="group" aria-label="Select your priorities" id="priority-grid">
+        <div class="career-sort-grid" role="list" id="case-study-grid">
           <!-- Filled by JS -->
         </div>
 
-        <button class="btn btn-primary" id="show-pathways-btn" data-testid="button-show-pathways" onclick="showPathways()" style="margin-bottom:var(--space-6);">
-          Show my pathways →
-        </button>
-
-        <div id="pathways-output" hidden aria-live="polite">
-          <!-- Filled by JS -->
+        <div class="case-study-panel" id="case-study-panel">
+          <h3 class="career-guess-title">Pick one provocation to begin</h3>
+          <p class="career-guess-subtitle" id="case-study-subtitle">You will choose the headline that seems most accurate, then compare your judgement with the evidence.</p>
+          <div id="case-study-predict" aria-live="polite"></div>
+          <div id="case-study-reveal" class="career-detail-box" aria-live="polite"></div>
         </div>
 
         <div class="stage-nav">
           <button class="btn btn-secondary" data-testid="button-prev-s6" onclick="goToStage(5)">← Back</button>
-          <span class="stage-nav-info">Stage 6 of 6 — Final reflection</span>
+          <span class="stage-nav-info">Stage 6 of 6 — Reality check</span>
           <button class="btn btn-primary" data-testid="button-finish" onclick="goToStage('end')">Finish →</button>
         </div>
       </div>
@@ -2303,6 +2303,10 @@
     </section>
 
   </main><!-- /stage-container -->
+
+  <footer class="site-footer">
+    © Laura Knight / Sapio. Licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener">CC BY-NC-ND 4.0</a>. You may share with attribution for non-commercial purposes only. No adapted versions may be redistributed.
+  </footer>
 </div><!-- /app -->
 
 <script>
@@ -2327,6 +2331,7 @@ const state = {
   pred1Answered: false,
   mythAnswered: {},
   careerRevealed: new Set(),
+  activeCareerId: null,
   skillsClassed: new Set(),
   sortPlaced: {},
   guessDone: {},
@@ -2376,158 +2381,344 @@ const TASKS = [
   { id:'t8', text: 'Designing a community engagement strategy', correct: 'human' },
 ];
 
-const MYTH_DATA = {
-  1: {
+const MYTH_DATA = [
+  {
+    id: 1,
+    statement: 'AI will completely replace most jobs within the next decade.',
     answer: 'myth',
-    explanation: '<strong>This is a myth.</strong> The ILO found that only clerical work is highly exposed overall — and even there, the likely impact is <em>augmentation</em> (AI helping with tasks) rather than full replacement. The WEF projects 170 million new jobs created alongside 92 million displaced. Wholesale replacement of most jobs in a decade is not supported by current evidence.',
+    explanation: '<strong>This is a myth.</strong> The ILO found that only clerical work is highly exposed overall, and even there the likely effect is more augmentation than total replacement. The WEF projects both job creation and job displacement, not the disappearance of most jobs.',
     sources: [
       { label: 'ILO WP096', url: 'https://webapps.ilo.org/static/english/intserv/working-papers/wp096/index.html' },
       { label: 'WEF Future of Jobs 2025', url: 'https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf' },
     ],
   },
-  2: {
+  {
+    id: 2,
+    statement: 'AI mostly changes tasks within jobs, rather than replacing entire occupations.',
     answer: 'fact',
-    explanation: '<strong>This is a fact.</strong> ILO research found that for most occupational groups, only 1–4% of tasks are <em>highly</em> exposed to AI — and the dominant effect is augmentation of specific tasks, not occupation-level replacement. AI tools assist with parts of jobs — like drafting, sorting, and screening — while people handle the rest.',
+    explanation: '<strong>This is a fact.</strong> The ILO found that the main effect is likely to be augmenting work by automating some tasks within occupations while leaving other duties for people.',
     sources: [
       { label: 'ILO WP096', url: 'https://webapps.ilo.org/static/english/intserv/working-papers/wp096/index.html' },
     ],
   },
-  3: {
+  {
+    id: 3,
+    statement: "Being in a job that's exposed to AI means you'll probably lose it.",
     answer: 'myth',
-    explanation: '<strong>This is a myth.</strong> The IMF found that professionals and managers can be highly exposed to AI but also have high <em>complementarity</em> — meaning AI supports their work rather than substituting for it. Exposure ≠ substitution risk. Context, skills, and demand growth all matter.',
+    explanation: '<strong>This is a myth.</strong> Exposure is not the same as substitution risk. The IMF shows that some highly exposed professions also have high complementarity, meaning AI can support the worker rather than replace them.',
     sources: [
       { label: 'IMF WP/23/216', url: 'https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023216-print-pdf.pdf' },
     ],
   },
-  4: {
+  {
+    id: 4,
+    statement: 'Workers in AI-exposed jobs still mainly need management and communication skills, not only deep technical AI skills.',
     answer: 'fact',
-    explanation: '<strong>This is a fact.</strong> OECD research found that in highly AI-exposed occupations, the most demanded skills are management and business skills — project management, finance, communication, administration. Most workers do not need deep specialist AI knowledge. Emotional and cognitive skills are also increasingly valued.',
+    explanation: '<strong>This is a fact.</strong> OECD research found that management and business skills are the most demanded in highly AI-exposed occupations, and many workers affected by AI will not need specialist AI skills.',
     sources: [
       { label: 'OECD AI & Skills 2024', url: 'https://www.oecd.org/en/publications/artificial-intelligence-and-the-changing-demand-for-skills-in-the-labour-market_88684e36-en.html' },
     ],
   },
-};
+  {
+    id: 5,
+    statement: 'The fastest-growing opportunities linked to AI are only in technology companies.',
+    answer: 'myth',
+    explanation: '<strong>This is a myth.</strong> Growth is not only in tech companies. UK and global evidence points to demand across care, education, clean energy, construction, and creative industries as well as digital fields.',
+    sources: [
+      { label: 'UK Priority Skills to 2030', url: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030' },
+      { label: 'WEF Future of Jobs 2025', url: 'https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf' },
+    ],
+  },
+  {
+    id: 6,
+    statement: 'If a job is in decline overall, there will be no openings in it at all.',
+    answer: 'myth',
+    explanation: '<strong>This is a myth.</strong> Even in occupations projected to decline overall, replacement demand can still create openings as people retire, move jobs, or leave the workforce.',
+    sources: [
+      { label: 'UK AI Skills Projections', url: 'https://www.gov.uk/government/publications/ai-skills-for-life-and-work-labour-market-and-skills-projections/ai-skills-for-life-and-work-labour-market-and-skills-projections' },
+    ],
+  },
+  {
+    id: 7,
+    statement: 'Apprenticeships and further education are likely to matter in many future growth sectors.',
+    answer: 'fact',
+    explanation: '<strong>This is a fact.</strong> UK Government analysis shows a substantial share of additional demand by 2030 is at level 2 or 3, and many routes into priority occupations come through apprenticeships and further education.',
+    sources: [
+      { label: 'UK Priority Skills to 2030', url: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030' },
+      { label: 'Occupations in Demand 2025', url: 'https://explore-education-statistics.service.gov.uk/find-statistics/occupations-in-demand/2025' },
+    ],
+  },
+  {
+    id: 8,
+    statement: 'All creative careers will shrink because AI can already generate images, music, and text.',
+    answer: 'unknown',
+    explanation: '<strong>We do not know yet.</strong> Some creative tasks are clearly exposed, and some roles are under pressure. But the evidence does not support the claim that all creative careers will shrink. Different creative jobs may be affected very differently, and demand will depend on markets, regulation, and how human originality is valued.',
+    sources: [
+      { label: 'WEF Future of Jobs 2025', url: 'https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf' },
+      { label: 'UK Priority Skills to 2030', url: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030' },
+    ],
+  },
+  {
+    id: 9,
+    statement: 'Jobs that require empathy, trust, and relationship-building will be untouched by AI.',
+    answer: 'myth',
+    explanation: '<strong>This is a myth.</strong> Those human elements remain valuable, but the jobs themselves can still be reshaped by AI tools for planning, administration, communication, or analysis. Human-centred does not mean AI-free.',
+    sources: [
+      { label: 'OECD AI & Skills 2024', url: 'https://www.oecd.org/en/publications/artificial-intelligence-and-the-changing-demand-for-skills-in-the-labour-market_88684e36-en.html' },
+      { label: 'WEF Future of Jobs 2025', url: 'https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf' },
+    ],
+  },
+  {
+    id: 10,
+    statement: 'By the time today’s teenagers start full-time work, employers will definitely care less about degrees than skills.',
+    answer: 'unknown',
+    explanation: '<strong>We do not know yet.</strong> There is evidence of growth in skills-first and non-degree routes, especially in some sectors. But employers are not moving at the same speed, and qualifications will still matter in many professions. The balance between credentials and demonstrated skills is still evolving.',
+    sources: [
+      { label: 'Occupations in Demand 2025', url: 'https://explore-education-statistics.service.gov.uk/find-statistics/occupations-in-demand/2025' },
+      { label: 'UK Priority Skills to 2030', url: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030' },
+      { label: 'HE Participation 2023/24', url: 'https://explore-education-statistics.service.gov.uk/find-statistics/participation-measures-in-higher-education/2023-24' },
+    ],
+  },
+];
 
 const CAREERS = [
   {
     id: 'clerical',
     icon: '🗂️',
     name: 'Clerical & Admin',
+    short: 'Routine admin and paperwork-heavy roles',
     exposure: 'high',
+    sliderValue: 2,
     expLabel: 'Higher exposure',
     dims: {
-      exposure: 'High — ILO found 24% of clerical tasks are highly exposed, 58% medium exposed.',
-      complementarity: 'Lower — some clerical roles have limited complementarity, making substitution more likely.',
-      demand: 'Projected to decline in some baseline models, though replacement demand still creates openings.',
+      exposure: 'High — the ILO found clerical work is the most exposed broad occupational group.',
+      complementarity: 'Lower — many routine tasks can be automated with limited extra human value added.',
+      demand: 'Under pressure in some projections, though replacement demand still creates openings.',
     },
-    detail: 'Clerical and administrative roles are the most exposed occupational group according to the ILO. Tasks like data entry, filing, and routine correspondence can be automated. However, roles involving complex coordination, stakeholder management, and decision support remain more resilient.',
-    source: 'ILO WP096 (2023); UK Gov AI Skills Projections',
+    detail: 'This is the clearest high-exposure example in the evidence base. Data entry, scheduling, filing, and routine document handling are exactly the kinds of tasks AI can help with or automate.',
+    source: 'ILO WP096; UK AI Skills Projections',
     sourceUrl: 'https://webapps.ilo.org/static/english/intserv/working-papers/wp096/index.html',
+  },
+  {
+    id: 'accountancy',
+    icon: '🧾',
+    name: 'Accountancy & Audit',
+    short: 'Bookkeeping, audit, reporting, compliance',
+    exposure: 'high',
+    sliderValue: 2,
+    expLabel: 'Higher exposure, but mixed outlook',
+    dims: {
+      exposure: 'High — reconciliation, reporting, document review, and routine analysis are very AI-assistable.',
+      complementarity: 'Medium to high at senior levels — judgement, assurance, and client trust still matter.',
+      demand: 'Changing rather than disappearing, with strongest value shifting toward advisory and interpretation.',
+    },
+    detail: 'Junior and routine accountancy tasks are especially exposed. But higher-value roles in audit judgement, tax strategy, and financial advice remain more human-intensive.',
+    source: 'OECD AI & Skills 2024; UK AI Skills Projections',
+    sourceUrl: 'https://www.oecd.org/en/publications/artificial-intelligence-and-the-changing-demand-for-skills-in-the-labour-market_88684e36-en.html',
   },
   {
     id: 'retail',
     icon: '🛒',
-    name: 'Retail & Service',
+    name: 'Retail, Consumer Goods & Service',
+    short: 'Shops, customer service, brand operations',
     exposure: 'high',
+    sliderValue: 2,
     expLabel: 'Higher exposure',
     dims: {
-      exposure: 'High — routine transactions, stock management and customer queries can be automated.',
-      complementarity: 'Varies — face-to-face human service, empathy, and complex complaint handling remain valued.',
-      demand: 'Mixed — some roles declining, but personal service and specialist retail showing resilience.',
+      exposure: 'High — stock, checkout, customer queries, and routine service tasks can be automated.',
+      complementarity: 'Varies — premium service and complex customer contact still reward people skills.',
+      demand: 'Mixed — some routine roles declining while specialist or experiential roles remain.',
     },
-    detail: 'Many routine retail tasks (checkouts, stock queries, basic customer service) are being automated. But physical retail that relies on human interaction, expertise, and experience is proving more resilient. Telemarketers are an IMF example of high exposure with low complementarity — a genuinely higher-risk combination.',
-    source: 'IMF WP/23/216 (2023)',
+    detail: 'This sector includes both high-risk routine service work and more resilient human-facing roles in premium brands, experiential retail, and relationship-led sales.',
+    source: 'IMF WP/23/216',
     sourceUrl: 'https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023216-print-pdf.pdf',
   },
   {
     id: 'software',
     icon: '💻',
     name: 'Software, Data & AI',
+    short: 'Programming, data, cyber, AI systems',
     exposure: 'med',
+    sliderValue: 1,
     expLabel: 'Medium exposure, high complementarity',
     dims: {
-      exposure: 'Medium — code generation and data analysis can be AI-assisted, but design and architecture require deep expertise.',
-      complementarity: 'Very high — AI amplifies what skilled developers and data professionals can produce.',
-      demand: 'Strong projected growth: programmers and software developers appear in UK critical demand occupations.',
+      exposure: 'Medium — coding and analysis are AI-assisted, but architecture and problem framing still matter.',
+      complementarity: 'Very high — AI often makes strong technical workers more productive rather than replacing them.',
+      demand: 'Strong projected growth in UK demand data.',
     },
-    detail: 'Software and data roles are an excellent example of high AI complementarity — AI tools make skilled professionals much more productive rather than replacing them. AI-related vacancies remain under 1% of all job postings across OECD countries, but growth is significant.',
-    source: 'UK Gov Occupations in Demand 2025; OECD AI Skill Demand 2023',
+    detail: 'This is a classic case where exposure does not equal risk. AI changes the task mix inside the role, but demand remains strong and complementarity is high.',
+    source: 'UK Occupations in Demand 2025; OECD AI Skill Demand',
     sourceUrl: 'https://explore-education-statistics.service.gov.uk/find-statistics/occupations-in-demand/2025',
+  },
+  {
+    id: 'finance',
+    icon: '📈',
+    name: 'Finance, Trading & Investment Banking',
+    short: 'Markets, analysis, deals, modelling',
+    exposure: 'med',
+    sliderValue: 1,
+    expLabel: 'Medium exposure, high complementarity',
+    dims: {
+      exposure: 'Medium — modelling, reporting, market analysis, and presentation drafting can be AI-assisted.',
+      complementarity: 'High — deal judgement, client trust, negotiation, and risk decisions remain human.',
+      demand: 'Selective and competitive, with continued demand for high-performing analysts and managers.',
+    },
+    detail: 'Much of the analytical workflow is exposed, but elite finance roles still depend on judgement, relationships, and accountability. The likely shift is in which tasks juniors spend time on.',
+    source: 'IMF WP/23/216; UK AI Skills Projections',
+    sourceUrl: 'https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023216-print-pdf.pdf',
+  },
+  {
+    id: 'lawbiz',
+    icon: '⚖️',
+    name: 'Law, Consulting & Professional Services',
+    short: 'Law firms, consulting, compliance, advisory',
+    exposure: 'med',
+    sliderValue: 1,
+    expLabel: 'Medium exposure, high complementarity',
+    dims: {
+      exposure: 'Medium — research, review, drafting, and synthesis are AI-assistable.',
+      complementarity: 'High — clients still pay for human judgement, trust, and accountability.',
+      demand: 'Restructuring rather than collapsing, especially in junior task profiles.',
+    },
+    detail: 'A lot of the junior workload is exposed, but senior advisory work remains highly human. The likely shift is toward fewer routine hours and more value in strategic judgement.',
+    source: 'IMF WP/23/216',
+    sourceUrl: 'https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023216-print-pdf.pdf',
+  },
+  {
+    id: 'politics',
+    icon: '🏛️',
+    name: 'Politics, Policy & Public Affairs',
+    short: 'Policy, comms, campaigning, government',
+    exposure: 'med',
+    sliderValue: 1,
+    expLabel: 'Medium exposure',
+    dims: {
+      exposure: 'Medium — briefing, speech drafting, communications, and policy scanning can be AI-assisted.',
+      complementarity: 'High — persuasion, trust, public judgement, and coalition-building remain human.',
+      demand: 'Stable but competitive, with AI changing workflows more than removing the field.',
+    },
+    detail: 'AI can help with briefings, research summaries, and message testing, but politics still runs on judgement, persuasion, legitimacy, and public trust.',
+    source: 'OECD AI & Skills 2024; WEF Future of Jobs 2025',
+    sourceUrl: 'https://www.oecd.org/en/publications/artificial-intelligence-and-the-changing-demand-for-skills-in-the-labour-market_88684e36-en.html',
   },
   {
     id: 'healthcare',
     icon: '🏥',
     name: 'Healthcare & Care',
+    short: 'Care, nursing, therapy, health support',
     exposure: 'low',
-    expLabel: 'Lower exposure to AI automation',
+    sliderValue: 0,
+    expLabel: 'Lower exposure to automation',
     dims: {
-      exposure: 'Low — physical care, empathy, clinical judgement, and human connection are hard to automate.',
-      complementarity: 'High — AI supports diagnosis and admin, freeing care workers to focus on human elements.',
-      demand: 'Strong growth: care workers and home carers are among the biggest individual increases in UK projections.',
+      exposure: 'Low — physical care, empathy, and clinical judgement are hard to automate.',
+      complementarity: 'High — AI can assist diagnosis and admin while people do the human work.',
+      demand: 'Strong projected growth in UK data.',
     },
-    detail: 'Healthcare and care work combines physical presence, emotional intelligence, and complex clinical judgement — areas where AI currently has limited reach. UK projections show care workers and home carers among the fastest-growing occupations. This is both a high-need and high-opportunity sector.',
-    source: 'UK Gov Assessment of Priority Skills 2030',
+    detail: 'This is one of the clearest lower-exposure but strong-growth fields. AI is more likely to support than replace the core human work.',
+    source: 'UK Priority Skills to 2030',
     sourceUrl: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030',
   },
   {
     id: 'education',
     icon: '🍎',
     name: 'Education',
+    short: 'Teaching, mentoring, learning support',
     exposure: 'low',
+    sliderValue: 0,
     expLabel: 'Lower to medium exposure',
     dims: {
-      exposure: 'Lower — teaching relationships, mentoring, and responding to individual learner needs require human presence.',
-      complementarity: 'High — AI assists with planning, marking support, and personalised practice materials.',
-      demand: 'Growing: secondary education teaching professionals appear strongly in UK demand projections.',
+      exposure: 'Lower — relationships, explanation, and adaptive teaching remain deeply human.',
+      complementarity: 'High — AI helps with planning and support materials.',
+      demand: 'Growing in UK projections, especially in key teaching roles.',
     },
-    detail: 'Teaching relies on human relationships, emotional attunement, and adaptive communication — areas where AI augments rather than replaces. Secondary education teachers are projected to remain in high demand in UK Government data. AI is changing the tools teachers use, not removing the role itself.',
-    source: 'UK Gov AI Skills for Life and Work; UK Gov Occupations in Demand 2025',
+    detail: 'AI changes preparation and support tasks, but not the central human relationship and professional judgement in teaching.',
+    source: 'UK AI Skills for Life and Work; Occupations in Demand 2025',
     sourceUrl: 'https://www.gov.uk/government/publications/ai-skills-for-life-and-work-labour-market-and-skills-projections/ai-skills-for-life-and-work-labour-market-and-skills-projections',
-  },
-  {
-    id: 'trades',
-    icon: '🔧',
-    name: 'Skilled Trades',
-    exposure: 'low',
-    expLabel: 'Lower exposure',
-    dims: {
-      exposure: 'Low — physical dexterity, spatial judgement, and on-site problem-solving are hard to automate in unstructured environments.',
-      complementarity: 'Growing — tools and diagnostics are becoming digital, adding value for digitally skilled tradespeople.',
-      demand: 'Strong in areas like construction and clean energy. UK housebuilding and net zero targets are driving demand.',
-    },
-    detail: 'Trades like plumbing, electrical work, and construction require physical skill, real-world problem-solving, and adaptability — things that are currently difficult to automate outside of highly structured factory environments. UK clean energy and housebuilding targets are creating significant demand.',
-    source: 'UK Gov Assessment of Priority Skills 2030',
-    sourceUrl: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030',
   },
   {
     id: 'creative',
     icon: '🎨',
     name: 'Creative, Media & Design',
+    short: 'Design, media, advertising, content',
     exposure: 'med',
+    sliderValue: 1,
     expLabel: 'Mixed exposure — varies by sub-field',
     dims: {
-      exposure: 'Mixed — some production tasks (image generation, music drafting) are affected; original creative direction, cultural insight, and human voice remain valued.',
-      complementarity: 'High in many roles — AI acts as a creative tool, not a replacement for vision and taste.',
-      demand: 'UK Creative Industries are a projected growth sector in Priority Skills 2030.',
+      exposure: 'Medium — some production tasks are exposed, but creative direction remains human.',
+      complementarity: 'High in many sub-fields — AI can act as a tool, not the origin of taste or judgement.',
+      demand: 'Mixed but with continued opportunity in strong creative sectors.',
     },
-    detail: 'Creative work is a nuanced picture. Some sub-tasks (generating stock imagery, routine copywriting) face AI competition. But creative direction, cultural knowledge, brand strategy, and original storytelling still require human insight and taste. UK Creative Industries are a priority growth sector — and human creativity is part of what makes them valuable.',
-    source: 'UK Gov Assessment of Priority Skills 2030; LinkedIn Jobs on the Rise 2025',
+    detail: 'This is not a simple high-risk field. Some tasks are exposed, but original direction, strategy, and cultural judgement still matter enormously.',
+    source: 'UK Priority Skills to 2030; WEF Future of Jobs 2025',
     sourceUrl: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030',
   },
   {
-    id: 'lawbiz',
-    icon: '⚖️',
-    name: 'Law, Business & Management',
-    exposure: 'med',
-    expLabel: 'Medium exposure, high complementarity',
+    id: 'agriculture',
+    icon: '🌾',
+    name: 'Agriculture & Food Systems',
+    short: 'Farming, agri-tech, food production',
+    exposure: 'low',
+    sliderValue: 0,
+    expLabel: 'Lower exposure, but changing tools',
     dims: {
-      exposure: 'Medium — legal research, document review, and financial analysis can be AI-assisted.',
-      complementarity: 'High — senior professionals add judgement, client relationships, and ethical accountability that AI cannot provide.',
-      demand: 'Financial Managers and Directors appear in UK strong projections; law is restructuring rather than declining.',
+      exposure: 'Low — much work is physical, outdoor, and variable.',
+      complementarity: 'Growing — sensors, forecasting, robotics, and agri-tech are becoming more important.',
+      demand: 'Stable to growing in some specialised areas, especially agri-tech and food resilience.',
     },
-    detail: 'The IMF research highlights that professionals and managers often have high exposure to AI but also high complementarity — meaning AI assists them rather than substitutes for them. Legal research and financial modelling can be AI-accelerated, but client-facing judgement and accountability remain human. Financial managers and directors appear strongly in UK projections.',
-    source: 'IMF WP/23/216 (2023); UK Gov AI Skills for Life and Work',
-    sourceUrl: 'https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023216-print-pdf.pdf',
+    detail: 'Agriculture is not untouched by technology, but much of the work is hard to automate fully. The bigger shift is toward more data, robotics, and environmental monitoring.',
+    source: 'WEF Future of Jobs 2025',
+    sourceUrl: 'https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf',
+  },
+  {
+    id: 'travel',
+    icon: '✈️',
+    name: 'Leisure, Travel & Hospitality',
+    short: 'Travel, hotels, events, visitor economy',
+    exposure: 'med',
+    sliderValue: 1,
+    expLabel: 'Medium exposure',
+    dims: {
+      exposure: 'Medium — booking, scheduling, and routine service tasks are exposed.',
+      complementarity: 'Medium to high in premium or human-led experiences.',
+      demand: 'Mixed but resilient in people-facing and experience-led parts of the sector.',
+    },
+    detail: 'Routine parts of travel and hospitality are exposed, but live service, problem-solving, and memorable human experiences still matter.',
+    source: 'LinkedIn Jobs on the Rise 2025 UK',
+    sourceUrl: 'https://www.linkedin.com/pulse/linkedin-jobs-rise-2025-25-fastest-growing-roles-uk-lrsnf',
+  },
+  {
+    id: 'automotive',
+    icon: '🚗',
+    name: 'Automotive, Engineering & Technical',
+    short: 'Engineering, diagnostics, advanced manufacturing',
+    exposure: 'low',
+    sliderValue: 0,
+    expLabel: 'Lower exposure, but highly reshaped',
+    dims: {
+      exposure: 'Low to medium — physical and technical work remains, but diagnostics and design tools are changing fast.',
+      complementarity: 'High — digital tools raise the value of technical workers who can use them well.',
+      demand: 'Strong in some specialist and transition areas such as electrification and control systems.',
+    },
+    detail: 'The work is becoming more software-rich, but still depends on hands-on technical skill, diagnostics, and engineering judgement.',
+    source: 'LinkedIn Jobs on the Rise 2025 UK; UK Priority Skills to 2030',
+    sourceUrl: 'https://www.linkedin.com/pulse/linkedin-jobs-rise-2025-25-fastest-growing-roles-uk-lrsnf',
+  },
+  {
+    id: 'trades',
+    icon: '🔧',
+    name: 'Skilled Trades & Construction',
+    short: 'Electrical, plumbing, site work, fit-out',
+    exposure: 'low',
+    sliderValue: 0,
+    expLabel: 'Lower exposure',
+    dims: {
+      exposure: 'Low — physical dexterity and site-based problem-solving are hard to automate.',
+      complementarity: 'Growing — tools and diagnostics are becoming more digital.',
+      demand: 'Strong in construction, housebuilding, and net zero-related work.',
+    },
+    detail: 'These are strong examples of lower-exposure work, but they are not static. Digital tools, diagnostics, and regulation are still changing the work.',
+    source: 'UK Priority Skills to 2030',
+    sourceUrl: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030',
   },
 ];
 
@@ -2658,14 +2849,24 @@ const OPPORTUNITY_CLUSTERS = {
 };
 
 const SORT_JOBS = [
-  { id: 'sj1', name: 'AI Ethicist', correct: 'new', note: 'A genuinely new role focused on ensuring AI systems are fair, accountable, and transparent. Emerged as organisations recognised the need for ethical oversight of AI.' },
-  { id: 'sj2', name: 'MLOps Engineer', correct: 'new', note: 'A new specialist role managing the deployment and monitoring of machine learning models in production. Combines software engineering and data science operations.' },
-  { id: 'sj3', name: 'Radiographer', correct: 'change', note: 'A long-standing clinical role that is changing as AI assists with image analysis. The core human role in patient care and clinical oversight remains essential.' },
-  { id: 'sj4', name: 'Journalist', correct: 'reshape', note: 'Being reshaped by AI tools that can generate drafts and summarise sources. Human judgement, investigation, source relationships, and editorial decisions remain central.' },
-  { id: 'sj5', name: 'Data Analyst', correct: 'reshape', note: 'Being reshaped — AI tools accelerate data processing, shifting the skill focus towards interpretation, communication, and strategic insight.' },
-  { id: 'sj6', name: 'Secondary Teacher', correct: 'change', note: 'A long-standing role that is changing as AI tools support planning, marking, and personalised practice — but human teaching relationships remain irreplaceable.' },
-  { id: 'sj7', name: 'AI Trainer', correct: 'new', note: 'An emerging role involving labelling, evaluating, and improving AI outputs. Still evolving in form and scale — not yet an established mass occupation but growing.' },
-  { id: 'sj8', name: 'Solicitor', correct: 'change', note: 'A long-standing role that is changing as AI accelerates legal research and document review, but human judgement, ethics, and client relationships remain central.' },
+  { id: 'sj1', name: 'Primary Teacher', correct: 'longstanding', note: 'Primary teaching is a longstanding role. AI may support planning and admin, but the core role has not been transformed in the way some office-based jobs have.' },
+  { id: 'sj2', name: 'Electrician', correct: 'longstanding', note: 'Electrician is a longstanding skilled trade. Digital tools are changing diagnostics, but the role itself remains strongly rooted in physical, site-based work.' },
+  { id: 'sj3', name: 'Nurse', correct: 'longstanding', note: 'Nursing is a longstanding profession. AI may assist records, scheduling, and some diagnostics, but the core human work remains central.' },
+  { id: 'sj4', name: 'Radiographer', correct: 'reshape-light', note: 'Radiography is reshaping slightly to moderately because AI assists image analysis, but the role still depends on patient care, clinical process, and professional judgement.' },
+  { id: 'sj5', name: 'Secondary Teacher', correct: 'reshape-light', note: 'Teaching is reshaping slightly: planning, feedback, and admin may change, but the core profession remains recognisably the same.' },
+  { id: 'sj6', name: 'Marketing Manager', correct: 'reshape-light', note: 'Marketing management is reshaping slightly because AI helps with drafts, data summaries, and audience analysis, but strategy and brand judgement remain human-led.' },
+  { id: 'sj7', name: 'Journalist', correct: 'reshape-heavy', note: 'Journalism is reshaping considerably because drafting, summarising, and routine content production are changing fast, even though investigation and editorial judgement remain human.' },
+  { id: 'sj8', name: 'Data Analyst', correct: 'reshape-heavy', note: 'Data analysis is reshaping considerably. AI increasingly handles first-pass analysis and visualisation, shifting human value toward interpretation and questioning.' },
+  { id: 'sj9', name: 'Solicitor', correct: 'reshape-heavy', note: 'Legal work is reshaping considerably in junior and research-heavy tasks because AI accelerates drafting, document review, and case synthesis.' },
+  { id: 'sj10', name: 'Accountant', correct: 'reshape-heavy', note: 'Accountancy is reshaping considerably because reconciliation, reporting, and routine analysis are increasingly automated or AI-assisted.' },
+  { id: 'sj11', name: 'Customer Service Adviser', correct: 'reshape-heavy', note: 'Customer service is reshaping considerably because chatbots and AI triage are changing the routine end of the work, even though complex support still needs people.' },
+  { id: 'sj12', name: 'Graphic Designer', correct: 'reshape-heavy', note: 'Graphic design is reshaping considerably as image generation tools change concepting, mockups, and asset production, while taste and creative direction remain valuable.' },
+  { id: 'sj13', name: 'AI Ethicist', correct: 'new', note: 'AI ethicist is a genuinely new role focused on fairness, accountability, governance, and responsible use of AI systems.' },
+  { id: 'sj14', name: 'MLOps Engineer', correct: 'new', note: 'MLOps engineer is a genuinely new specialist role focused on running machine learning systems reliably in production.' },
+  { id: 'sj15', name: 'AI Product Manager', correct: 'new', note: 'AI product manager is a newer role bringing together product strategy, user needs, and AI system capability.' },
+  { id: 'sj16', name: 'AI Trainer', correct: 'new', note: 'AI trainer is an emerging new role focused on evaluating outputs, improving data, and shaping model behaviour.' },
+  { id: 'sj17', name: 'Prompt Designer', correct: 'new', note: 'Prompt-focused roles are genuinely new, even if titles vary. They emerged because organisations need people who can structure AI interactions well.' },
+  { id: 'sj18', name: 'Model Risk Auditor', correct: 'new', note: 'Model risk and AI assurance roles have expanded as firms need people to test, audit, and challenge algorithmic systems.' },
 ];
 
 const GUESS_ROLES = [
@@ -2696,16 +2897,16 @@ const GUESS_ROLES = [
 ];
 
 const SKILLS = [
-  { id: 'sk1', text: 'Critical thinking', type: 'transferable' },
-  { id: 'sk2', text: 'Python programming', type: 'specialist' },
-  { id: 'sk3', text: 'Communication', type: 'transferable' },
-  { id: 'sk4', text: 'Transformer model fine-tuning', type: 'specialist' },
-  { id: 'sk5', text: 'Project management', type: 'transferable' },
-  { id: 'sk6', text: 'Empathy & active listening', type: 'transferable' },
-  { id: 'sk7', text: 'Prompt engineering', type: 'specialist' },
-  { id: 'sk8', text: 'Collaboration', type: 'transferable' },
-  { id: 'sk9', text: 'Data literacy', type: 'transferable' },
-  { id: 'sk10', text: 'Reinforcement learning from human feedback (RLHF)', type: 'specialist' },
+  { id: 'sk1', text: 'Critical thinking', type: 'transferable', note: 'This travels widely because many different careers need people who can question, judge, and make sense of information.' },
+  { id: 'sk2', text: 'Python programming', type: 'specialist', note: 'This is valuable, but it is more role-specific than a universal skill. Not every career needs it.' },
+  { id: 'sk3', text: 'Communication', type: 'transferable', note: 'Communication matters in almost every sector, from healthcare and teaching to law, business, and engineering.' },
+  { id: 'sk4', text: 'Transformer model fine-tuning', type: 'specialist', note: 'This is a specialist technical skill used in a relatively narrow set of advanced AI roles.' },
+  { id: 'sk5', text: 'Project management', type: 'transferable', note: 'This travels well because coordinating people, tasks, deadlines, and priorities matters across many jobs.' },
+  { id: 'sk6', text: 'Empathy and active listening', type: 'transferable', note: 'This is strongly transferable in roles involving people, leadership, support, negotiation, and teamwork.' },
+  { id: 'sk7', text: 'Prompt engineering', type: 'specialist', note: 'Useful in some AI-heavy workflows, but still more specialised than broad workplace skills like communication or judgement.' },
+  { id: 'sk8', text: 'Collaboration', type: 'transferable', note: 'This travels across roles because most modern work happens with other people, teams, clients, or communities.' },
+  { id: 'sk9', text: 'Data literacy', type: 'transferable', note: 'More and more roles need people who can read, question, and use data even if they are not data specialists.' },
+  { id: 'sk10', text: 'Reinforcement learning from human feedback (RLHF)', type: 'specialist', note: 'This is a niche AI-development skill used in a relatively small number of technical roles.' },
 ];
 
 const PRIORITIES = [
@@ -2717,6 +2918,81 @@ const PRIORITIES = [
   { id: 'impact',     icon: '🌍', label: 'Social impact',        clusters: ['education', 'healthcare', 'social', 'clean'] },
   { id: 'demand',     icon: '📈', label: 'Strong demand',        clusters: ['healthcare', 'software', 'trades', 'education', 'construction'] },
   { id: 'flexible',   icon: '🕐', label: 'Flexibility',          clusters: ['software', 'creative', 'management', 'lawbiz'] },
+];
+
+const CASE_STUDIES = [
+  {
+    id: 'ai-entry',
+    icon: '🧠',
+    title: 'AI careers are growing, but not only through degrees',
+    prompt: 'Which headline fits best?',
+    options: ['Only PhD-level specialists can enter AI careers now', 'Alternative routes into AI are expanding, including apprenticeships', 'AI careers are already a mass market open to everyone'],
+    correct: 1,
+    reveal: 'UK evidence suggests alternative routes are opening up. The AI Labour Market Survey reports apprenticeships rising from 3% of AI hires in 2020 to 19% in 2025, even while skills gaps remain high and many organisations still struggle to hire.',
+    takeaway: 'This should reduce fear and fatalism: there is still a serious barrier to entry, but the route into AI is widening rather than narrowing only to elite university pathways.',
+    source: 'UK AI Labour Market Survey 2025',
+    sourceUrl: 'https://www.gov.uk/government/publications/ai-labour-market-survey-2025-report/ai-labour-market-survey-2025-report-executive-summary',
+  },
+  {
+    id: 'care-growth',
+    icon: '❤️',
+    title: 'Some of the biggest future growth is not in tech',
+    prompt: 'Which headline fits best?',
+    options: ['AI jobs will completely dominate future growth', 'Care, education, and frontline roles still show major growth', 'Only manual jobs are expected to grow'],
+    correct: 1,
+    reveal: 'The World Economic Forum projects some of the biggest absolute growth in care economy jobs, education roles, and other frontline occupations, even while AI and software roles grow quickly in percentage terms.',
+    takeaway: 'This helps balance fear. A future shaped by AI is not a future where only coding matters.',
+    source: 'WEF Future of Jobs 2025',
+    sourceUrl: 'https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf',
+  },
+  {
+    id: 'clerical-risk',
+    icon: '🗂️',
+    title: 'Some fields really are more exposed than others',
+    prompt: 'Which headline fits best?',
+    options: ['All jobs are equally exposed to AI', 'Clerical work stands out as especially exposed', 'Care work is more exposed than clerical work'],
+    correct: 1,
+    reveal: 'The ILO found that only the broad occupation of clerical work is highly exposed overall, with 24% of clerical tasks highly exposed and another 58% medium exposed.',
+    takeaway: 'This is the part of the story that should make students cautious without making them hopeless: some pathways deserve harder questioning than others.',
+    source: 'ILO Working Paper 96',
+    sourceUrl: 'https://webapps.ilo.org/static/english/intserv/working-papers/wp096/index.html',
+  },
+  {
+    id: 'ai-jobs-small',
+    icon: '📉',
+    title: 'AI-specific jobs are growing fast, but still small',
+    prompt: 'Which headline fits best?',
+    options: ['AI-specific roles already make up a huge share of the labour market', 'AI-specific vacancies are growing fast but still remain a small share of total jobs', 'AI-specific roles are not growing at all'],
+    correct: 1,
+    reveal: 'OECD analysis found AI-related vacancies were still less than 1% of all job postings across the countries studied, even after strong growth. That means AI is important, but not the whole labour market.',
+    takeaway: 'This should surprise students who think everything is already becoming an AI job. The change is real, but the wider economy is still much broader.',
+    source: 'OECD AI skill demand across 14 countries',
+    sourceUrl: 'https://www.oecd.org/en/publications/emerging-trends-in-ai-skill-demand-across-14-oecd-countries_7c691b9a-en.html',
+  },
+  {
+    id: 'finance-mixed',
+    icon: '📈',
+    title: 'High-status professional careers are not simple winners or losers',
+    prompt: 'Which headline fits best?',
+    options: ['Finance and business roles are completely protected', 'Professional roles may gain AI responsibilities but some are also under pressure', 'Finance and business roles are disappearing entirely'],
+    correct: 1,
+    reveal: 'UK projections suggest growth in business and finance roles such as financial analysts and managers in some areas, while also warning that some finance managers and business sales roles may see decline. The picture is mixed, not simple.',
+    takeaway: 'This matters for ambitious middle-class pupils in particular: prestigious careers are being reshaped too, not just routine jobs.',
+    source: 'UK AI Skills for Life and Work',
+    sourceUrl: 'https://www.gov.uk/government/publications/ai-skills-for-life-and-work-labour-market-and-skills-projections/ai-skills-for-life-and-work-labour-market-and-skills-projections',
+  },
+  {
+    id: 'surprise-growth',
+    icon: '✈️',
+    title: 'Some fast-growing roles might not be what students expect',
+    prompt: 'Which headline fits best?',
+    options: ['Only AI engineers are showing rapid growth', 'Growth is appearing in AI roles, care roles, aviation, engineering, and sustainability too', 'There is no clear evidence of growth outside software'],
+    correct: 1,
+    reveal: 'LinkedIn’s UK Jobs on the Rise list includes AI engineers and AI researchers, but also home health aides, aircraft mechanics, environmental officers, energy managers, and control systems engineers.',
+    takeaway: 'This broadens the imagination of what a good future could look like. Opportunity is not one narrow path.',
+    source: 'LinkedIn Jobs on the Rise 2025 UK',
+    sourceUrl: 'https://www.linkedin.com/pulse/linkedin-jobs-rise-2025-25-fastest-growing-roles-uk-lrsnf',
+  },
 ];
 
 const SOURCES_DATA = [
@@ -2841,6 +3117,7 @@ function restartJourney() {
     pred1Answered: false,
     mythAnswered: {},
     careerRevealed: new Set(),
+    activeCareerId: null,
     skillsClassed: new Set(),
     sortPlaced: {},
     guessDone: {},
@@ -3005,21 +3282,45 @@ function judgeMyth(btn, cardId, choice) {
   if (state.mythAnswered[cardId]) return;
   state.mythAnswered[cardId] = true;
 
-  const data = MYTH_DATA[cardId];
+  const data = MYTH_DATA.find(item => item.id === cardId);
   const card = btn.closest('.myth-card');
   const buttons = card.querySelectorAll('.myth-btn');
   buttons.forEach(b => { b.disabled = true; });
 
   const isCorrect = choice === data.answer;
-  btn.classList.add(choice === 'myth' ? 'myth-selected-myth' : 'myth-selected-fact');
+  btn.classList.add('myth-selected-' + choice);
 
   const verdict = document.getElementById('myth-verdict-' + cardId);
   if (verdict) {
-    verdict.className = 'myth-verdict visible verdict-' + (isCorrect ? (data.answer === 'myth' ? 'myth' : 'fact') : (data.answer === 'myth' ? 'fact' : 'myth'));
+    verdict.className = 'myth-verdict visible verdict-' + data.answer;
     verdict.innerHTML = data.explanation + `<div class="source-chips">${
       data.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener" class="source-chip">📄 ${s.label}</a>`).join('')
     }</div>`;
   }
+
+  if (!isCorrect) {
+    const correctBtn = card.querySelector(`[data-choice="${data.answer}"]`);
+    if (correctBtn) correctBtn.classList.add('myth-selected-' + data.answer);
+  }
+}
+
+function initMythCards() {
+  const container = document.getElementById('myth-cards-grid');
+  if (!container) return;
+
+  container.innerHTML = MYTH_DATA.map(item => `
+    <div class="myth-card" role="listitem" data-testid="myth-card-${item.id}">
+      <div>
+        <p class="myth-statement">"${item.statement}"</p>
+        <div class="myth-buttons" role="group" aria-label="Judge this statement">
+          <button class="myth-btn" data-choice="myth" data-testid="myth-btn-${item.id}-myth" onclick="judgeMyth(this, ${item.id}, 'myth')">Myth</button>
+          <button class="myth-btn" data-choice="fact" data-testid="myth-btn-${item.id}-fact" onclick="judgeMyth(this, ${item.id}, 'fact')">Fact</button>
+          <button class="myth-btn" data-choice="unknown" data-testid="myth-btn-${item.id}-unknown" onclick="judgeMyth(this, ${item.id}, 'unknown')">We don't know yet</button>
+        </div>
+        <div class="myth-verdict" id="myth-verdict-${item.id}"></div>
+      </div>
+    </div>
+  `).join('');
 }
 
 /* ----------------------------------------------------------------
@@ -3033,41 +3334,67 @@ function initCareerGrid() {
   CAREERS.forEach(career => {
     const card = document.createElement('div');
     card.className = 'career-sort-card';
+    if (state.careerRevealed.has(career.id)) card.classList.add('answered', 'exp-' + career.exposure);
+    if (state.activeCareerId === career.id) card.classList.add('active');
     card.setAttribute('role', 'listitem');
     card.setAttribute('data-testid', 'career-card-' + career.id);
     card.setAttribute('tabindex', '0');
-    card.setAttribute('aria-label', career.name + ' — tap to explore');
+    card.setAttribute('aria-label', career.name + ' — tap to choose this sector');
     card.innerHTML = `
       <div class="career-icon">${career.icon}</div>
       <div class="career-name">${career.name}</div>
+      <div class="career-meta">${career.short}</div>
       <div class="career-exposure">${career.expLabel}</div>
     `;
-    card.addEventListener('click', () => showCareerDetail(career, card));
-    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showCareerDetail(career, card); }});
+    card.addEventListener('click', () => selectCareer(career.id));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectCareer(career.id); }});
     grid.appendChild(card);
   });
 }
 
-function showCareerDetail(career, card) {
-  state.careerRevealed.add(career.id);
-
-  // Mark all cards
-  document.querySelectorAll('.career-sort-card').forEach(c => c.classList.remove('exp-high','exp-med','exp-low','answered'));
-  document.querySelectorAll('.career-sort-card').forEach((c,i) => {
-    if (state.careerRevealed.has(CAREERS[i]?.id)) {
-      c.classList.add('exp-' + CAREERS[i].exposure, 'answered');
-      c.querySelector('.career-exposure').style.display = 'block';
-    }
-  });
-
+function selectCareer(careerId) {
+  state.activeCareerId = careerId;
+  initCareerGrid();
+  const career = CAREERS.find(c => c.id === careerId);
+  const slider = document.getElementById('career-slider');
+  const btn = document.getElementById('check-career-btn');
+  const subtitle = document.getElementById('career-guess-subtitle');
+  const helper = document.getElementById('career-guess-helper');
   const detail = document.getElementById('career-detail');
-  if (!detail) return;
-  detail.classList.add('visible');
+
+  if (slider) {
+    slider.disabled = false;
+    slider.value = 1;
+  }
+  if (btn) btn.disabled = false;
+  if (subtitle) subtitle.textContent = `${career.icon} ${career.name}: where do you think it sits?`;
+  if (helper) helper.textContent = 'Choose lower, medium, or higher exposure before revealing the feedback.';
+  if (detail) {
+    detail.classList.remove('visible');
+    detail.innerHTML = '';
+  }
+}
+
+function checkCareerPlacement() {
+  const career = CAREERS.find(c => c.id === state.activeCareerId);
+  const slider = document.getElementById('career-slider');
+  const detail = document.getElementById('career-detail');
+  if (!career || !slider || !detail) return;
+
+  const guess = Number(slider.value);
+  const isCorrect = guess === career.sliderValue;
+  state.careerRevealed.add(career.id);
+  initCareerGrid();
+
+  detail.className = 'career-detail-box visible';
   detail.innerHTML = `
     <div class="career-detail-title">
       ${career.icon} ${career.name}
       <span class="exposure-pill exp-pill-${career.exposure}">${career.expLabel}</span>
     </div>
+    <p style="font-size:var(--text-sm);font-weight:700;margin-bottom:var(--space-3);color:${isCorrect ? 'var(--color-success)' : 'var(--color-warning)'};">
+      ${isCorrect ? 'You placed it well.' : `Not quite. You placed it at ${['lower','medium','higher'][guess]} exposure, but the evidence suggests ${['lower','medium','higher'][career.sliderValue]}.`}
+    </p>
     <p style="font-size:var(--text-sm);line-height:1.65;margin-bottom:var(--space-4);">${career.detail}</p>
     <div class="three-dimensions">
       <div class="dim-box">
@@ -3208,7 +3535,7 @@ function initCardSort() {
     pool.appendChild(chip);
   });
 
-  ['new','reshape','change'].forEach(col => {
+  ['longstanding','reshape-light','reshape-heavy','new'].forEach(col => {
     const el = document.getElementById('sort-col-' + col);
     if (el) el.addEventListener('click', (e) => { if (e.target === el || e.target.closest('.sort-column-label')) placeSortJob(col); });
   });
@@ -3236,17 +3563,22 @@ function placeSortJob(col) {
 
   const placed = document.createElement('div');
   placed.className = 'sortable-job-card placed';
-  placed.innerHTML = `<strong>${job.name}</strong>${isCorrect ? ' ✓' : ` (suggested: ${colLabel(job.correct)})`}`;
+  placed.innerHTML = `
+    <strong>${job.name}</strong>
+    <div style="font-size:var(--text-xs);margin-top:var(--space-2);color:${isCorrect ? 'var(--color-success)' : 'var(--color-warning)'};">
+      ${isCorrect ? `Correct — this fits ${colLabel(job.correct)}.` : `Not quite — you chose ${colLabel(col)}, but it fits ${colLabel(job.correct)}.`}
+    </div>
+    <div style="font-size:var(--text-xs);margin-top:var(--space-2);line-height:1.5;color:var(--color-text-muted);">${job.note}</div>
+  `;
   if (targetCol) targetCol.appendChild(placed);
   state.sortJobSelected = null;
 
-  // Reveal note when enough placed
   const placedCount = Object.keys(state.sortPlaced).length;
-  if (placedCount >= 4) {
+  if (placedCount >= 6) {
     const reveal = document.getElementById('sort-reveal');
-    if (reveal && reveal.classList.contains('hidden')) {
+    if (reveal) {
       reveal.classList.remove('hidden');
-      reveal.innerHTML = `<strong>Notice the range:</strong> Some of these roles (like AI Ethicist and MLOps Engineer) didn't exist a few years ago. Others (like secondary teacher and solicitor) are long-standing but being reshaped by digital tools. The key insight is that new technology creates new categories of work — it doesn't simply delete the old ones. <strong>Important:</strong> some roles listed here (like AI Trainer) are still emerging — their long-term scale is uncertain.
+      reveal.innerHTML = `<strong>Notice the pattern:</strong> some roles remain recognisably longstanding, some are shifting a little, some are being changed much more deeply by AI, and some are genuinely new. This is a better picture than simply saying jobs are either "safe" or "replaced".
       <div class="source-chips">
         <a href="https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf" target="_blank" rel="noopener" class="source-chip">📄 WEF Future of Jobs 2025</a>
         <a href="https://www.linkedin.com/pulse/linkedin-jobs-rise-2025-25-fastest-growing-roles-uk-lrsnf" target="_blank" rel="noopener" class="source-chip">📄 LinkedIn Jobs on the Rise 2025</a>
@@ -3256,7 +3588,12 @@ function placeSortJob(col) {
 }
 
 function colLabel(col) {
-  return { new: 'Genuinely New', reshape: 'Reshaped', change: 'Long-standing & Changing' }[col] || col;
+  return {
+    longstanding: 'Longstanding',
+    'reshape-light': 'Reshaping slightly',
+    'reshape-heavy': 'Reshaping considerably',
+    new: 'Genuinely new'
+  }[col] || col;
 }
 
 /* ----------------------------------------------------------------
@@ -3316,26 +3653,51 @@ function chooseGuess(btn, choice, idx) {
 function initSkillsSort() {
   const area = document.getElementById('skills-sort-area');
   if (!area) return;
-  area.innerHTML = '';
+  renderSkillQuestion(0);
+}
 
-  SKILLS.forEach(skill => {
-    const chip = document.createElement('button');
-    chip.className = 'skill-chip';
-    chip.setAttribute('data-testid', 'skill-chip-' + skill.id);
-    chip.setAttribute('aria-label', skill.text + ' — tap to classify');
-    chip.textContent = skill.text;
-    chip.addEventListener('click', () => {
-      if (!chip.classList.contains('transferable') && !chip.classList.contains('specialist')) {
-        chip.classList.add(skill.type);
-        chip.setAttribute('aria-label', skill.text + ' — ' + (skill.type === 'transferable' ? 'travels widely across roles' : 'specialist technical skill'));
-      }
-    });
-    area.appendChild(chip);
+function renderSkillQuestion(idx) {
+  const area = document.getElementById('skills-sort-area');
+  if (!area) return;
+  if (idx >= SKILLS.length) {
+    area.innerHTML = `<div class="evidence-note"><strong>Well done.</strong> The pattern matters: broad skills like communication, judgement, empathy, and project management travel across many roles, while more technical AI methods are valuable but narrower.<div class="source-chips"><a href="https://www.oecd.org/en/publications/emerging-trends-in-ai-skill-demand-across-14-oecd-countries_7c691b9a-en.html" target="_blank" rel="noopener" class="source-chip">📄 OECD AI Skill Demand</a></div></div>`;
+    return;
+  }
+
+  const skill = SKILLS[idx];
+  area.innerHTML = `
+    <div class="guess-role-box animate-in">
+      <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:var(--space-3);">Skill ${idx + 1} of ${SKILLS.length}</p>
+      <p class="guess-clue">${skill.text}</p>
+      <div class="guess-options" role="group" aria-label="Choose the skill type">
+        <button class="guess-opt" data-testid="skill-choice-${idx}-transferable" onclick="chooseSkillType(this, ${idx}, 'transferable')">Travels across many roles</button>
+        <button class="guess-opt" data-testid="skill-choice-${idx}-specialist" onclick="chooseSkillType(this, ${idx}, 'specialist')">More specialist</button>
+      </div>
+      <div id="skill-reveal-${idx}" class="prediction-reveal" style="border-left-color:var(--color-stage5);"></div>
+    </div>
+  `;
+}
+
+function chooseSkillType(btn, idx, choice) {
+  const skill = SKILLS[idx];
+  const correct = skill.type === choice;
+  const container = btn.closest('.guess-options');
+  container.querySelectorAll('.guess-opt').forEach(b => {
+    b.disabled = true;
+    if (b === btn && correct) b.classList.add('correct');
+    else if (b === btn && !correct) b.classList.add('wrong');
+    else if ((b.textContent.includes('Travels') && skill.type === 'transferable') || (b.textContent.includes('specialist') && skill.type === 'specialist')) b.classList.add('correct');
   });
+  const reveal = document.getElementById('skill-reveal-' + idx);
+  if (reveal) {
+    reveal.classList.add('visible');
+    reveal.innerHTML = `${correct ? '✓ Correct.' : 'Not quite.'} <strong>${skill.type === 'transferable' ? 'Travels across many roles' : 'More specialist'}.</strong> ${skill.note}`;
+  }
+  setTimeout(() => renderSkillQuestion(idx + 1), 1700);
 }
 
 /* ----------------------------------------------------------------
-   STAGE 6 — Priorities + Pathways
+   PRIORITIES + STAGE 6 CASE STUDIES
 ---------------------------------------------------------------- */
 function initPriorities() {
   const grid = document.getElementById('priority-grid');
@@ -3343,13 +3705,14 @@ function initPriorities() {
   grid.innerHTML = '';
   PRIORITIES.forEach(p => {
     const card = document.createElement('div');
-    card.className = 'priority-card';
+    card.className = 'interest-card';
+    if (state.prioritiesSelected.has(p.id)) card.classList.add('selected');
     card.setAttribute('data-testid', 'priority-' + p.id);
     card.setAttribute('data-id', p.id);
     card.setAttribute('role', 'checkbox');
-    card.setAttribute('aria-checked', 'false');
+    card.setAttribute('aria-checked', state.prioritiesSelected.has(p.id) ? 'true' : 'false');
     card.setAttribute('tabindex', '0');
-    card.innerHTML = `<div class="priority-icon">${p.icon}</div><div class="priority-label">${p.label}</div>`;
+    card.innerHTML = `<div class="interest-icon">${p.icon}</div><div class="interest-label">${p.label}</div>`;
     card.addEventListener('click', () => togglePriority(card, p.id));
     card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePriority(card, p.id); }});
     grid.appendChild(card);
@@ -3368,76 +3731,67 @@ function togglePriority(card, id) {
   }
 }
 
-function showPathways() {
-  if (state.prioritiesSelected.size === 0) {
-    alert('Please select at least one priority to continue.');
-    return;
-  }
-
-  const clusterScores = {};
-  state.prioritiesSelected.forEach(id => {
-    const priority = PRIORITIES.find(p => p.id === id);
-    if (!priority) return;
-    priority.clusters.forEach(c => {
-      clusterScores[c] = (clusterScores[c] || 0) + 1;
-    });
+function initCaseStudies() {
+  const grid = document.getElementById('case-study-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  CASE_STUDIES.forEach(cs => {
+    const card = document.createElement('div');
+    card.className = 'career-sort-card';
+    card.setAttribute('role', 'listitem');
+    card.setAttribute('data-testid', 'case-card-' + cs.id);
+    card.setAttribute('tabindex', '0');
+    card.innerHTML = `<div class="career-icon">${cs.icon}</div><div class="career-name">${cs.title}</div><div class="career-meta">Provocation</div>`;
+    card.addEventListener('click', () => selectCaseStudy(cs.id));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectCaseStudy(cs.id); }});
+    grid.appendChild(card);
   });
+}
 
-  const top = Object.entries(clusterScores)
-    .sort((a,b) => b[1] - a[1])
-    .slice(0, 3)
-    .map(([id]) => OPPORTUNITY_CLUSTERS[id])
-    .filter(Boolean);
-
-  const output = document.getElementById('pathways-output');
-  if (!output) return;
-
-  output.innerHTML = `
-    <hr class="section-sep">
-    <h3 style="font-family:var(--font-display);font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-2);">Three areas to explore further</h3>
-    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-6);">These suggestions are a starting point, not a prescription. Talk to people in these fields, research further, and keep an open mind. Your interests and priorities will continue to evolve.</p>
-    ${top.map(c => `
-      <div class="pathway-result-card animate-in">
-        <div class="pathway-result-header">
-          <div class="pathway-result-icon" style="background:color-mix(in srgb,${c.colour} 15%,var(--color-surface-offset));">${c.icon}</div>
-          <div>
-            <div class="pathway-result-name">${c.name}</div>
-            <div style="font-size:var(--text-sm);color:var(--color-text-muted);">${c.desc}</div>
-          </div>
-        </div>
-        <div class="pathway-sections">
-          <div class="pathway-section">
-            <div class="pathway-section-label">🤖 AI effect</div>
-            <div class="pathway-section-content">${c.aiEffect}</div>
-          </div>
-          <div class="pathway-section">
-            <div class="pathway-section-label">📈 Growth outlook</div>
-            <div class="pathway-section-content">${c.growth}</div>
-          </div>
-          <div class="pathway-section">
-            <div class="pathway-section-label">🎓 Routes in</div>
-            <div class="pathway-section-content">${c.routes.join(' · ')}</div>
-          </div>
-          <div class="pathway-section">
-            <div class="pathway-section-label">🧠 Key skills</div>
-            <div class="pathway-section-content">${c.skills}</div>
-          </div>
-        </div>
-        <div class="caution-box">
-          <strong>Reality check:</strong> ${c.caution}
-        </div>
-        <div class="source-chips">
-          ${c.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener" class="source-chip">📄 ${s.label}</a>`).join('')}
-        </div>
+function selectCaseStudy(id) {
+  const cs = CASE_STUDIES.find(c => c.id === id);
+  const subtitle = document.getElementById('case-study-subtitle');
+  const predict = document.getElementById('case-study-predict');
+  const reveal = document.getElementById('case-study-reveal');
+  if (!cs || !predict || !reveal) return;
+  if (subtitle) subtitle.textContent = cs.prompt;
+  reveal.classList.remove('visible');
+  reveal.innerHTML = '';
+  predict.innerHTML = `
+    <div class="guess-role-box animate-in">
+      <div class="guess-options" role="group" aria-label="Choose the best headline">
+        ${cs.options.map((opt, i) => `<button class="guess-opt" data-testid="case-choice-${cs.id}-${i}" onclick="answerCaseStudy('${cs.id}', ${i})">${opt}</button>`).join('')}
       </div>
-    `).join('')}
-    <div class="evidence-note mt-6">
-      <strong>Remember:</strong> These projections are drawn from UK Government and international data — but they are scenarios, not certainties. The future of work depends on technology development, policy, economics, and individual choices. Use this as a conversation starter, not a definitive guide.
     </div>
   `;
+}
 
-  output.removeAttribute('hidden');
-  output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+function answerCaseStudy(id, idx) {
+  const cs = CASE_STUDIES.find(c => c.id === id);
+  const predict = document.getElementById('case-study-predict');
+  const reveal = document.getElementById('case-study-reveal');
+  if (!cs || !predict || !reveal) return;
+  const buttons = predict.querySelectorAll('.guess-opt');
+  buttons.forEach((b, i) => {
+    b.disabled = true;
+    if (i === cs.correct) b.classList.add('correct');
+    else if (i === idx) b.classList.add('wrong');
+  });
+  reveal.classList.add('visible');
+  reveal.innerHTML = `
+    <div class="career-detail-title">${cs.icon} ${cs.title}</div>
+    <p style="font-size:var(--text-sm);font-weight:700;margin-bottom:var(--space-3);color:${idx === cs.correct ? 'var(--color-success)' : 'var(--color-warning)'};">
+      ${idx === cs.correct ? 'Good judgement.' : 'A more grounded answer is highlighted above.'}
+    </p>
+    <p style="font-size:var(--text-sm);line-height:1.65;margin-bottom:var(--space-4);">${cs.reveal}</p>
+    <div class="dim-box" style="margin-bottom:var(--space-4);">
+      <div class="dim-label">Why this matters</div>
+      <div class="dim-value" style="font-size:var(--text-sm);font-weight:500;">${cs.takeaway}</div>
+    </div>
+    <div class="source-chips">
+      <a href="${cs.sourceUrl}" target="_blank" rel="noopener" class="source-chip">📄 ${cs.source}</a>
+    </div>
+  `;
 }
 
 /* ----------------------------------------------------------------
@@ -3529,12 +3883,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initTimeline();
   initSources();
   initMatching();
+  initMythCards();
   initCareerGrid();
   initInterests();
   initCardSort();
   initGuessGame();
   initSkillsSort();
   initPriorities();
+  initCaseStudies();
   updateProgress();
 });
 </script>
