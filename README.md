@@ -136,4 +136,11 @@ Possible future improvements:
 
 ## Licence
 
-No licence has been added yet. Add one if you want to define reuse terms publicly.
+This project is licensed under:
+- CC BY-NC-ND 4.0
+
+That means others may copy and share the work with attribution, but they may not use it commercially and may not distribute adapted versions.
+
+The copyright holder may still use the work commercially, including as part of a paid course or consultancy offering.
+
+Full licence text is included in the `LICENSE` file.
