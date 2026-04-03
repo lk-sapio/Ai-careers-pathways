@@ -1,0 +1,3542 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Future Paths — AI &amp; Your Career | An Interactive Learning Journey</title>
+  <meta name="description" content="A 15-minute structured learning journey for 15–16 year olds exploring how AI is reshaping careers, qualifications, and future opportunities. Based on authoritative UK and global sources.">
+  <meta property="og:title" content="Future Paths — AI &amp; Your Career">
+  <meta property="og:description" content="Explore how AI is reshaping jobs and discover your future pathways. A 15-minute interactive experience for secondary school pupils.">
+
+  <!-- Fonts: Cabinet Grotesk (display) + General Sans (body) via Fontshare -->
+  <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800&f[]=general-sans@400,500,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
+    :root, [data-theme="light"] {
+      --color-bg:              #f4f3ef;
+      --color-surface:         #f8f7f4;
+      --color-surface-2:       #ffffff;
+      --color-surface-offset:  #eeede9;
+      --color-surface-dynamic: #e5e3de;
+      --color-divider:         #d9d7d2;
+      --color-border:          #ccc9c3;
+
+      --color-text:            #1a1916;
+      --color-text-muted:      #6b6966;
+      --color-text-faint:      #aeaca7;
+      --color-text-inverse:    #f4f3ef;
+
+      /* Accent: rich indigo-violet — credible, modern, youth-facing */
+      --color-primary:         #3d2fa8;
+      --color-primary-hover:   #2e2290;
+      --color-primary-active:  #1f1672;
+      --color-primary-light:   #ebe9f9;
+
+      /* Stage accent colours */
+      --color-stage1:          #1d6fa4; /* blue */
+      --color-stage2:          #2a7a57; /* green */
+      --color-stage3:          #9b4516; /* amber-brown */
+      --color-stage4:          #1e6fa4; /* teal-blue */
+      --color-stage5:          #6b2db0; /* purple */
+      --color-stage6:          #3d2fa8; /* indigo */
+
+      --color-success:         #287242;
+      --color-warning:         #9b4516;
+      --color-error:           #a0283a;
+      --color-exposed:         #c05a10;
+      --color-protected:       #1e7a4a;
+
+      --radius-sm:  0.375rem;
+      --radius-md:  0.5rem;
+      --radius-lg:  0.75rem;
+      --radius-xl:  1.25rem;
+      --radius-full:9999px;
+
+      --transition-fast: 140ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-interactive: 200ms cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-slow: 350ms cubic-bezier(0.16, 1, 0.3, 1);
+
+      --shadow-sm: 0 1px 3px rgba(20,18,14,0.07);
+      --shadow-md: 0 4px 14px rgba(20,18,14,0.09);
+      --shadow-lg: 0 12px 36px rgba(20,18,14,0.13);
+
+      --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
+      --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
+      --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
+      --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
+      --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
+      --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
+
+      --space-1:  0.25rem; --space-2:  0.5rem;  --space-3:  0.75rem;
+      --space-4:  1rem;    --space-5:  1.25rem; --space-6:  1.5rem;
+      --space-8:  2rem;    --space-10: 2.5rem;  --space-12: 3rem;
+      --space-16: 4rem;    --space-20: 5rem;    --space-24: 6rem;
+
+      --font-display: 'Cabinet Grotesk', 'Helvetica Neue', sans-serif;
+      --font-body:    'General Sans', 'Inter', sans-serif;
+
+      --content-narrow:  640px;
+      --content-default: 920px;
+      --content-wide:    1180px;
+    }
+
+    [data-theme="dark"] {
+      --color-bg:              #131210;
+      --color-surface:         #1a1916;
+      --color-surface-2:       #201f1d;
+      --color-surface-offset:  #171613;
+      --color-surface-dynamic: #2c2a27;
+      --color-divider:         #2a2825;
+      --color-border:          #3a3835;
+
+      --color-text:            #d8d6d2;
+      --color-text-muted:      #787571;
+      --color-text-faint:      #555350;
+      --color-text-inverse:    #131210;
+
+      --color-primary:         #7b6ddb;
+      --color-primary-hover:   #9588e4;
+      --color-primary-active:  #aba0ec;
+      --color-primary-light:   #2a2440;
+
+      --color-stage1:          #4fa0d0;
+      --color-stage2:          #4db880;
+      --color-stage3:          #d07840;
+      --color-stage4:          #4fa0d0;
+      --color-stage5:          #a56fdb;
+      --color-stage6:          #7b6ddb;
+
+      --color-success:         #4db880;
+      --color-warning:         #d07840;
+      --color-error:           #d06070;
+      --color-exposed:         #d07840;
+      --color-protected:       #4db880;
+
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.25);
+      --shadow-md: 0 4px 14px rgba(0,0,0,0.35);
+      --shadow-lg: 0 12px 36px rgba(0,0,0,0.5);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --color-bg:              #131210;
+        --color-surface:         #1a1916;
+        --color-surface-2:       #201f1d;
+        --color-surface-offset:  #171613;
+        --color-surface-dynamic: #2c2a27;
+        --color-divider:         #2a2825;
+        --color-border:          #3a3835;
+        --color-text:            #d8d6d2;
+        --color-text-muted:      #787571;
+        --color-text-faint:      #555350;
+        --color-text-inverse:    #131210;
+        --color-primary:         #7b6ddb;
+        --color-primary-hover:   #9588e4;
+        --color-primary-active:  #aba0ec;
+        --color-primary-light:   #2a2440;
+        --color-stage1:          #4fa0d0;
+        --color-stage2:          #4db880;
+        --color-stage3:          #d07840;
+        --color-stage4:          #4fa0d0;
+        --color-stage5:          #a56fdb;
+        --color-stage6:          #7b6ddb;
+        --color-success:         #4db880;
+        --color-warning:         #d07840;
+        --color-error:           #d06070;
+        --color-exposed:         #d07840;
+        --color-protected:       #4db880;
+        --shadow-sm: 0 1px 3px rgba(0,0,0,0.25);
+        --shadow-md: 0 4px 14px rgba(0,0,0,0.35);
+        --shadow-lg: 0 12px 36px rgba(0,0,0,0.5);
+      }
+    }
+
+    /* ============================================================
+       BASE RESET
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      -webkit-text-size-adjust: none;
+      text-size-adjust: none;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--space-16);
+    }
+
+    body {
+      min-height: 100dvh;
+      line-height: 1.65;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+      transition: background-color var(--transition-slow), color var(--transition-slow);
+    }
+
+    img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+    ul[role="list"], ol[role="list"] { list-style: none; }
+    input, button, textarea, select { font: inherit; color: inherit; }
+    h1, h2, h3, h4, h5 { text-wrap: balance; line-height: 1.15; font-family: var(--font-display); }
+    p, li { text-wrap: pretty; max-width: 68ch; }
+
+    ::selection { background: color-mix(in srgb, var(--color-primary) 20%, transparent); color: var(--color-text); }
+
+    :focus-visible {
+      outline: 2.5px solid var(--color-primary);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    button { cursor: pointer; background: none; border: none; }
+
+    a, button, [role="button"] {
+      transition: color var(--transition-interactive),
+                  background var(--transition-interactive),
+                  border-color var(--transition-interactive),
+                  box-shadow var(--transition-interactive),
+                  opacity var(--transition-interactive);
+    }
+
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+      overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0;
+    }
+
+    /* ============================================================
+       LAYOUT SHELL
+    ============================================================ */
+    #app {
+      display: flex;
+      flex-direction: column;
+      min-height: 100dvh;
+    }
+
+    /* ============================================================
+       TOPBAR / HEADER
+    ============================================================ */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-divider);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .topbar-inner {
+      max-width: var(--content-wide);
+      margin: 0 auto;
+      padding: var(--space-3) var(--space-6);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      text-decoration: none;
+      color: var(--color-text);
+      flex-shrink: 0;
+    }
+
+    .logo-svg { flex-shrink: 0; }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: var(--text-sm);
+      letter-spacing: -0.01em;
+    }
+
+    /* Progress bar */
+    .progress-bar-wrap {
+      flex: 1;
+      background: var(--color-divider);
+      border-radius: var(--radius-full);
+      height: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--color-primary);
+      border-radius: var(--radius-full);
+      transition: width 0.4s cubic-bezier(0.16,1,0.3,1);
+      width: 0%;
+    }
+
+    .progress-label {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background: var(--color-surface-offset);
+      color: var(--color-text-muted);
+      border: 1px solid var(--color-border);
+    }
+
+    .icon-btn:hover {
+      background: var(--color-surface-dynamic);
+      color: var(--color-text);
+    }
+
+    /* ============================================================
+       STAGE WRAPPER
+    ============================================================ */
+    .stage-container {
+      padding-top: 72px; /* topbar height */
+      flex: 1;
+    }
+
+    /* Each stage is a full section */
+    .stage {
+      display: none;
+      padding: clamp(var(--space-12), 6vw, var(--space-20)) var(--space-6);
+      min-height: calc(100dvh - 72px);
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stage.active {
+      display: flex;
+    }
+
+    .stage-inner {
+      width: 100%;
+      max-width: var(--content-default);
+    }
+
+    /* Stage label badge */
+    .stage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-4);
+      border: 1px solid currentColor;
+    }
+
+    .stage-title {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-3);
+      color: var(--color-text);
+    }
+
+    .stage-subtitle {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      max-width: 60ch;
+      margin-bottom: var(--space-10);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       LANDING / INTRO STAGE
+    ============================================================ */
+    .intro-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: calc(100dvh - 72px);
+      padding: var(--space-16) var(--space-6);
+    }
+
+    .intro-eyebrow {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-5);
+    }
+
+    .intro-title {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.08;
+      margin-bottom: var(--space-6);
+      color: var(--color-text);
+    }
+
+    .intro-desc {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      max-width: 52ch;
+      margin: 0 auto var(--space-10);
+      line-height: 1.8;
+    }
+
+    .intro-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      justify-content: center;
+      margin-bottom: var(--space-10);
+    }
+
+    .pill {
+      background: var(--color-surface-offset);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      padding: var(--space-1) var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .intro-meta {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      margin-top: var(--space-8);
+      max-width: 42ch;
+      text-align: center;
+    }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      border: none;
+      transition: all var(--transition-interactive);
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-primary-hover);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .btn-primary:active {
+      background: var(--color-primary-active);
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: var(--color-surface-offset);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
+    }
+
+    .btn-secondary:hover {
+      background: var(--color-surface-dynamic);
+    }
+
+    .btn-lg {
+      padding: var(--space-4) var(--space-8);
+      font-size: var(--text-base);
+      border-radius: var(--radius-xl);
+    }
+
+    .btn-sm {
+      padding: var(--space-2) var(--space-4);
+      font-size: var(--text-xs);
+    }
+
+    /* ============================================================
+       NAV BUTTONS (bottom of each stage)
+    ============================================================ */
+    .stage-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: var(--space-12);
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--color-divider);
+      gap: var(--space-4);
+    }
+
+    .stage-nav-info {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      text-align: center;
+      flex: 1;
+    }
+
+    /* ============================================================
+       CARDS
+    ============================================================ */
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .card-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+    @media (max-width: 640px) {
+      .card-grid-2, .card-grid-3 { grid-template-columns: 1fr; }
+    }
+
+    /* ============================================================
+       SOURCE CHIP
+    ============================================================ */
+    .source-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      background: var(--color-surface-offset);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-full);
+      padding: 2px var(--space-3);
+      text-decoration: none;
+      transition: color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .source-chip:hover {
+      color: var(--color-primary);
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+    }
+
+    .source-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
+    }
+
+    /* ============================================================
+       TIMELINE SLIDER (Stage 1)
+    ============================================================ */
+    .timeline-slider-wrap {
+      margin-bottom: var(--space-8);
+    }
+
+    .timeline-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--space-2);
+    }
+
+    .timeline-label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-align: center;
+      flex: 1;
+    }
+
+    .timeline-label.active {
+      color: var(--color-primary);
+    }
+
+    .timeline-track {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    input[type="range"].timeline-input {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: var(--radius-full);
+      background: var(--color-divider);
+      outline: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    input[type="range"].timeline-input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      border: 3px solid var(--color-bg);
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    input[type="range"].timeline-input::-webkit-slider-thumb:hover {
+      transform: scale(1.2);
+      box-shadow: var(--shadow-lg);
+    }
+
+    input[type="range"].timeline-input::-moz-range-thumb {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      border: 3px solid var(--color-bg);
+      box-shadow: var(--shadow-md);
+      cursor: pointer;
+    }
+
+    .timeline-era-display {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin-top: var(--space-6);
+      transition: all var(--transition-slow);
+    }
+
+    .era-heading {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: var(--space-4);
+    }
+
+    .era-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+    }
+
+    @media (max-width: 560px) {
+      .era-stats { grid-template-columns: 1fr; }
+    }
+
+    .era-stat {
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      text-align: center;
+    }
+
+    .era-stat-value {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: block;
+      margin-bottom: var(--space-1);
+    }
+
+    .era-stat-label {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+    }
+
+    /* ============================================================
+       REVEAL CARDS (tap-to-reveal)
+    ============================================================ */
+    .reveal-grid {
+      display: grid;
+      gap: var(--space-4);
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    }
+
+    .reveal-card {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+      min-height: 140px;
+      transition: border-color var(--transition-interactive), box-shadow var(--transition-interactive), transform var(--transition-interactive);
+    }
+
+    .reveal-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .reveal-card.revealed {
+      cursor: default;
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+
+    .reveal-card:hover { transform: translateY(-2px); }
+
+    .reveal-front, .reveal-back {
+      padding: var(--space-5);
+    }
+
+    .reveal-front {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 140px;
+    }
+
+    .reveal-back {
+      display: none;
+    }
+
+    .reveal-card.revealed .reveal-front { display: none; }
+    .reveal-card.revealed .reveal-back  { display: block; }
+
+    .reveal-icon {
+      font-size: 2rem;
+      margin-bottom: var(--space-2);
+    }
+
+    .reveal-question {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    .reveal-tap-hint {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      margin-top: var(--space-2);
+    }
+
+    .reveal-fact {
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+
+    /* ============================================================
+       PREDICTION PROMPT (button choices before reveal)
+    ============================================================ */
+    .prediction-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6) var(--space-8);
+      margin-bottom: var(--space-6);
+    }
+
+    .prediction-q {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: var(--space-4);
+    }
+
+    .prediction-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+    }
+
+    .prediction-option {
+      padding: var(--space-3) var(--space-5);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface-offset);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-interactive);
+    }
+
+    .prediction-option:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+    }
+
+    .prediction-option.selected {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    .prediction-option.correct {
+      border-color: var(--color-success);
+      background: color-mix(in srgb, var(--color-success) 12%, transparent);
+      color: var(--color-success);
+    }
+
+    .prediction-option.wrong {
+      border-color: var(--color-error);
+      background: color-mix(in srgb, var(--color-error) 12%, transparent);
+      color: var(--color-error);
+      opacity: 0.7;
+    }
+
+    .prediction-reveal {
+      display: none;
+      margin-top: var(--space-4);
+      padding: var(--space-4);
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      line-height: 1.65;
+      border-left: 3px solid var(--color-primary);
+    }
+
+    .prediction-reveal.visible { display: block; }
+
+    /* ============================================================
+       MATCHING EXERCISE (Stage 2)
+    ============================================================ */
+    .matching-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-6);
+    }
+
+    @media (max-width: 600px) {
+      .matching-grid { grid-template-columns: 1fr; }
+    }
+
+    .matching-col-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-3);
+    }
+
+    .matching-col-ai { color: var(--color-stage1); }
+    .matching-col-human { color: var(--color-stage2); }
+
+    .matching-item {
+      background: var(--color-surface-offset);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-sm);
+      margin-bottom: var(--space-2);
+      cursor: pointer;
+      user-select: none;
+      transition: all var(--transition-interactive);
+    }
+
+    .matching-item:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+
+    .matching-item.placed-ai {
+      border-color: var(--color-stage1);
+      background: color-mix(in srgb, var(--color-stage1) 10%, var(--color-surface));
+    }
+
+    .matching-item.placed-human {
+      border-color: var(--color-stage2);
+      background: color-mix(in srgb, var(--color-stage2) 10%, var(--color-surface));
+    }
+
+    .matching-item.correct {
+      border-color: var(--color-success);
+      background: color-mix(in srgb, var(--color-success) 12%, var(--color-surface));
+    }
+
+    .matching-item.incorrect {
+      border-color: var(--color-error);
+      background: color-mix(in srgb, var(--color-error) 10%, var(--color-surface));
+    }
+
+    /* ============================================================
+       MYTH / FACT CARDS (Stage 2)
+    ============================================================ */
+    .myth-cards {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .myth-card {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5) var(--space-6);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: var(--space-4);
+      align-items: start;
+    }
+
+    .myth-statement {
+      font-size: var(--text-base);
+      font-weight: 500;
+      margin-bottom: var(--space-3);
+    }
+
+    .myth-buttons {
+      display: flex;
+      gap: var(--space-2);
+      flex-wrap: wrap;
+    }
+
+    .myth-btn {
+      padding: var(--space-2) var(--space-4);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--color-border);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      background: var(--color-surface-offset);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+
+    .myth-btn:hover { border-color: var(--color-primary); }
+
+    .myth-btn.myth-selected-myth {
+      background: color-mix(in srgb, var(--color-error) 12%, transparent);
+      border-color: var(--color-error);
+      color: var(--color-error);
+    }
+
+    .myth-btn.myth-selected-fact {
+      background: color-mix(in srgb, var(--color-success) 12%, transparent);
+      border-color: var(--color-success);
+      color: var(--color-success);
+    }
+
+    .myth-verdict {
+      display: none;
+      margin-top: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      line-height: 1.6;
+    }
+
+    .myth-verdict.visible { display: block; }
+
+    .myth-verdict.verdict-myth {
+      background: color-mix(in srgb, var(--color-error) 10%, var(--color-surface));
+      border-left: 3px solid var(--color-error);
+    }
+
+    .myth-verdict.verdict-fact {
+      background: color-mix(in srgb, var(--color-success) 10%, var(--color-surface));
+      border-left: 3px solid var(--color-success);
+    }
+
+    .myth-badge {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      flex-shrink: 0;
+      align-self: flex-start;
+    }
+
+    .badge-myth { background: color-mix(in srgb, var(--color-error) 15%, transparent); color: var(--color-error); }
+    .badge-fact { background: color-mix(in srgb, var(--color-success) 15%, transparent); color: var(--color-success); }
+
+    /* ============================================================
+       EXPOSURE SPECTRUM (Stage 3)
+    ============================================================ */
+    .spectrum-track {
+      position: relative;
+      margin: var(--space-8) 0;
+      padding: 0 var(--space-4);
+    }
+
+    .spectrum-bar {
+      height: 12px;
+      border-radius: var(--radius-full);
+      background: linear-gradient(to right, var(--color-protected), var(--color-surface-dynamic), var(--color-exposed));
+      margin-bottom: var(--space-3);
+    }
+
+    .spectrum-ends {
+      display: flex;
+      justify-content: space-between;
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      font-weight: 600;
+    }
+
+    .career-sort-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .career-sort-card {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      cursor: pointer;
+      text-align: center;
+      transition: all var(--transition-interactive);
+      position: relative;
+    }
+
+    .career-sort-card:not(.answered):hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .career-sort-card .career-icon {
+      font-size: 1.75rem;
+      margin-bottom: var(--space-2);
+    }
+
+    .career-sort-card .career-name {
+      font-size: var(--text-sm);
+      font-weight: 600;
+    }
+
+    .career-sort-card .career-exposure {
+      display: none;
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      margin-top: var(--space-1);
+    }
+
+    .career-sort-card.answered .career-exposure { display: block; }
+
+    .career-sort-card.answered {
+      cursor: default;
+    }
+
+    /* Exposure level colours */
+    .exp-high  { border-color: var(--color-exposed); }
+    .exp-med   { border-color: var(--color-warning); }
+    .exp-low   { border-color: var(--color-protected); }
+
+    .career-detail-box {
+      display: none;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin-top: var(--space-4);
+    }
+
+    .career-detail-box.visible { display: block; }
+
+    .career-detail-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: var(--space-3);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .exposure-pill {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      padding: 2px var(--space-3);
+      border-radius: var(--radius-full);
+    }
+
+    .exp-pill-high { background: color-mix(in srgb, var(--color-exposed) 15%, transparent); color: var(--color-exposed); }
+    .exp-pill-med  { background: color-mix(in srgb, var(--color-warning) 15%, transparent); color: var(--color-warning); }
+    .exp-pill-low  { background: color-mix(in srgb, var(--color-protected) 15%, transparent); color: var(--color-protected); }
+
+    .three-dimensions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-3);
+      margin-top: var(--space-4);
+    }
+
+    @media (max-width: 520px) {
+      .three-dimensions { grid-template-columns: 1fr; }
+    }
+
+    .dim-box {
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+    }
+
+    .dim-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-2);
+    }
+
+    .dim-value {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* ============================================================
+       INTEREST FILTER (Stage 4)
+    ============================================================ */
+    .interest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .interest-card {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4) var(--space-3);
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-interactive);
+      user-select: none;
+    }
+
+    .interest-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .interest-card.selected {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .interest-icon { font-size: 1.75rem; margin-bottom: var(--space-2); }
+
+    .interest-label {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+    }
+
+    /* Opportunity clusters */
+    .opportunity-clusters {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    .opportunity-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-5) var(--space-6);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: var(--space-5);
+      align-items: start;
+    }
+
+    .opportunity-icon-wrap {
+      width: 48px; height: 48px;
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .opportunity-name {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+      margin-bottom: var(--space-1);
+    }
+
+    .opportunity-desc {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-3);
+    }
+
+    .pathway-tags {
+      display: flex; flex-wrap: wrap; gap: var(--space-2);
+    }
+
+    .pathway-tag {
+      font-size: var(--text-xs);
+      padding: 2px var(--space-3);
+      border-radius: var(--radius-full);
+      font-weight: 500;
+    }
+
+    .tag-apprentice { background: color-mix(in srgb, #d07840 15%, transparent); color: var(--color-warning); }
+    .tag-fe         { background: color-mix(in srgb, #4fa0d0 15%, transparent); color: var(--color-stage1); }
+    .tag-degree     { background: color-mix(in srgb, #7b6ddb 15%, transparent); color: var(--color-stage5); }
+    .tag-mixed      { background: color-mix(in srgb, #4db880 15%, transparent); color: var(--color-success); }
+
+    /* ============================================================
+       CARD SORT (Stage 5)
+    ============================================================ */
+    .card-sort-area {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-4);
+    }
+
+    @media (max-width: 640px) {
+      .card-sort-area { grid-template-columns: 1fr; }
+    }
+
+    .sort-column {
+      background: var(--color-surface-offset);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4);
+      min-height: 200px;
+    }
+
+    .sort-column-label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-3);
+      text-align: center;
+    }
+
+    .sort-col-new      { color: var(--color-stage5); border-color: var(--color-stage5); }
+    .sort-col-reshape  { color: var(--color-stage3); border-color: var(--color-stage3); }
+    .sort-col-change   { color: var(--color-stage2); border-color: var(--color-stage2); }
+
+    .sortable-job-card {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      margin-bottom: var(--space-2);
+      cursor: pointer;
+      transition: all var(--transition-interactive);
+      user-select: none;
+    }
+
+    .sortable-job-card:hover {
+      border-color: var(--color-primary);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sortable-job-card.placed {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .job-pool {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+      padding: var(--space-4);
+      background: var(--color-surface);
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-xl);
+      min-height: 60px;
+    }
+
+    .job-chip {
+      background: var(--color-surface-offset);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-full);
+      padding: var(--space-2) var(--space-4);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-interactive);
+      user-select: none;
+    }
+
+    .job-chip:hover {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+
+    .job-chip.chip-selected {
+      border-color: var(--color-primary);
+      background: var(--color-primary);
+      color: #fff;
+    }
+
+    /* Guess the role */
+    .guess-role-box {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin-bottom: var(--space-4);
+    }
+
+    .guess-clue {
+      font-size: var(--text-base);
+      font-style: italic;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-4);
+      border-left: 3px solid var(--color-primary);
+      padding-left: var(--space-4);
+    }
+
+    .guess-options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-2);
+    }
+
+    @media (max-width: 480px) {
+      .guess-options { grid-template-columns: 1fr; }
+    }
+
+    .guess-opt {
+      padding: var(--space-3) var(--space-4);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface-offset);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      cursor: pointer;
+      text-align: left;
+      transition: all var(--transition-interactive);
+    }
+
+    .guess-opt:hover { border-color: var(--color-primary); background: var(--color-primary-light); }
+    .guess-opt.correct  { border-color: var(--color-success); background: color-mix(in srgb, var(--color-success) 12%, var(--color-surface)); color: var(--color-success); }
+    .guess-opt.wrong    { border-color: var(--color-error);   background: color-mix(in srgb, var(--color-error) 10%, var(--color-surface));   color: var(--color-error);   opacity: 0.7; }
+    .guess-opt:disabled { cursor: default; }
+
+    /* Skills challenge */
+    .skills-drag-area {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      padding: var(--space-4);
+      background: var(--color-surface);
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-xl);
+      min-height: 60px;
+      margin-bottom: var(--space-4);
+    }
+
+    .skill-chip {
+      background: var(--color-surface-offset);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-full);
+      padding: var(--space-2) var(--space-4);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition-interactive);
+    }
+
+    .skill-chip.transferable {
+      border-color: var(--color-success);
+      background: color-mix(in srgb, var(--color-success) 12%, var(--color-surface));
+      color: var(--color-success);
+    }
+
+    .skill-chip.specialist {
+      border-color: var(--color-stage1);
+      background: color-mix(in srgb, var(--color-stage1) 12%, var(--color-surface));
+      color: var(--color-stage1);
+    }
+
+    /* ============================================================
+       FINAL PATHWAYS (Stage 6)
+    ============================================================ */
+    .priority-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    .priority-card {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-4);
+      text-align: center;
+      cursor: pointer;
+      transition: all var(--transition-interactive);
+      user-select: none;
+    }
+
+    .priority-card:hover { border-color: var(--color-primary); box-shadow: var(--shadow-sm); }
+
+    .priority-card.selected {
+      border-color: var(--color-primary);
+      background: var(--color-primary-light);
+    }
+
+    .priority-icon { font-size: 1.75rem; margin-bottom: var(--space-2); }
+    .priority-label { font-size: var(--text-sm); font-weight: 600; }
+
+    .pathway-result-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      margin-bottom: var(--space-4);
+    }
+
+    .pathway-result-header {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+
+    .pathway-result-icon {
+      font-size: 2rem;
+      width: 52px; height: 52px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--radius-lg);
+      flex-shrink: 0;
+    }
+
+    .pathway-result-name {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+    }
+
+    .pathway-sections {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-3);
+    }
+
+    @media (max-width: 560px) {
+      .pathway-sections { grid-template-columns: 1fr; }
+    }
+
+    .pathway-section {
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+    }
+
+    .pathway-section-label {
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-2);
+    }
+
+    .pathway-section-content {
+      font-size: var(--text-sm);
+      line-height: 1.6;
+    }
+
+    .caution-box {
+      margin-top: var(--space-4);
+      padding: var(--space-4);
+      background: color-mix(in srgb, var(--color-warning) 10%, var(--color-surface));
+      border-left: 3px solid var(--color-warning);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      line-height: 1.6;
+      color: var(--color-text-muted);
+    }
+
+    /* ============================================================
+       SUMMARY CARD (end)
+    ============================================================ */
+    .summary-hero {
+      text-align: center;
+      padding: var(--space-8) 0 var(--space-6);
+    }
+
+    .summary-icon-wrap {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      background: var(--color-primary-light);
+      border: 2px solid var(--color-primary);
+      margin: 0 auto var(--space-4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+
+    .summary-print-note {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      margin-top: var(--space-3);
+    }
+
+    /* ============================================================
+       SOURCES DRAWER
+    ============================================================ */
+    .sources-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      display: none;
+      animation: fadeIn 0.2s ease;
+    }
+
+    .sources-backdrop.open { display: block; }
+
+    .sources-drawer {
+      position: fixed;
+      right: 0; top: 0; bottom: 0;
+      width: min(440px, 100vw);
+      background: var(--color-surface);
+      border-left: 1px solid var(--color-border);
+      z-index: 201;
+      overflow-y: auto;
+      padding: var(--space-6);
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .sources-drawer.open { transform: translateX(0); }
+
+    .sources-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-6);
+    }
+
+    .sources-drawer-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 700;
+    }
+
+    .source-entry {
+      border-bottom: 1px solid var(--color-divider);
+      padding: var(--space-4) 0;
+    }
+
+    .source-entry:last-child { border-bottom: none; }
+
+    .source-org {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: var(--space-1);
+    }
+
+    .source-title {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      margin-bottom: var(--space-2);
+    }
+
+    .source-link {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      word-break: break-all;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .source-link:hover { color: var(--color-primary); }
+
+    /* ============================================================
+       INLINE EVIDENCE NOTE
+    ============================================================ */
+    .evidence-note {
+      background: var(--color-surface-offset);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      margin-top: var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    .evidence-note strong { color: var(--color-text); }
+
+    /* ============================================================
+       ANIMATIONS
+    ============================================================ */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-in {
+      animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* ============================================================
+       INTRO ANIMATION
+    ============================================================ */
+    #stage-intro .intro-title { animation: slideUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.1s both; }
+    #stage-intro .intro-desc  { animation: slideUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.2s both; }
+    #stage-intro .intro-pills { animation: slideUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.3s both; }
+    #stage-intro .btn-primary { animation: slideUp 0.6s cubic-bezier(0.16,1,0.3,1) 0.4s both; }
+
+    /* ============================================================
+       STEP COUNTER
+    ============================================================ */
+    .step-dots {
+      display: flex;
+      gap: var(--space-2);
+      justify-content: center;
+      margin-bottom: var(--space-6);
+    }
+
+    .step-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--color-divider);
+      transition: all var(--transition-interactive);
+    }
+
+    .step-dot.active {
+      background: var(--color-primary);
+      width: 24px;
+      border-radius: var(--radius-full);
+    }
+
+    .step-dot.done {
+      background: color-mix(in srgb, var(--color-primary) 50%, transparent);
+    }
+
+    /* ============================================================
+       SECTION DIVIDER
+    ============================================================ */
+    .section-sep {
+      border: none;
+      border-top: 1px solid var(--color-divider);
+      margin: var(--space-8) 0;
+    }
+
+    /* ============================================================
+       INSTRUCTION LABEL
+    ============================================================ */
+    .instruction-label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-text-faint);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: var(--space-3);
+    }
+
+    /* ============================================================
+       RESPONSIVE UTILITIES
+    ============================================================ */
+    @media (max-width: 480px) {
+      .topbar-inner { padding: var(--space-3) var(--space-4); }
+      .stage { padding: var(--space-8) var(--space-4); }
+      .logo-text { display: none; }
+    }
+
+    /* ============================================================
+       PRINT STYLE
+    ============================================================ */
+    @media print {
+      .topbar, .stage-nav, .sources-backdrop, .sources-drawer { display: none !important; }
+      .stage { display: flex !important; page-break-after: always; }
+    }
+
+    /* ============================================================
+       MISC HELPERS
+    ============================================================ */
+    .text-primary  { color: var(--color-primary); }
+    .text-muted    { color: var(--color-text-muted); }
+    .text-faint    { color: var(--color-text-faint); }
+    .font-display  { font-family: var(--font-display); }
+    .font-bold     { font-weight: 700; }
+    .font-semibold { font-weight: 600; }
+    .mt-4  { margin-top: var(--space-4); }
+    .mt-6  { margin-top: var(--space-6); }
+    .mt-8  { margin-top: var(--space-8); }
+    .mb-4  { margin-bottom: var(--space-4); }
+    .mb-6  { margin-bottom: var(--space-6); }
+
+    .hidden { display: none !important; }
+
+    /* Alert: no-data message */
+    .no-data-note {
+      text-align: center;
+      padding: var(--space-8);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    /* instruction progress */
+    .sub-stage-progress {
+      display: flex;
+      gap: var(--space-2);
+      margin-bottom: var(--space-6);
+    }
+
+    .sub-stage-dot {
+      flex: 1;
+      height: 4px;
+      border-radius: var(--radius-full);
+      background: var(--color-divider);
+    }
+
+    .sub-stage-dot.active { background: var(--color-primary); }
+    .sub-stage-dot.done   { background: color-mix(in srgb, var(--color-primary) 50%, transparent); }
+  </style>
+</head>
+
+<body>
+<div id="app">
+  <!-- ============================================================
+       TOPBAR
+  ============================================================ -->
+  <header class="topbar" role="banner">
+    <div class="topbar-inner">
+      <!-- SVG Logo -->
+      <a class="logo" href="#" onclick="goToStage('intro'); return false;" aria-label="Future Paths home">
+        <svg class="logo-svg" aria-hidden="true" viewBox="0 0 32 32" width="32" height="32" fill="none">
+          <rect width="32" height="32" rx="8" fill="var(--color-primary)"/>
+          <circle cx="10" cy="22" r="3" fill="#fff" opacity="0.9"/>
+          <circle cx="16" cy="14" r="3" fill="#fff" opacity="0.75"/>
+          <circle cx="24" cy="9"  r="3" fill="#fff" opacity="0.55"/>
+          <path d="M10 22 L16 14 L24 9" stroke="#fff" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.6"/>
+        </svg>
+        <span class="logo-text">Future Paths</span>
+      </a>
+
+      <div class="progress-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Experience progress" id="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+
+      <span class="progress-label" id="progress-label" aria-live="polite">Intro</span>
+
+      <div class="topbar-actions">
+        <!-- Sources button -->
+        <button class="icon-btn" id="sources-btn" data-testid="button-sources" aria-label="View sources and evidence" title="Sources &amp; Evidence">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+          </svg>
+        </button>
+        <!-- Dark mode toggle -->
+        <button class="icon-btn" data-theme-toggle data-testid="button-theme-toggle" aria-label="Switch theme" title="Toggle dark/light mode">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================
+       SOURCES DRAWER
+  ============================================================ -->
+  <div class="sources-backdrop" id="sources-backdrop" role="presentation"></div>
+  <aside class="sources-drawer" id="sources-drawer" role="complementary" aria-label="Sources and evidence">
+    <div class="sources-drawer-header">
+      <h2 class="sources-drawer-title">Sources &amp; Evidence</h2>
+      <button class="icon-btn" id="sources-close" data-testid="button-sources-close" aria-label="Close sources panel">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6 6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-6);line-height:1.65;">
+      All claims in this experience are drawn from the following authoritative sources. Figures are cited as accurately as possible; where data is from projections, this is clearly noted.
+    </p>
+    <div id="sources-list">
+      <!-- Dynamically populated -->
+    </div>
+  </aside>
+
+  <!-- ============================================================
+       STAGE CONTAINER
+  ============================================================ -->
+  <main class="stage-container" id="stage-container">
+
+    <!-- ==================== INTRO STAGE ==================== -->
+    <section id="stage-intro" class="stage active" aria-label="Introduction">
+      <div class="intro-stage">
+        <p class="intro-eyebrow">A 15-minute learning journey</p>
+        <h1 class="intro-title">AI &amp; Your Future<br>Career</h1>
+        <p class="intro-desc">
+          Artificial intelligence is changing how work happens — not just in tech, but across almost every field. This interactive experience helps you explore what that really means for the choices ahead of you.
+        </p>
+        <div class="intro-pills" aria-label="What you will explore">
+          <span class="pill">📅 Then, now &amp; next</span>
+          <span class="pill">🤖 What AI actually does</span>
+          <span class="pill">📊 Exposure vs opportunity</span>
+          <span class="pill">🌱 Where growth is happening</span>
+          <span class="pill">🆕 New kinds of jobs</span>
+          <span class="pill">🧭 Your future pathways</span>
+        </div>
+        <button class="btn btn-primary btn-lg" data-testid="button-start" onclick="startJourney()">
+          Begin the journey
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <p class="intro-meta">
+          No sign-in required. Nothing is saved. Based on sources from the WEF, ILO, IMF, OECD, and UK Government.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== STAGE 1: Then, Now, Next ==================== -->
+    <section id="stage-1" class="stage" aria-label="Stage 1: Then, Now, Next">
+      <div class="stage-inner">
+        <span class="stage-badge" style="color:var(--color-stage1);border-color:var(--color-stage1);">
+          Stage 1 of 6
+        </span>
+        <h2 class="stage-title">Then, Now, Next</h2>
+        <p class="stage-subtitle">How has work changed across generations? Move the slider to explore three different eras — and then test your predictions before the facts are revealed.</p>
+
+        <!-- Timeline slider -->
+        <div class="timeline-slider-wrap">
+          <div class="timeline-labels" aria-hidden="true">
+            <span class="timeline-label" id="tl-label-0">Grandparents' era<br><small style="font-weight:400;font-size:var(--text-xs);">~1970s–80s</small></span>
+            <span class="timeline-label" id="tl-label-1">Parents' era<br><small style="font-weight:400;font-size:var(--text-xs);">~1990s–2000s</small></span>
+            <span class="timeline-label" id="tl-label-2">Your era<br><small style="font-weight:400;font-size:var(--text-xs);">2020s onwards</small></span>
+          </div>
+          <div class="timeline-track">
+            <input type="range" class="timeline-input" id="timeline-slider" min="0" max="2" step="1" value="0"
+              data-testid="input-timeline-slider" aria-label="Select era to explore" aria-valuetext="Grandparents' era">
+          </div>
+        </div>
+
+        <div class="timeline-era-display" id="timeline-era-display" aria-live="polite">
+          <!-- Filled by JS -->
+        </div>
+
+        <hr class="section-sep">
+
+        <!-- Prediction before reveal -->
+        <div class="prediction-box" id="pred-box-1">
+          <p class="prediction-q">How much do you think the workforce will need to update its core skills by 2030?</p>
+          <div class="prediction-options" role="group" aria-label="Select your prediction">
+            <button class="prediction-option" data-testid="pred-1a" onclick="choosePrediction(this,'pred1','a')">About 10%</button>
+            <button class="prediction-option" data-testid="pred-1b" onclick="choosePrediction(this,'pred1','b')">About 25%</button>
+            <button class="prediction-option" data-testid="pred-1c" onclick="choosePrediction(this,'pred1','c')">About 40%</button>
+            <button class="prediction-option" data-testid="pred-1d" onclick="choosePrediction(this,'pred1','d')">More than 50%</button>
+          </div>
+          <div class="prediction-reveal" id="pred-reveal-1">
+            <strong>According to the WEF:</strong> 39% of workers' core skills are expected to change by 2030, and 59% of the global workforce will need retraining. This is a major shift — but it is about <em>which</em> skills matter, not necessarily that jobs disappear entirely.
+            <div class="source-chips">
+              <a href="https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf" target="_blank" rel="noopener" class="source-chip" data-testid="link-source-wef1">
+                📄 WEF Future of Jobs 2025
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tap-to-reveal cards -->
+        <p class="instruction-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 15 9 9m0 6 6-6"/><circle cx="12" cy="12" r="10"/></svg>
+          Tap each card to reveal a key fact
+        </p>
+        <div class="reveal-grid" role="list">
+          <div class="reveal-card" role="listitem" data-testid="reveal-card-university" onclick="revealCard(this)" tabindex="0" aria-label="University — tap to reveal">
+            <div class="reveal-front">
+              <div class="reveal-icon">🎓</div>
+              <p class="reveal-question">University<br>attendance</p>
+              <p class="reveal-tap-hint">Tap to reveal</p>
+            </div>
+            <div class="reveal-back">
+              <p class="reveal-fact"><strong>Then:</strong> far fewer people went to university — higher education was less common and often less accessible. <strong>Now:</strong> 50.9% of people in England enter higher education by age 25, up 12 percentage points since 2001/02.</p>
+              <div class="source-chips">
+                <a href="https://explore-education-statistics.service.gov.uk/find-statistics/participation-measures-in-higher-education/2023-24" target="_blank" rel="noopener" class="source-chip">📄 DfE HE Participation 2023/24</a>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-card" role="listitem" data-testid="reveal-card-internet" onclick="revealCard(this)" tabindex="0" aria-label="Internet access — tap to reveal">
+            <div class="reveal-front">
+              <div class="reveal-icon">🌐</div>
+              <p class="reveal-question">Internet access<br>across ages</p>
+              <p class="reveal-tap-hint">Tap to reveal</p>
+            </div>
+            <div class="reveal-back">
+              <p class="reveal-fact"><strong>In 2019:</strong> 99% of 16–44 year-olds used the internet recently. Only 47% of those aged 75+ did — up from just 20% in 2011. Digital access has transformed how people work, learn and communicate between generations.</p>
+              <div class="source-chips">
+                <a href="https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry/bulletins/internetusers/2019" target="_blank" rel="noopener" class="source-chip">📄 ONS Internet Users 2019</a>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-card" role="listitem" data-testid="reveal-card-qual" onclick="revealCard(this)" tabindex="0" aria-label="Qualifications — tap to reveal">
+            <div class="reveal-front">
+              <div class="reveal-icon">📜</div>
+              <p class="reveal-question">Qualification<br>levels in England</p>
+              <p class="reveal-tap-hint">Tap to reveal</p>
+            </div>
+            <div class="reveal-back">
+              <p class="reveal-fact"><strong>2021 Census:</strong> 33.8% of people aged 16+ in England and Wales had Level 4+ qualifications. But 18.2% had no qualifications at all. Apprenticeships were the highest qualification for 5.3% — showing many routes into work.</p>
+              <div class="source-chips">
+                <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/bulletins/educationenglandandwales/census2021" target="_blank" rel="noopener" class="source-chip">📄 ONS Census 2021</a>
+              </div>
+            </div>
+          </div>
+          <div class="reveal-card" role="listitem" data-testid="reveal-card-jobs" onclick="revealCard(this)" tabindex="0" aria-label="Jobs affected — tap to reveal">
+            <div class="reveal-front">
+              <div class="reveal-icon">💼</div>
+              <p class="reveal-question">Jobs expected<br>to be affected by 2030</p>
+              <p class="reveal-tap-hint">Tap to reveal</p>
+            </div>
+            <div class="reveal-back">
+              <p class="reveal-fact"><strong>WEF projects:</strong> 22% of today's jobs will be significantly transformed by 2030. Importantly, 170 million new roles are expected to be created while 92 million are displaced — a <em>net gain</em> of 78 million jobs globally.</p>
+              <div class="source-chips">
+                <a href="https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf" target="_blank" rel="noopener" class="source-chip">📄 WEF Future of Jobs 2025</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-nav">
+          <button class="btn btn-secondary" data-testid="button-prev-s1" onclick="goToStage('intro')">← Back</button>
+          <span class="stage-nav-info">Stage 1 of 6 — Then, Now, Next</span>
+          <button class="btn btn-primary" data-testid="button-next-s1" onclick="goToStage(2)">Continue →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STAGE 2: What does AI actually do? ==================== -->
+    <section id="stage-2" class="stage" aria-label="Stage 2: What does AI actually do to jobs?">
+      <div class="stage-inner">
+        <span class="stage-badge" style="color:var(--color-stage2);border-color:var(--color-stage2);">Stage 2 of 6</span>
+        <h2 class="stage-title">What does AI actually do to jobs?</h2>
+        <p class="stage-subtitle">There's a lot of hype around AI and work. Let's look at what the evidence actually shows — and correct some common misconceptions.</p>
+
+        <!-- Matching exercise -->
+        <p class="instruction-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 3 4 8 5-5 5 15H2L8 3z"/></svg>
+          Matching: tap a task, then tap the column where you think it belongs
+        </p>
+
+        <div id="matching-area">
+          <div class="job-pool" id="task-pool" role="list" aria-label="Task pool — tap a task to select it"></div>
+
+          <div class="matching-grid">
+            <div>
+              <p class="matching-col-label matching-col-ai">AI can handle a lot of this</p>
+              <div id="col-ai" class="sort-column" style="min-height:160px;background:color-mix(in srgb, var(--color-stage1) 6%, var(--color-surface-offset));" role="group" aria-label="AI-assisted tasks">
+              </div>
+            </div>
+            <div>
+              <p class="matching-col-label matching-col-human">Still needs human judgement most</p>
+              <div id="col-human" class="sort-column" style="min-height:160px;background:color-mix(in srgb, var(--color-stage2) 6%, var(--color-surface-offset));" role="group" aria-label="Human-judgement tasks">
+              </div>
+            </div>
+          </div>
+
+          <div id="matching-feedback" class="evidence-note hidden" aria-live="polite"></div>
+        </div>
+
+        <hr class="section-sep">
+
+        <!-- Myth / Fact cards -->
+        <p class="instruction-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+          Myth or Fact? Decide for each statement, then see the evidence.
+        </p>
+
+        <div class="myth-cards" role="list">
+          <!-- Card 1 -->
+          <div class="myth-card" role="listitem" data-testid="myth-card-1">
+            <div>
+              <p class="myth-statement">"AI will completely replace most jobs within the next decade."</p>
+              <div class="myth-buttons" role="group" aria-label="Is this a myth or fact?">
+                <button class="myth-btn" data-testid="myth-btn-1-myth" onclick="judgeMyth(this, 1, 'myth')">Myth</button>
+                <button class="myth-btn" data-testid="myth-btn-1-fact" onclick="judgeMyth(this, 1, 'fact')">Fact</button>
+              </div>
+              <div class="myth-verdict" id="myth-verdict-1"></div>
+            </div>
+            <span class="myth-badge badge-myth" aria-hidden="true">MYTH</span>
+          </div>
+          <!-- Card 2 -->
+          <div class="myth-card" role="listitem" data-testid="myth-card-2">
+            <div>
+              <p class="myth-statement">"AI mostly changes <em>tasks within</em> jobs, rather than replacing entire occupations."</p>
+              <div class="myth-buttons" role="group" aria-label="Is this a myth or fact?">
+                <button class="myth-btn" data-testid="myth-btn-2-myth" onclick="judgeMyth(this, 2, 'myth')">Myth</button>
+                <button class="myth-btn" data-testid="myth-btn-2-fact" onclick="judgeMyth(this, 2, 'fact')">Fact</button>
+              </div>
+              <div class="myth-verdict" id="myth-verdict-2"></div>
+            </div>
+            <span class="myth-badge badge-fact" aria-hidden="true">FACT</span>
+          </div>
+          <!-- Card 3 -->
+          <div class="myth-card" role="listitem" data-testid="myth-card-3">
+            <div>
+              <p class="myth-statement">"Being in a job that's 'exposed' to AI means you'll probably lose it."</p>
+              <div class="myth-buttons" role="group" aria-label="Is this a myth or fact?">
+                <button class="myth-btn" data-testid="myth-btn-3-myth" onclick="judgeMyth(this, 3, 'myth')">Myth</button>
+                <button class="myth-btn" data-testid="myth-btn-3-fact" onclick="judgeMyth(this, 3, 'fact')">Fact</button>
+              </div>
+              <div class="myth-verdict" id="myth-verdict-3"></div>
+            </div>
+            <span class="myth-badge badge-myth" aria-hidden="true">MYTH</span>
+          </div>
+          <!-- Card 4 -->
+          <div class="myth-card" role="listitem" data-testid="myth-card-4">
+            <div>
+              <p class="myth-statement">"Workers in AI-exposed jobs still mainly need management and communication skills — not deep technical AI skills."</p>
+              <div class="myth-buttons" role="group" aria-label="Is this a myth or fact?">
+                <button class="myth-btn" data-testid="myth-btn-4-myth" onclick="judgeMyth(this, 4, 'myth')">Myth</button>
+                <button class="myth-btn" data-testid="myth-btn-4-fact" onclick="judgeMyth(this, 4, 'fact')">Fact</button>
+              </div>
+              <div class="myth-verdict" id="myth-verdict-4"></div>
+            </div>
+            <span class="myth-badge badge-fact" aria-hidden="true">FACT</span>
+          </div>
+        </div>
+
+        <div class="stage-nav">
+          <button class="btn btn-secondary" data-testid="button-prev-s2" onclick="goToStage(1)">← Back</button>
+          <span class="stage-nav-info">Stage 2 of 6 — What AI does</span>
+          <button class="btn btn-primary" data-testid="button-next-s2" onclick="goToStage(3)">Continue →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STAGE 3: Exposure ==================== -->
+    <section id="stage-3" class="stage" aria-label="Stage 3: Which careers are more exposed?">
+      <div class="stage-inner">
+        <span class="stage-badge" style="color:var(--color-stage3);border-color:var(--color-stage3);">Stage 3 of 6</span>
+        <h2 class="stage-title">Exposure, Risk &amp; Opportunity</h2>
+        <p class="stage-subtitle">Some careers are more exposed to AI than others — but exposure is not the same as decline. Tap a career cluster to see where it sits and what that actually means.</p>
+
+        <!-- Key concept callout -->
+        <div class="evidence-note" style="border-left:3px solid var(--color-primary);margin-bottom:var(--space-8);">
+          <strong>Three things to keep separate:</strong> (1) <strong>Exposure</strong> — how many tasks AI can assist with. (2) <strong>Complementarity</strong> — how much human skill adds value alongside AI. (3) <strong>Demand growth</strong> — whether the sector is expanding or shrinking overall. A career can be highly exposed and still be a strong opportunity.
+        </div>
+
+        <!-- Spectrum -->
+        <div class="spectrum-track" aria-label="AI exposure spectrum from less exposed to more exposed">
+          <div class="spectrum-bar"></div>
+          <div class="spectrum-ends">
+            <span>🛡️ Less exposed to AI task automation</span>
+            <span>⚡ More exposed to AI task automation</span>
+          </div>
+        </div>
+
+        <!-- Career grid -->
+        <p class="instruction-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Tap a career cluster to place it on the spectrum and see the evidence
+        </p>
+        <div class="career-sort-grid" role="list" id="career-grid">
+          <!-- Filled by JS -->
+        </div>
+
+        <div class="career-detail-box" id="career-detail" aria-live="polite"></div>
+
+        <div class="stage-nav">
+          <button class="btn btn-secondary" data-testid="button-prev-s3" onclick="goToStage(2)">← Back</button>
+          <span class="stage-nav-info">Stage 3 of 6 — Exposure &amp; opportunity</span>
+          <button class="btn btn-primary" data-testid="button-next-s3" onclick="goToStage(4)">Continue →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STAGE 4: Opportunity ==================== -->
+    <section id="stage-4" class="stage" aria-label="Stage 4: Where is opportunity growing?">
+      <div class="stage-inner">
+        <span class="stage-badge" style="color:var(--color-stage4);border-color:var(--color-stage4);">Stage 4 of 6</span>
+        <h2 class="stage-title">Where Is Opportunity Growing?</h2>
+        <p class="stage-subtitle">Choose up to three things that matter most to you, and we'll show you which opportunity clusters might suit your interests — along with different routes in.</p>
+
+        <p class="instruction-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Select up to 3 interests that sound like you
+        </p>
+
+        <div class="interest-grid" role="group" aria-label="Select your interests" id="interest-grid">
+          <!-- Filled by JS -->
+        </div>
+
+        <button class="btn btn-primary" id="show-clusters-btn" data-testid="button-show-clusters" onclick="showClusters()" style="margin-bottom:var(--space-6);">
+          Show my opportunity clusters →
+        </button>
+
+        <div id="opportunity-results" hidden aria-live="polite">
+          <hr class="section-sep">
+          <h3 style="font-family:var(--font-display);font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-6);">Based on your interests, explore these areas:</h3>
+          <div class="opportunity-clusters" id="clusters-output">
+          </div>
+          <div class="evidence-note mt-6">
+            <strong>UK Government data:</strong> Priority occupations in 10 key sectors are projected to grow from 5.9 million workers in 2025 to 6.7 million in 2030 — a 15% increase, growing 1.6× faster than other employment. 34% of additional demand is expected at Level 2 or 3 qualifications — not just degrees.
+            <div class="source-chips">
+              <a href="https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030" target="_blank" rel="noopener" class="source-chip">📄 UK Gov Priority Skills 2030</a>
+              <a href="https://explore-education-statistics.service.gov.uk/find-statistics/occupations-in-demand/2025" target="_blank" rel="noopener" class="source-chip">📄 UK Gov Occupations in Demand 2025</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="stage-nav">
+          <button class="btn btn-secondary" data-testid="button-prev-s4" onclick="goToStage(3)">← Back</button>
+          <span class="stage-nav-info">Stage 4 of 6 — Opportunity map</span>
+          <button class="btn btn-primary" data-testid="button-next-s4" onclick="goToStage(5)">Continue →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STAGE 5: New & Changing Jobs ==================== -->
+    <section id="stage-5" class="stage" aria-label="Stage 5: Jobs that are new and changing">
+      <div class="stage-inner">
+        <span class="stage-badge" style="color:var(--color-stage5);border-color:var(--color-stage5);">Stage 5 of 6</span>
+        <h2 class="stage-title">New Jobs, Changed Jobs</h2>
+        <p class="stage-subtitle">When technology changes, new roles appear — and old ones transform. Here you'll sort jobs, guess some new roles, and discover which skills travel across different careers.</p>
+
+        <!-- Card sort -->
+        <p class="instruction-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          Tap a job card, then tap a column to sort it
+        </p>
+
+        <div class="job-pool" id="sort-job-pool" role="list" aria-label="Jobs to sort"></div>
+
+        <div class="card-sort-area" role="group" aria-label="Sort columns">
+          <div class="sort-column sort-col-new" id="sort-col-new" role="group" aria-label="Genuinely new roles">
+            <p class="sort-column-label sort-col-new">🆕 Genuinely New</p>
+          </div>
+          <div class="sort-column sort-col-reshape" id="sort-col-reshape" role="group" aria-label="Reshaped roles">
+            <p class="sort-column-label sort-col-reshape">🔄 Reshaped</p>
+          </div>
+          <div class="sort-column sort-col-change" id="sort-col-change" role="group" aria-label="Long-standing but changing roles">
+            <p class="sort-column-label sort-col-change">🌀 Long-standing &amp; Changing</p>
+          </div>
+        </div>
+
+        <div id="sort-reveal" class="evidence-note hidden mt-6" aria-live="polite"></div>
+
+        <hr class="section-sep">
+
+        <!-- Guess-the-role -->
+        <h3 style="font-family:var(--font-display);font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-4);">Guess the role</h3>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-5);">Read the clue, then choose the job title you think it describes.</p>
+
+        <div id="guess-game-wrap">
+          <!-- Filled by JS -->
+        </div>
+
+        <hr class="section-sep">
+
+        <!-- Skills that travel -->
+        <h3 style="font-family:var(--font-display);font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-3);">Which skills travel across many roles?</h3>
+        <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-4);">Tap each skill chip to classify it — does it travel widely across different jobs, or is it very specialist?</p>
+
+        <div class="skills-drag-area" id="skills-sort-area" role="group" aria-label="Skill chips to classify">
+          <!-- Filled by JS -->
+        </div>
+
+        <div class="evidence-note mt-4">
+          <strong>OECD research:</strong> Most workers exposed to AI will not need specialist AI skills. Leading firms in AI-heavy sectors want socio-emotional, leadership, innovation, and problem-solving skills alongside technical knowledge.
+          <div class="source-chips">
+            <a href="https://www.oecd.org/en/publications/emerging-trends-in-ai-skill-demand-across-14-oecd-countries_7c691b9a-en.html" target="_blank" rel="noopener" class="source-chip">📄 OECD AI Skill Demand</a>
+            <a href="https://www.oecd.org/en/publications/artificial-intelligence-and-the-changing-demand-for-skills-in-the-labour-market_88684e36-en.html" target="_blank" rel="noopener" class="source-chip">📄 OECD AI &amp; Skill Demand</a>
+          </div>
+        </div>
+
+        <div class="stage-nav">
+          <button class="btn btn-secondary" data-testid="button-prev-s5" onclick="goToStage(4)">← Back</button>
+          <span class="stage-nav-info">Stage 5 of 6 — New &amp; changing jobs</span>
+          <button class="btn btn-primary" data-testid="button-next-s5" onclick="goToStage(6)">Continue →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== STAGE 6: Your Future Pathways ==================== -->
+    <section id="stage-6" class="stage" aria-label="Stage 6: Your future pathways">
+      <div class="stage-inner">
+        <span class="stage-badge" style="color:var(--color-stage6);border-color:var(--color-stage6);">Stage 6 of 6</span>
+        <h2 class="stage-title">Your Future Pathways</h2>
+        <p class="stage-subtitle">This is not a personality test or career predictor — it's a starting point for reflection. Choose what matters most to you, and explore what that could mean.</p>
+
+        <p class="instruction-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          What matters most to you? Select all that apply.
+        </p>
+
+        <div class="priority-grid" role="group" aria-label="Select your priorities" id="priority-grid">
+          <!-- Filled by JS -->
+        </div>
+
+        <button class="btn btn-primary" id="show-pathways-btn" data-testid="button-show-pathways" onclick="showPathways()" style="margin-bottom:var(--space-6);">
+          Show my pathways →
+        </button>
+
+        <div id="pathways-output" hidden aria-live="polite">
+          <!-- Filled by JS -->
+        </div>
+
+        <div class="stage-nav">
+          <button class="btn btn-secondary" data-testid="button-prev-s6" onclick="goToStage(5)">← Back</button>
+          <span class="stage-nav-info">Stage 6 of 6 — Final reflection</span>
+          <button class="btn btn-primary" data-testid="button-finish" onclick="goToStage('end')">Finish →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== END STAGE ==================== -->
+    <section id="stage-end" class="stage" aria-label="Journey complete">
+      <div class="stage-inner">
+        <div class="summary-hero">
+          <div class="summary-icon-wrap" aria-hidden="true">✨</div>
+          <h2 class="stage-title">Journey complete</h2>
+          <p class="intro-desc" style="margin:0 auto var(--space-4);">
+            You've explored how AI is reshaping work, which careers are more or less exposed, where opportunity is growing, and what pathways exist.
+          </p>
+        </div>
+
+        <!-- Reflection prompt -->
+        <div class="prediction-box" id="reflection-box" style="margin-bottom:var(--space-6);">
+          <p class="prediction-q">What surprised you most during this journey?</p>
+          <div class="prediction-options" role="group" aria-label="Reflection choices">
+            <button class="prediction-option" data-testid="reflect-a" onclick="chooseReflection(this,'a')">How many <em>new</em> jobs AI is expected to create</button>
+            <button class="prediction-option" data-testid="reflect-b" onclick="chooseReflection(this,'b')">That exposure doesn't automatically mean risk</button>
+            <button class="prediction-option" data-testid="reflect-c" onclick="chooseReflection(this,'c')">How important human skills still are</button>
+            <button class="prediction-option" data-testid="reflect-d" onclick="chooseReflection(this,'d')">How many different routes into careers exist</button>
+            <button class="prediction-option" data-testid="reflect-e" onclick="chooseReflection(this,'e')">Nothing — I expected all of this</button>
+          </div>
+          <div class="prediction-reveal" id="reflection-reveal" style="border-left-color:var(--color-stage2);">
+            <strong>Great reflection.</strong> These are exactly the kinds of nuances that most media coverage misses. The picture is more complex — and more hopeful — than "AI will take all the jobs."
+          </div>
+        </div>
+
+        <!-- Key takeaways -->
+        <h3 style="font-family:var(--font-display);font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-4);">Key takeaways to remember</h3>
+        <div class="card-grid card-grid-2" style="margin-bottom:var(--space-8);">
+          <div class="card">
+            <div style="font-size:1.5rem;margin-bottom:var(--space-3);">🧩</div>
+            <h4 style="font-size:var(--text-base);font-weight:700;margin-bottom:var(--space-2);">Tasks, not whole jobs</h4>
+            <p style="font-size:var(--text-sm);color:var(--color-text-muted);">AI tends to reshape specific tasks within roles, not eliminate entire occupations at once. Human judgement, creativity, and relationships remain central in most work.</p>
+          </div>
+          <div class="card">
+            <div style="font-size:1.5rem;margin-bottom:var(--space-3);">📈</div>
+            <h4 style="font-size:var(--text-base);font-weight:700;margin-bottom:var(--space-2);">Growth is everywhere</h4>
+            <p style="font-size:var(--text-sm);color:var(--color-text-muted);">Growth is not only in technology. Care, education, construction, clean energy, and creative industries all show strong projected demand in UK Government data.</p>
+          </div>
+          <div class="card">
+            <div style="font-size:1.5rem;margin-bottom:var(--space-3);">🛤️</div>
+            <h4 style="font-size:var(--text-base);font-weight:700;margin-bottom:var(--space-2);">Many routes in</h4>
+            <p style="font-size:var(--text-sm);color:var(--color-text-muted);">Apprenticeships, T Levels, BTECs, FE colleges, degrees, and mixed routes all lead to valuable careers. 74.8% of workers in critical-demand roles require training below degree level.</p>
+          </div>
+          <div class="card">
+            <div style="font-size:1.5rem;margin-bottom:var(--space-3);">🧠</div>
+            <h4 style="font-size:var(--text-base);font-weight:700;margin-bottom:var(--space-2);">Human skills still matter</h4>
+            <p style="font-size:var(--text-sm);color:var(--color-text-muted);">Creative thinking, resilience, collaboration, communication, and leadership remain in high demand — alongside domain knowledge — even in the most AI-intensive sectors.</p>
+          </div>
+        </div>
+
+        <!-- All sources summary -->
+        <div class="evidence-note">
+          <strong>Sources used in this experience:</strong> World Economic Forum Future of Jobs Report 2025; International Labour Organization Working Paper WP096; IMF Working Paper WP/23/216; OECD reports on AI and skill demand; UK Government Assessment of Priority Skills to 2030; UK Government Occupations in Demand 2025; UK Government AI Skills for Life and Work; DfE Higher Education Participation 2023/24; ONS Education Census 2021; ONS Internet Users 2019; LinkedIn Jobs on the Rise 2025 UK.
+          <div class="source-chips">
+            <button class="source-chip" onclick="openSources()" data-testid="button-view-all-sources" style="cursor:pointer;">
+              📚 View all sources with links →
+            </button>
+          </div>
+        </div>
+
+        <div class="stage-nav" style="border:none;padding:0;margin-top:var(--space-8);">
+          <button class="btn btn-secondary" data-testid="button-restart" onclick="restartJourney()">
+            ↩ Start over
+          </button>
+          <span class="stage-nav-info" style="font-size:var(--text-xs);color:var(--color-text-faint);">Nothing has been saved. Your responses exist only in this browser session.</span>
+          <button class="btn btn-secondary" data-testid="button-print" onclick="window.print()">
+            🖨️ Print summary
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main><!-- /stage-container -->
+</div><!-- /app -->
+
+<script>
+/* ================================================================
+   FUTURE PATHS — AI Careers Explorer
+   Static client-side only. No storage, no cookies, no analytics.
+================================================================ */
+
+'use strict';
+
+/* ----------------------------------------------------------------
+   APP STATE (ephemeral — in page memory only)
+---------------------------------------------------------------- */
+const state = {
+  currentStage: 'intro',
+  matchingSelected: null,
+  sortJobSelected: null,
+  guessIndex: 0,
+  interestsSelected: new Set(),
+  prioritiesSelected: new Set(),
+  reflectionChosen: false,
+  pred1Answered: false,
+  mythAnswered: {},
+  careerRevealed: new Set(),
+  skillsClassed: new Set(),
+  sortPlaced: {},
+  guessDone: {},
+};
+
+/* ----------------------------------------------------------------
+   DATA
+---------------------------------------------------------------- */
+const ERA_DATA = [
+  {
+    label: "Grandparents' era (~1970s–80s)",
+    stats: [
+      { value: '~14%',  label: 'UK adults with university-level quals (approx.)' },
+      { value: '<5%',   label: 'Households with home computers (1980)' },
+      { value: '~8%',   label: 'Workers in service/knowledge roles (rough estimate)' },
+    ],
+    note: 'Qualifications were less common and work was more manual. Digital technology was just emerging in workplaces.',
+  },
+  {
+    label: "Parents' era (~1990s–2000s)",
+    stats: [
+      { value: '~29%',  label: 'UK adults with Level 4+ qualifications' },
+      { value: '~65%',  label: 'UK households with internet access (2005)' },
+      { value: '40.5%', label: '55–64 year-olds with tertiary attainment today (this cohort)' },
+    ],
+    note: 'The internet transformed office work. University expanded. "Digital skills" began to mean something in job ads.',
+  },
+  {
+    label: "Your era (2020s onwards)",
+    stats: [
+      { value: '50.9%', label: 'In England entering HE by age 25 (2023/24)' },
+      { value: '99%',   label: 'UK adults aged 16–44 using internet (2019)' },
+      { value: '60.2%', label: 'UK 25–34 year-olds with tertiary attainment (2023)' },
+    ],
+    note: 'AI is now the technology reshaping work — much as computers and the internet did before. But growth is happening across many sectors, not just tech.',
+  },
+];
+
+const TASKS = [
+  { id:'t1', text: 'Sorting and summarising large volumes of documents', correct: 'ai' },
+  { id:'t2', text: 'Comforting a patient and adjusting care based on their mood', correct: 'human' },
+  { id:'t3', text: 'Generating a first draft of a routine report', correct: 'ai' },
+  { id:'t4', text: 'Negotiating a complex business agreement', correct: 'human' },
+  { id:'t5', text: 'Screening large numbers of job applications', correct: 'ai' },
+  { id:'t6', text: 'Teaching a child with complex learning needs', correct: 'human' },
+  { id:'t7', text: 'Translating a legal document', correct: 'ai' },
+  { id:'t8', text: 'Designing a community engagement strategy', correct: 'human' },
+];
+
+const MYTH_DATA = {
+  1: {
+    answer: 'myth',
+    explanation: '<strong>This is a myth.</strong> The ILO found that only clerical work is highly exposed overall — and even there, the likely impact is <em>augmentation</em> (AI helping with tasks) rather than full replacement. The WEF projects 170 million new jobs created alongside 92 million displaced. Wholesale replacement of most jobs in a decade is not supported by current evidence.',
+    sources: [
+      { label: 'ILO WP096', url: 'https://webapps.ilo.org/static/english/intserv/working-papers/wp096/index.html' },
+      { label: 'WEF Future of Jobs 2025', url: 'https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf' },
+    ],
+  },
+  2: {
+    answer: 'fact',
+    explanation: '<strong>This is a fact.</strong> ILO research found that for most occupational groups, only 1–4% of tasks are <em>highly</em> exposed to AI — and the dominant effect is augmentation of specific tasks, not occupation-level replacement. AI tools assist with parts of jobs — like drafting, sorting, and screening — while people handle the rest.',
+    sources: [
+      { label: 'ILO WP096', url: 'https://webapps.ilo.org/static/english/intserv/working-papers/wp096/index.html' },
+    ],
+  },
+  3: {
+    answer: 'myth',
+    explanation: '<strong>This is a myth.</strong> The IMF found that professionals and managers can be highly exposed to AI but also have high <em>complementarity</em> — meaning AI supports their work rather than substituting for it. Exposure ≠ substitution risk. Context, skills, and demand growth all matter.',
+    sources: [
+      { label: 'IMF WP/23/216', url: 'https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023216-print-pdf.pdf' },
+    ],
+  },
+  4: {
+    answer: 'fact',
+    explanation: '<strong>This is a fact.</strong> OECD research found that in highly AI-exposed occupations, the most demanded skills are management and business skills — project management, finance, communication, administration. Most workers do not need deep specialist AI knowledge. Emotional and cognitive skills are also increasingly valued.',
+    sources: [
+      { label: 'OECD AI & Skills 2024', url: 'https://www.oecd.org/en/publications/artificial-intelligence-and-the-changing-demand-for-skills-in-the-labour-market_88684e36-en.html' },
+    ],
+  },
+};
+
+const CAREERS = [
+  {
+    id: 'clerical',
+    icon: '🗂️',
+    name: 'Clerical & Admin',
+    exposure: 'high',
+    expLabel: 'Higher exposure',
+    dims: {
+      exposure: 'High — ILO found 24% of clerical tasks are highly exposed, 58% medium exposed.',
+      complementarity: 'Lower — some clerical roles have limited complementarity, making substitution more likely.',
+      demand: 'Projected to decline in some baseline models, though replacement demand still creates openings.',
+    },
+    detail: 'Clerical and administrative roles are the most exposed occupational group according to the ILO. Tasks like data entry, filing, and routine correspondence can be automated. However, roles involving complex coordination, stakeholder management, and decision support remain more resilient.',
+    source: 'ILO WP096 (2023); UK Gov AI Skills Projections',
+    sourceUrl: 'https://webapps.ilo.org/static/english/intserv/working-papers/wp096/index.html',
+  },
+  {
+    id: 'retail',
+    icon: '🛒',
+    name: 'Retail & Service',
+    exposure: 'high',
+    expLabel: 'Higher exposure',
+    dims: {
+      exposure: 'High — routine transactions, stock management and customer queries can be automated.',
+      complementarity: 'Varies — face-to-face human service, empathy, and complex complaint handling remain valued.',
+      demand: 'Mixed — some roles declining, but personal service and specialist retail showing resilience.',
+    },
+    detail: 'Many routine retail tasks (checkouts, stock queries, basic customer service) are being automated. But physical retail that relies on human interaction, expertise, and experience is proving more resilient. Telemarketers are an IMF example of high exposure with low complementarity — a genuinely higher-risk combination.',
+    source: 'IMF WP/23/216 (2023)',
+    sourceUrl: 'https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023216-print-pdf.pdf',
+  },
+  {
+    id: 'software',
+    icon: '💻',
+    name: 'Software, Data & AI',
+    exposure: 'med',
+    expLabel: 'Medium exposure, high complementarity',
+    dims: {
+      exposure: 'Medium — code generation and data analysis can be AI-assisted, but design and architecture require deep expertise.',
+      complementarity: 'Very high — AI amplifies what skilled developers and data professionals can produce.',
+      demand: 'Strong projected growth: programmers and software developers appear in UK critical demand occupations.',
+    },
+    detail: 'Software and data roles are an excellent example of high AI complementarity — AI tools make skilled professionals much more productive rather than replacing them. AI-related vacancies remain under 1% of all job postings across OECD countries, but growth is significant.',
+    source: 'UK Gov Occupations in Demand 2025; OECD AI Skill Demand 2023',
+    sourceUrl: 'https://explore-education-statistics.service.gov.uk/find-statistics/occupations-in-demand/2025',
+  },
+  {
+    id: 'healthcare',
+    icon: '🏥',
+    name: 'Healthcare & Care',
+    exposure: 'low',
+    expLabel: 'Lower exposure to AI automation',
+    dims: {
+      exposure: 'Low — physical care, empathy, clinical judgement, and human connection are hard to automate.',
+      complementarity: 'High — AI supports diagnosis and admin, freeing care workers to focus on human elements.',
+      demand: 'Strong growth: care workers and home carers are among the biggest individual increases in UK projections.',
+    },
+    detail: 'Healthcare and care work combines physical presence, emotional intelligence, and complex clinical judgement — areas where AI currently has limited reach. UK projections show care workers and home carers among the fastest-growing occupations. This is both a high-need and high-opportunity sector.',
+    source: 'UK Gov Assessment of Priority Skills 2030',
+    sourceUrl: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030',
+  },
+  {
+    id: 'education',
+    icon: '🍎',
+    name: 'Education',
+    exposure: 'low',
+    expLabel: 'Lower to medium exposure',
+    dims: {
+      exposure: 'Lower — teaching relationships, mentoring, and responding to individual learner needs require human presence.',
+      complementarity: 'High — AI assists with planning, marking support, and personalised practice materials.',
+      demand: 'Growing: secondary education teaching professionals appear strongly in UK demand projections.',
+    },
+    detail: 'Teaching relies on human relationships, emotional attunement, and adaptive communication — areas where AI augments rather than replaces. Secondary education teachers are projected to remain in high demand in UK Government data. AI is changing the tools teachers use, not removing the role itself.',
+    source: 'UK Gov AI Skills for Life and Work; UK Gov Occupations in Demand 2025',
+    sourceUrl: 'https://www.gov.uk/government/publications/ai-skills-for-life-and-work-labour-market-and-skills-projections/ai-skills-for-life-and-work-labour-market-and-skills-projections',
+  },
+  {
+    id: 'trades',
+    icon: '🔧',
+    name: 'Skilled Trades',
+    exposure: 'low',
+    expLabel: 'Lower exposure',
+    dims: {
+      exposure: 'Low — physical dexterity, spatial judgement, and on-site problem-solving are hard to automate in unstructured environments.',
+      complementarity: 'Growing — tools and diagnostics are becoming digital, adding value for digitally skilled tradespeople.',
+      demand: 'Strong in areas like construction and clean energy. UK housebuilding and net zero targets are driving demand.',
+    },
+    detail: 'Trades like plumbing, electrical work, and construction require physical skill, real-world problem-solving, and adaptability — things that are currently difficult to automate outside of highly structured factory environments. UK clean energy and housebuilding targets are creating significant demand.',
+    source: 'UK Gov Assessment of Priority Skills 2030',
+    sourceUrl: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030',
+  },
+  {
+    id: 'creative',
+    icon: '🎨',
+    name: 'Creative, Media & Design',
+    exposure: 'med',
+    expLabel: 'Mixed exposure — varies by sub-field',
+    dims: {
+      exposure: 'Mixed — some production tasks (image generation, music drafting) are affected; original creative direction, cultural insight, and human voice remain valued.',
+      complementarity: 'High in many roles — AI acts as a creative tool, not a replacement for vision and taste.',
+      demand: 'UK Creative Industries are a projected growth sector in Priority Skills 2030.',
+    },
+    detail: 'Creative work is a nuanced picture. Some sub-tasks (generating stock imagery, routine copywriting) face AI competition. But creative direction, cultural knowledge, brand strategy, and original storytelling still require human insight and taste. UK Creative Industries are a priority growth sector — and human creativity is part of what makes them valuable.',
+    source: 'UK Gov Assessment of Priority Skills 2030; LinkedIn Jobs on the Rise 2025',
+    sourceUrl: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030',
+  },
+  {
+    id: 'lawbiz',
+    icon: '⚖️',
+    name: 'Law, Business & Management',
+    exposure: 'med',
+    expLabel: 'Medium exposure, high complementarity',
+    dims: {
+      exposure: 'Medium — legal research, document review, and financial analysis can be AI-assisted.',
+      complementarity: 'High — senior professionals add judgement, client relationships, and ethical accountability that AI cannot provide.',
+      demand: 'Financial Managers and Directors appear in UK strong projections; law is restructuring rather than declining.',
+    },
+    detail: 'The IMF research highlights that professionals and managers often have high exposure to AI but also high complementarity — meaning AI assists them rather than substitutes for them. Legal research and financial modelling can be AI-accelerated, but client-facing judgement and accountability remain human. Financial managers and directors appear strongly in UK projections.',
+    source: 'IMF WP/23/216 (2023); UK Gov AI Skills for Life and Work',
+    sourceUrl: 'https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023216-print-pdf.pdf',
+  },
+];
+
+const INTERESTS = [
+  { id: 'people',   icon: '🤝', label: 'Working with people', clusters: ['healthcare', 'education', 'creative', 'management'] },
+  { id: 'ideas',    icon: '💡', label: 'Ideas & analysis', clusters: ['software', 'lawbiz', 'creative', 'management'] },
+  { id: 'making',   icon: '🛠️', label: 'Making & building', clusters: ['trades', 'clean', 'construction', 'creative'] },
+  { id: 'solving',  icon: '🧩', label: 'Solving problems', clusters: ['software', 'healthcare', 'lawbiz', 'trades'] },
+  { id: 'helping',  icon: '❤️', label: 'Helping others', clusters: ['healthcare', 'education', 'social'] },
+  { id: 'creating', icon: '🎭', label: 'Creating & expressing', clusters: ['creative', 'education', 'social'] },
+  { id: 'tech',     icon: '🤖', label: 'Technology & computing', clusters: ['software', 'clean', 'management'] },
+  { id: 'outdoors', icon: '🌿', label: 'Outdoors & environment', clusters: ['clean', 'trades', 'construction'] },
+  { id: 'money',    icon: '📊', label: 'Finance & business', clusters: ['lawbiz', 'management', 'software'] },
+  { id: 'art',      icon: '🎨', label: 'Art & design', clusters: ['creative', 'education'] },
+];
+
+const OPPORTUNITY_CLUSTERS = {
+  healthcare: {
+    icon: '🏥', name: 'Healthcare & Care',
+    colour: '#4db880',
+    desc: 'One of the UK\'s largest and fastest-growing employment sectors, spanning the NHS, social care, mental health, and community services.',
+    aiEffect: 'Augment — AI assists with diagnostics, admin, and monitoring, freeing staff for human care.',
+    growth: 'Strong — care workers and home carers are among the largest projected increases in UK employment.',
+    routes: ['Apprenticeship (nursing, healthcare support)', 'FE (health & social care)', 'Degree (nursing, medicine, physiotherapy)', 'Mixed route (healthcare support → training)'],
+    skills: 'Empathy, communication, physical care, clinical judgement, resilience.',
+    caution: 'Demanding work with workforce pressures. Pay levels vary significantly across roles and sectors.',
+    sources: [{ label: 'UK Gov Priority Skills 2030', url: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030' }],
+  },
+  education: {
+    icon: '📚', name: 'Education & Training',
+    colour: '#4fa0d0',
+    desc: 'Schools, colleges, universities, and the growing EdTech sector. Secondary and FE teaching are in high demand.',
+    aiEffect: 'Augment — AI tools support lesson planning and marking, but human teaching remains central.',
+    growth: 'Strong — secondary teaching professionals appear in UK elevated demand occupations.',
+    routes: ['Degree + PGCE (teaching)', 'Apprenticeship (teaching assistant)', 'FE (learning support)', 'Degree in specialist subject + teacher training'],
+    skills: 'Communication, subject knowledge, patience, adaptability, classroom presence.',
+    caution: 'Workforce shortages in some subjects (maths, science, computing). Work-life balance challenges widely reported.',
+    sources: [{ label: 'UK Gov Occupations in Demand 2025', url: 'https://explore-education-statistics.service.gov.uk/find-statistics/occupations-in-demand/2025' }],
+  },
+  software: {
+    icon: '💻', name: 'Digital & Technology',
+    colour: '#7b6ddb',
+    desc: 'Software development, data science, cybersecurity, cloud infrastructure, AI engineering, and digital product management.',
+    aiEffect: 'Complement — AI dramatically amplifies what skilled technologists can produce.',
+    growth: 'Strong — programmers and software developers are in critical demand; the sector is projected to grow significantly.',
+    routes: ['Degree (computer science, data science)', 'Higher apprenticeship (software developer, data analyst)', 'Bootcamps + self-taught + portfolio', 'T Levels + FE (digital support)'],
+    skills: 'Programming, logical thinking, data literacy, communication, problem-solving, learning agility.',
+    caution: 'Competitive market. AI tools are changing which specific coding skills matter most. Continuous learning is essential.',
+    sources: [{ label: 'UK Gov Occupations in Demand 2025', url: 'https://explore-education-statistics.service.gov.uk/find-statistics/occupations-in-demand/2025' }, { label: 'OECD AI Skill Demand', url: 'https://www.oecd.org/en/publications/emerging-trends-in-ai-skill-demand-across-14-oecd-countries_7c691b9a-en.html' }],
+  },
+  creative: {
+    icon: '🎨', name: 'Creative Industries',
+    colour: '#d07840',
+    desc: 'Film, TV, gaming, music, animation, advertising, fashion, publishing, architecture, and design.',
+    aiEffect: 'Mixed — AI changes some production tasks, but original creative vision, cultural knowledge, and human voice remain central.',
+    growth: 'Strong — UK Creative Industries are a projected growth sector in Priority Skills 2030.',
+    routes: ['Degree (fine art, design, film, music)', 'Apprenticeship (digital marketing, content creation)', 'FE (creative media, performing arts)', 'Self-built portfolio + freelance'],
+    skills: 'Creative vision, craft skill, digital production tools, communication, project management, taste.',
+    caution: 'Competitive and often precarious, especially early in careers. Freelancing is common. AI is disrupting some sub-sectors more than others.',
+    sources: [{ label: 'UK Gov Priority Skills 2030', url: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030' }],
+  },
+  clean: {
+    icon: '⚡', name: 'Clean Energy',
+    colour: '#4db880',
+    desc: 'Solar, wind, heat pump installation, grid management, energy efficiency, and the broader net zero economy.',
+    aiEffect: 'Augment — AI optimises energy systems and forecasts demand; installation and engineering are hands-on.',
+    growth: 'Strong — UK clean energy is a priority growth sector driven by net zero targets.',
+    routes: ['Apprenticeship (electrical, engineering)', 'FE (renewables, energy efficiency)', 'Degree (engineering, environmental science)', 'Retraining routes from related trades'],
+    skills: 'Electrical/mechanical skills, systems thinking, environmental knowledge, problem-solving, physical work.',
+    caution: 'A relatively young sector — roles and qualifications are still evolving. Location of work may be less flexible.',
+    sources: [{ label: 'UK Gov Priority Skills 2030', url: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030' }],
+  },
+  construction: {
+    icon: '🏗️', name: 'Construction & Housebuilding',
+    colour: '#d07840',
+    desc: 'Building, civil engineering, architecture, quantity surveying, and project management in the built environment.',
+    aiEffect: 'Limited automation — site work is physical and variable; AI is being used for design and planning tools.',
+    growth: 'Strong — UK housebuilding targets and infrastructure investment are driving demand.',
+    routes: ['Apprenticeship (construction, bricklaying, carpentry)', 'FE (construction & built environment)', 'Degree (architecture, civil engineering, quantity surveying)', 'T Levels (construction)'],
+    skills: 'Physical skill, spatial awareness, planning, teamwork, technical drawing, site safety.',
+    caution: 'Physically demanding work with some seasonal and project-based variability. Safety culture is critical.',
+    sources: [{ label: 'UK Gov Priority Skills 2030', url: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030' }],
+  },
+  trades: {
+    icon: '🔧', name: 'Skilled Trades',
+    colour: '#4fa0d0',
+    desc: 'Plumbing, electricals, heating engineers, welders, mechanics, and specialist craftspeople.',
+    aiEffect: 'Limited automation — physical, on-site problem-solving in unstructured environments is hard to automate.',
+    growth: 'Steady — shortages in some trades, particularly as older tradespeople retire.',
+    routes: ['Apprenticeship (most skilled trades have strong routes)', 'FE (engineering, construction)', 'T Levels (engineering)', 'Directly employed with structured training'],
+    skills: 'Technical craft skills, spatial reasoning, customer communication, problem-solving, physical dexterity.',
+    caution: 'Physically demanding. Self-employment is common and brings both freedom and uncertainty.',
+    sources: [{ label: 'UK Gov Priority Skills 2030', url: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030' }],
+  },
+  social: {
+    icon: '🌍', name: 'Social & Community Work',
+    colour: '#4db880',
+    desc: 'Youth work, social work, community development, charities, public services, and third sector organisations.',
+    aiEffect: 'Augment — AI supports admin and caseload management; human relationship and advocacy remain central.',
+    growth: 'Steady to growing — driven by demographic need and policy priorities around support and prevention.',
+    routes: ['Degree (social work — required for qualified roles)', 'FE + experience pathway', 'Apprenticeship (children and young people practitioner)', 'Volunteering → employed route'],
+    skills: 'Empathy, resilience, ethical reasoning, communication, advocacy, cultural awareness.',
+    caution: 'Emotionally demanding. High caseloads reported in some areas. Pay progression can be slow.',
+    sources: [{ label: 'UK Gov Occupations in Demand 2025', url: 'https://explore-education-statistics.service.gov.uk/find-statistics/occupations-in-demand/2025' }],
+  },
+  management: {
+    icon: '📋', name: 'Business, Finance & Management',
+    colour: '#7b6ddb',
+    desc: 'Management roles, financial analysis, HR, strategy, operations, marketing, and professional services.',
+    aiEffect: 'Mixed — AI assists with analysis and reporting, but senior judgement, leadership, and client relationships remain human.',
+    growth: 'Mixed — Financial Managers and Directors appear strongly in UK projections; some operational management roles face more pressure.',
+    routes: ['Degree (business, economics, finance, management)', 'Higher apprenticeship (accounting, management)', 'Professional qualifications (ACCA, CIMA, CMI)', 'Graduate scheme from varied degree subject'],
+    skills: 'Communication, analytical thinking, leadership, financial literacy, project management, stakeholder management.',
+    caution: 'Highly competitive at senior levels. AI is automating analytical and reporting tasks, shifting value towards strategy and relationships.',
+    sources: [{ label: 'UK Gov AI Skills for Life and Work', url: 'https://www.gov.uk/government/publications/ai-skills-for-life-and-work-labour-market-and-skills-projections/ai-skills-for-life-and-work-labour-market-and-skills-projections' }],
+  },
+  lawbiz: {
+    icon: '⚖️', name: 'Law & Professional Services',
+    colour: '#4fa0d0',
+    desc: 'Legal practice, paralegal roles, compliance, consulting, and professional advisory work.',
+    aiEffect: 'Augment — AI accelerates research and document review; judgement, ethics, and client relationships remain human.',
+    growth: 'Restructuring — some entry roles are changing, but demand for qualified professionals remains strong.',
+    routes: ['Degree + Solicitor Qualifying Exam (SQE)', 'Apprenticeship (solicitor — growing route)', 'Paralegal via FE/diploma then experience', 'Degree in any subject + law conversion'],
+    skills: 'Legal reasoning, written communication, attention to detail, client management, ethical judgement.',
+    caution: 'Highly competitive at the top. Solicitor qualifying exams changed recently — check current requirements. AI is disrupting some paralegal and junior tasks.',
+    sources: [{ label: 'IMF WP/23/216', url: 'https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023216-print-pdf.pdf' }],
+  },
+};
+
+const SORT_JOBS = [
+  { id: 'sj1', name: 'AI Ethicist', correct: 'new', note: 'A genuinely new role focused on ensuring AI systems are fair, accountable, and transparent. Emerged as organisations recognised the need for ethical oversight of AI.' },
+  { id: 'sj2', name: 'MLOps Engineer', correct: 'new', note: 'A new specialist role managing the deployment and monitoring of machine learning models in production. Combines software engineering and data science operations.' },
+  { id: 'sj3', name: 'Radiographer', correct: 'change', note: 'A long-standing clinical role that is changing as AI assists with image analysis. The core human role in patient care and clinical oversight remains essential.' },
+  { id: 'sj4', name: 'Journalist', correct: 'reshape', note: 'Being reshaped by AI tools that can generate drafts and summarise sources. Human judgement, investigation, source relationships, and editorial decisions remain central.' },
+  { id: 'sj5', name: 'Data Analyst', correct: 'reshape', note: 'Being reshaped — AI tools accelerate data processing, shifting the skill focus towards interpretation, communication, and strategic insight.' },
+  { id: 'sj6', name: 'Secondary Teacher', correct: 'change', note: 'A long-standing role that is changing as AI tools support planning, marking, and personalised practice — but human teaching relationships remain irreplaceable.' },
+  { id: 'sj7', name: 'AI Trainer', correct: 'new', note: 'An emerging role involving labelling, evaluating, and improving AI outputs. Still evolving in form and scale — not yet an established mass occupation but growing.' },
+  { id: 'sj8', name: 'Solicitor', correct: 'change', note: 'A long-standing role that is changing as AI accelerates legal research and document review, but human judgement, ethics, and client relationships remain central.' },
+];
+
+const GUESS_ROLES = [
+  {
+    clue: `"I work with teams of engineers and product designers to decide what our AI system should be able to do — and to make sure it's safe, useful, and meets user needs. I don't write the code, but I set the direction."`,
+    options: ['Data Entry Clerk', 'AI Product Manager', 'Network Engineer', 'HR Business Partner'],
+    correct: 'AI Product Manager',
+    explanation: 'An AI Product Manager bridges technical teams and business goals, shaping AI products without necessarily coding. This is a growing role as organisations integrate AI into their products.',
+    source: 'WEF Future of Jobs 2025',
+    sourceUrl: 'https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf',
+  },
+  {
+    clue: `"I review the outputs of AI models and flag when they're biased, wrong, or harmful. I help improve the training data. It's quite repetitive at times, but the work matters — I'm essentially teaching the AI."`,
+    options: ['Social Media Manager', 'AI Trainer / Data Annotator', 'Cybersecurity Analyst', 'Graphic Designer'],
+    correct: 'AI Trainer / Data Annotator',
+    explanation: 'AI trainers and data annotators help improve AI systems by labelling data, evaluating outputs, and flagging problems. The role is growing but its long-term form is still evolving.',
+    source: 'LinkedIn Jobs on the Rise 2025 UK',
+    sourceUrl: 'https://www.linkedin.com/pulse/linkedin-jobs-rise-2025-25-fastest-growing-roles-uk-lrsnf',
+  },
+  {
+    clue: `"I design and maintain the infrastructure that allows AI models to run in production — handling computing resources, monitoring performance, and making sure models stay accurate over time."`,
+    options: ['MLOps Engineer', 'Financial Analyst', 'Secondary School Teacher', 'Event Manager'],
+    correct: 'MLOps Engineer',
+    explanation: 'MLOps (Machine Learning Operations) Engineers manage the technical pipeline from model development to live deployment. This is a new specialist role at the intersection of software engineering and data science.',
+    source: 'WEF Future of Jobs 2025',
+    sourceUrl: 'https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf',
+  },
+];
+
+const SKILLS = [
+  { id: 'sk1', text: 'Critical thinking', type: 'transferable' },
+  { id: 'sk2', text: 'Python programming', type: 'specialist' },
+  { id: 'sk3', text: 'Communication', type: 'transferable' },
+  { id: 'sk4', text: 'Transformer model fine-tuning', type: 'specialist' },
+  { id: 'sk5', text: 'Project management', type: 'transferable' },
+  { id: 'sk6', text: 'Empathy & active listening', type: 'transferable' },
+  { id: 'sk7', text: 'Prompt engineering', type: 'specialist' },
+  { id: 'sk8', text: 'Collaboration', type: 'transferable' },
+  { id: 'sk9', text: 'Data literacy', type: 'transferable' },
+  { id: 'sk10', text: 'Reinforcement learning from human feedback (RLHF)', type: 'specialist' },
+];
+
+const PRIORITIES = [
+  { id: 'stability',  icon: '🏛️', label: 'Job stability',       clusters: ['healthcare', 'education', 'trades', 'management'] },
+  { id: 'creativity', icon: '🎨', label: 'Creative work',        clusters: ['creative', 'education', 'software'] },
+  { id: 'helping',    icon: '❤️', label: 'Helping people',       clusters: ['healthcare', 'education', 'social'] },
+  { id: 'hightech',   icon: '🤖', label: 'High-tech work',       clusters: ['software', 'clean', 'management'] },
+  { id: 'handson',    icon: '🔨', label: 'Hands-on & practical', clusters: ['trades', 'construction', 'clean', 'healthcare'] },
+  { id: 'impact',     icon: '🌍', label: 'Social impact',        clusters: ['education', 'healthcare', 'social', 'clean'] },
+  { id: 'demand',     icon: '📈', label: 'Strong demand',        clusters: ['healthcare', 'software', 'trades', 'education', 'construction'] },
+  { id: 'flexible',   icon: '🕐', label: 'Flexibility',          clusters: ['software', 'creative', 'management', 'lawbiz'] },
+];
+
+const SOURCES_DATA = [
+  {
+    org: 'World Economic Forum',
+    title: 'Future of Jobs Report 2025',
+    url: 'https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf',
+    note: 'Global employer survey on labour market transformation, role creation and displacement, and skills demand.',
+  },
+  {
+    org: 'International Labour Organization',
+    title: 'Generative AI and jobs: A global analysis of potential effects on job quantity and quality (WP096)',
+    url: 'https://webapps.ilo.org/static/english/intserv/working-papers/wp096/index.html',
+    note: 'Task-level analysis of AI exposure across occupations globally.',
+  },
+  {
+    org: 'International Monetary Fund',
+    title: 'Labor Market Exposure to AI: Cross-country Differences and the Role of Complementarity (WP/23/216)',
+    url: 'https://www.imf.org/-/media/files/publications/wp/2023/english/wpiea2023216-print-pdf.pdf',
+    note: 'Analysis distinguishing exposure from substitution risk through the lens of complementarity.',
+  },
+  {
+    org: 'OECD',
+    title: 'Artificial intelligence and the changing demand for skills in the labour market',
+    url: 'https://www.oecd.org/en/publications/artificial-intelligence-and-the-changing-demand-for-skills-in-the-labour-market_88684e36-en.html',
+    note: 'Evidence on which skills are in demand in AI-exposed occupations.',
+  },
+  {
+    org: 'OECD',
+    title: 'Emerging trends in AI skill demand across 14 OECD countries',
+    url: 'https://www.oecd.org/en/publications/emerging-trends-in-ai-skill-demand-across-14-oecd-countries_7c691b9a-en.html',
+    note: 'Job posting analysis of AI-specific skill demand across countries.',
+  },
+  {
+    org: 'UK Government',
+    title: 'Assessment of priority skills to 2030',
+    url: 'https://www.gov.uk/government/publications/assessment-of-priority-skills-to-2030/assessment-of-priority-skills-to-2030',
+    note: 'UK official projection of priority occupation growth across 10 key sectors.',
+  },
+  {
+    org: 'UK Government — Department for Education',
+    title: 'Occupations in demand 2025',
+    url: 'https://explore-education-statistics.service.gov.uk/find-statistics/occupations-in-demand/2025',
+    note: 'Official statistics on UK occupations with critical and elevated demand.',
+  },
+  {
+    org: 'UK Government',
+    title: 'AI Skills for Life and Work: Labour market and skills projections',
+    url: 'https://www.gov.uk/government/publications/ai-skills-for-life-and-work-labour-market-and-skills-projections/ai-skills-for-life-and-work-labour-market-and-skills-projections',
+    note: 'UK projections for AI-related job growth and occupational change. Projections are scenarios, not certainties.',
+  },
+  {
+    org: 'UK Government — Department for Education',
+    title: 'Participation measures in higher education 2023/24',
+    url: 'https://explore-education-statistics.service.gov.uk/find-statistics/participation-measures-in-higher-education/2023-24',
+    note: 'Data on higher education entry rates and apprenticeship participation over time.',
+  },
+  {
+    org: 'ONS',
+    title: 'Education, England and Wales: Census 2021',
+    url: 'https://www.ons.gov.uk/peoplepopulationandcommunity/educationandchildcare/bulletins/educationenglandandwales/census2021',
+    note: 'Qualification levels across the England and Wales population.',
+  },
+  {
+    org: 'ONS',
+    title: 'Internet users, UK: 2019',
+    url: 'https://www.ons.gov.uk/businessindustryandtrade/itandinternetindustry/bulletins/internetusers/2019',
+    note: 'Generational data on internet use across UK age groups.',
+  },
+  {
+    org: 'OECD',
+    title: 'Education at a Glance 2025, UK country profile',
+    url: 'https://gpseducation.oecd.org/CountryProfile?primaryCountry=GBR&treshold=10&topic=EO',
+    note: 'Comparative data on tertiary attainment rates across age cohorts.',
+  },
+  {
+    org: 'LinkedIn',
+    title: 'Jobs on the Rise 2025: The 25 fastest-growing roles in the UK',
+    url: 'https://www.linkedin.com/pulse/linkedin-jobs-rise-2025-25-fastest-growing-roles-uk-lrsnf',
+    note: 'Platform data on fastest-growing job titles in the UK. Note: based on LinkedIn job postings, not official statistics.',
+  },
+];
+
+/* ----------------------------------------------------------------
+   NAVIGATION
+---------------------------------------------------------------- */
+function goToStage(stageId) {
+  const allStages = document.querySelectorAll('.stage');
+  allStages.forEach(s => { s.classList.remove('active'); s.setAttribute('aria-hidden','true'); });
+
+  let el;
+  if (stageId === 'intro') {
+    el = document.getElementById('stage-intro');
+  } else if (stageId === 'end') {
+    el = document.getElementById('stage-end');
+  } else {
+    el = document.getElementById('stage-' + stageId);
+  }
+  if (el) {
+    el.classList.add('active');
+    el.removeAttribute('aria-hidden');
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    state.currentStage = stageId;
+    updateProgress();
+  }
+}
+
+function startJourney() {
+  goToStage(1);
+}
+
+function restartJourney() {
+  // Clear all ephemeral state
+  Object.assign(state, {
+    currentStage: 'intro',
+    matchingSelected: null,
+    sortJobSelected: null,
+    guessIndex: 0,
+    interestsSelected: new Set(),
+    prioritiesSelected: new Set(),
+    reflectionChosen: false,
+    pred1Answered: false,
+    mythAnswered: {},
+    careerRevealed: new Set(),
+    skillsClassed: new Set(),
+    sortPlaced: {},
+    guessDone: {},
+  });
+  goToStage('intro');
+}
+
+function updateProgress() {
+  const stages = ['intro', 1, 2, 3, 4, 5, 6, 'end'];
+  const idx = stages.indexOf(state.currentStage);
+  const pct = idx <= 0 ? 0 : Math.round((idx / (stages.length - 1)) * 100);
+  const bar = document.getElementById('progress-bar');
+  const wrap = document.getElementById('progress-bar-wrap');
+  const label = document.getElementById('progress-label');
+  if (bar) bar.style.width = pct + '%';
+  if (wrap) wrap.setAttribute('aria-valuenow', pct);
+  const labels = { intro: 'Intro', 1: 'Stage 1', 2: 'Stage 2', 3: 'Stage 3', 4: 'Stage 4', 5: 'Stage 5', 6: 'Stage 6', end: 'Complete' };
+  if (label) label.textContent = labels[state.currentStage] || '';
+}
+
+/* ----------------------------------------------------------------
+   STAGE 1 — Timeline
+---------------------------------------------------------------- */
+function initTimeline() {
+  const slider = document.getElementById('timeline-slider');
+  if (!slider) return;
+  renderEra(0);
+  slider.addEventListener('input', () => {
+    const v = parseInt(slider.value, 10);
+    renderEra(v);
+    slider.setAttribute('aria-valuetext', ERA_DATA[v].label);
+  });
+}
+
+function renderEra(idx) {
+  const era = ERA_DATA[idx];
+  const display = document.getElementById('timeline-era-display');
+  if (!display) return;
+
+  // Update label highlights
+  [0,1,2].forEach(i => {
+    const lbl = document.getElementById('tl-label-' + i);
+    if (lbl) lbl.classList.toggle('active', i === idx);
+  });
+
+  display.innerHTML = `
+    <h3 class="era-heading">${era.label}</h3>
+    <div class="era-stats">
+      ${era.stats.map(s => `
+        <div class="era-stat">
+          <span class="era-stat-value" style="color:var(--color-primary)">${s.value}</span>
+          <span class="era-stat-label">${s.label}</span>
+        </div>
+      `).join('')}
+    </div>
+    <p style="margin-top:var(--space-4);font-size:var(--text-sm);color:var(--color-text-muted);">${era.note}</p>
+  `;
+}
+
+/* ----------------------------------------------------------------
+   PREDICTION BEFORE REVEAL
+---------------------------------------------------------------- */
+function choosePrediction(btn, predId, choice) {
+  if (state.pred1Answered) return;
+  state.pred1Answered = true;
+
+  const container = btn.closest('.prediction-options');
+  const buttons = container.querySelectorAll('.prediction-option');
+  const correctAnswer = 'c'; // ~40%
+
+  buttons.forEach(b => {
+    b.disabled = true;
+    const bChoice = b.getAttribute('data-testid')?.replace('pred-1','');
+    if (bChoice === correctAnswer) b.classList.add('correct');
+    else if (b === btn) b.classList.add('wrong');
+    else b.classList.add('wrong');
+  });
+
+  const reveal = document.getElementById('pred-reveal-1');
+  if (reveal) { reveal.classList.add('visible'); }
+}
+
+/* ----------------------------------------------------------------
+   REVEAL CARDS
+---------------------------------------------------------------- */
+function revealCard(card) {
+  if (card.classList.contains('revealed')) return;
+  card.classList.add('revealed');
+}
+
+/* ----------------------------------------------------------------
+   STAGE 2 — Matching Exercise
+---------------------------------------------------------------- */
+function initMatching() {
+  const pool = document.getElementById('task-pool');
+  if (!pool) return;
+  pool.innerHTML = '';
+
+  TASKS.forEach(task => {
+    const chip = document.createElement('button');
+    chip.className = 'job-chip';
+    chip.id = 'task-' + task.id;
+    chip.setAttribute('data-testid', 'task-chip-' + task.id);
+    chip.setAttribute('data-taskid', task.id);
+    chip.setAttribute('role', 'listitem');
+    chip.textContent = task.text;
+    chip.addEventListener('click', () => selectTask(chip, task));
+    pool.appendChild(chip);
+  });
+
+  const colAI = document.getElementById('col-ai');
+  const colHuman = document.getElementById('col-human');
+  if (colAI) colAI.addEventListener('click', () => placeTask('ai'));
+  if (colHuman) colHuman.addEventListener('click', () => placeTask('human'));
+}
+
+function selectTask(chip, task) {
+  if (chip.classList.contains('chip-placed')) return;
+  // Deselect others
+  document.querySelectorAll('.job-chip.chip-selected').forEach(c => c.classList.remove('chip-selected'));
+  chip.classList.add('chip-selected');
+  state.matchingSelected = { chip, task };
+}
+
+function placeTask(col) {
+  if (!state.matchingSelected) return;
+  const { chip, task } = state.matchingSelected;
+  if (chip.classList.contains('chip-placed')) return;
+
+  chip.classList.remove('chip-selected');
+  chip.classList.add('chip-placed');
+  chip.disabled = true;
+
+  const isCorrect = task.correct === col;
+  const targetCol = document.getElementById('col-' + col);
+
+  const placed = document.createElement('div');
+  placed.className = 'matching-item ' + (isCorrect ? 'correct' : 'incorrect');
+  placed.innerHTML = chip.textContent;
+  if (!isCorrect) {
+    placed.innerHTML += `<span style="font-size:var(--text-xs);display:block;margin-top:4px;opacity:0.75;">→ Actually better in the ${task.correct === 'ai' ? 'AI-assisted' : 'human judgement'} column</span>`;
+  }
+  if (targetCol) targetCol.appendChild(placed);
+  state.matchingSelected = null;
+
+  // Check if all placed
+  const allPlaced = TASKS.every(t => document.getElementById('task-' + t.id)?.classList.contains('chip-placed'));
+  if (allPlaced) {
+    const feedback = document.getElementById('matching-feedback');
+    if (feedback) {
+      feedback.classList.remove('hidden');
+      feedback.innerHTML = `<strong>Well done for working through that.</strong> Notice how many tasks that <em>feel</em> purely human still have AI assistance possibilities — and vice versa. The ILO research suggests the most important effect of AI is <em>augmenting</em> what people do, not removing them from the picture entirely.
+      <div class="source-chips"><a href="https://webapps.ilo.org/static/english/intserv/working-papers/wp096/index.html" target="_blank" rel="noopener" class="source-chip">📄 ILO WP096</a></div>`;
+    }
+  }
+}
+
+/* ----------------------------------------------------------------
+   MYTH / FACT
+---------------------------------------------------------------- */
+function judgeMyth(btn, cardId, choice) {
+  if (state.mythAnswered[cardId]) return;
+  state.mythAnswered[cardId] = true;
+
+  const data = MYTH_DATA[cardId];
+  const card = btn.closest('.myth-card');
+  const buttons = card.querySelectorAll('.myth-btn');
+  buttons.forEach(b => { b.disabled = true; });
+
+  const isCorrect = choice === data.answer;
+  btn.classList.add(choice === 'myth' ? 'myth-selected-myth' : 'myth-selected-fact');
+
+  const verdict = document.getElementById('myth-verdict-' + cardId);
+  if (verdict) {
+    verdict.className = 'myth-verdict visible verdict-' + (isCorrect ? (data.answer === 'myth' ? 'myth' : 'fact') : (data.answer === 'myth' ? 'fact' : 'myth'));
+    verdict.innerHTML = data.explanation + `<div class="source-chips">${
+      data.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener" class="source-chip">📄 ${s.label}</a>`).join('')
+    }</div>`;
+  }
+}
+
+/* ----------------------------------------------------------------
+   STAGE 3 — Career Grid
+---------------------------------------------------------------- */
+function initCareerGrid() {
+  const grid = document.getElementById('career-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  CAREERS.forEach(career => {
+    const card = document.createElement('div');
+    card.className = 'career-sort-card';
+    card.setAttribute('role', 'listitem');
+    card.setAttribute('data-testid', 'career-card-' + career.id);
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', career.name + ' — tap to explore');
+    card.innerHTML = `
+      <div class="career-icon">${career.icon}</div>
+      <div class="career-name">${career.name}</div>
+      <div class="career-exposure">${career.expLabel}</div>
+    `;
+    card.addEventListener('click', () => showCareerDetail(career, card));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showCareerDetail(career, card); }});
+    grid.appendChild(card);
+  });
+}
+
+function showCareerDetail(career, card) {
+  state.careerRevealed.add(career.id);
+
+  // Mark all cards
+  document.querySelectorAll('.career-sort-card').forEach(c => c.classList.remove('exp-high','exp-med','exp-low','answered'));
+  document.querySelectorAll('.career-sort-card').forEach((c,i) => {
+    if (state.careerRevealed.has(CAREERS[i]?.id)) {
+      c.classList.add('exp-' + CAREERS[i].exposure, 'answered');
+      c.querySelector('.career-exposure').style.display = 'block';
+    }
+  });
+
+  const detail = document.getElementById('career-detail');
+  if (!detail) return;
+  detail.classList.add('visible');
+  detail.innerHTML = `
+    <div class="career-detail-title">
+      ${career.icon} ${career.name}
+      <span class="exposure-pill exp-pill-${career.exposure}">${career.expLabel}</span>
+    </div>
+    <p style="font-size:var(--text-sm);line-height:1.65;margin-bottom:var(--space-4);">${career.detail}</p>
+    <div class="three-dimensions">
+      <div class="dim-box">
+        <div class="dim-label">⚡ AI Exposure</div>
+        <div class="dim-value" style="font-size:var(--text-xs);font-weight:500;">${career.dims.exposure}</div>
+      </div>
+      <div class="dim-box">
+        <div class="dim-label">🤝 Complementarity</div>
+        <div class="dim-value" style="font-size:var(--text-xs);font-weight:500;">${career.dims.complementarity}</div>
+      </div>
+      <div class="dim-box">
+        <div class="dim-label">📈 Demand Outlook</div>
+        <div class="dim-value" style="font-size:var(--text-xs);font-weight:500;">${career.dims.demand}</div>
+      </div>
+    </div>
+    <div class="source-chips">
+      <a href="${career.sourceUrl}" target="_blank" rel="noopener" class="source-chip">📄 ${career.source}</a>
+    </div>
+  `;
+  detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+/* ----------------------------------------------------------------
+   STAGE 4 — Interest Filter
+---------------------------------------------------------------- */
+function initInterests() {
+  const grid = document.getElementById('interest-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  INTERESTS.forEach(interest => {
+    const card = document.createElement('div');
+    card.className = 'interest-card';
+    card.setAttribute('data-testid', 'interest-' + interest.id);
+    card.setAttribute('data-id', interest.id);
+    card.setAttribute('role', 'checkbox');
+    card.setAttribute('aria-checked', 'false');
+    card.setAttribute('tabindex', '0');
+    card.innerHTML = `<div class="interest-icon">${interest.icon}</div><div class="interest-label">${interest.label}</div>`;
+    card.addEventListener('click', () => toggleInterest(card, interest.id));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleInterest(card, interest.id); }});
+    grid.appendChild(card);
+  });
+}
+
+function toggleInterest(card, id) {
+  if (state.interestsSelected.has(id)) {
+    state.interestsSelected.delete(id);
+    card.classList.remove('selected');
+    card.setAttribute('aria-checked', 'false');
+  } else if (state.interestsSelected.size < 3) {
+    state.interestsSelected.add(id);
+    card.classList.add('selected');
+    card.setAttribute('aria-checked', 'true');
+  } else {
+    // Swap oldest
+    const oldest = [...state.interestsSelected][0];
+    state.interestsSelected.delete(oldest);
+    document.querySelector(`[data-id="${oldest}"]`)?.classList.remove('selected');
+    document.querySelector(`[data-id="${oldest}"]`)?.setAttribute('aria-checked','false');
+    state.interestsSelected.add(id);
+    card.classList.add('selected');
+    card.setAttribute('aria-checked', 'true');
+  }
+}
+
+function showClusters() {
+  if (state.interestsSelected.size === 0) {
+    alert('Please select at least one interest to continue.');
+    return;
+  }
+
+  // Score clusters
+  const clusterScores = {};
+  state.interestsSelected.forEach(id => {
+    const interest = INTERESTS.find(i => i.id === id);
+    if (!interest) return;
+    interest.clusters.forEach(c => {
+      clusterScores[c] = (clusterScores[c] || 0) + 1;
+    });
+  });
+
+  // Top 4 unique clusters
+  const top = Object.entries(clusterScores)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 4)
+    .map(([id]) => OPPORTUNITY_CLUSTERS[id])
+    .filter(Boolean);
+
+  const output = document.getElementById('clusters-output');
+  if (!output) return;
+  output.innerHTML = top.map(c => `
+    <div class="opportunity-card animate-in">
+      <div class="opportunity-icon-wrap" style="background:color-mix(in srgb,${c.colour} 15%,var(--color-surface-offset));">${c.icon}</div>
+      <div>
+        <div class="opportunity-name">${c.name}</div>
+        <div class="opportunity-desc">${c.desc}</div>
+        <div style="font-size:var(--text-xs);margin-bottom:var(--space-3);">
+          <span style="font-weight:600;color:var(--color-primary);">AI effect:</span> ${c.aiEffect}<br>
+          <span style="font-weight:600;color:var(--color-success);">Growth outlook:</span> ${c.growth}
+        </div>
+        <div class="pathway-tags">
+          ${c.routes.map(r => `<span class="pathway-tag ${routeTagClass(r)}">${r}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  const resultsEl = document.getElementById('opportunity-results');
+  if (resultsEl) {
+    resultsEl.removeAttribute('hidden');
+    resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function routeTagClass(route) {
+  if (route.toLowerCase().includes('apprenticeship')) return 'tag-apprentice';
+  if (route.toLowerCase().includes('fe') || route.toLowerCase().includes('college') || route.toLowerCase().includes('t level')) return 'tag-fe';
+  if (route.toLowerCase().includes('degree') || route.toLowerCase().includes('uni') || route.toLowerCase().includes('pgce')) return 'tag-degree';
+  return 'tag-mixed';
+}
+
+/* ----------------------------------------------------------------
+   STAGE 5 — Card Sort
+---------------------------------------------------------------- */
+function initCardSort() {
+  const pool = document.getElementById('sort-job-pool');
+  if (!pool) return;
+  pool.innerHTML = '';
+
+  SORT_JOBS.forEach(job => {
+    const chip = document.createElement('button');
+    chip.className = 'job-chip';
+    chip.id = 'sortjob-' + job.id;
+    chip.setAttribute('data-testid', 'sort-chip-' + job.id);
+    chip.setAttribute('role', 'listitem');
+    chip.textContent = job.name;
+    chip.addEventListener('click', () => selectSortJob(chip, job));
+    pool.appendChild(chip);
+  });
+
+  ['new','reshape','change'].forEach(col => {
+    const el = document.getElementById('sort-col-' + col);
+    if (el) el.addEventListener('click', (e) => { if (e.target === el || e.target.closest('.sort-column-label')) placeSortJob(col); });
+  });
+}
+
+function selectSortJob(chip, job) {
+  if (state.sortPlaced[job.id]) return;
+  document.querySelectorAll('.job-chip.chip-selected').forEach(c => c.classList.remove('chip-selected'));
+  chip.classList.add('chip-selected');
+  state.sortJobSelected = { chip, job };
+}
+
+function placeSortJob(col) {
+  if (!state.sortJobSelected) return;
+  const { chip, job } = state.sortJobSelected;
+  if (state.sortPlaced[job.id]) return;
+
+  state.sortPlaced[job.id] = col;
+  chip.classList.remove('chip-selected');
+  chip.disabled = true;
+  chip.style.opacity = '0.4';
+
+  const targetCol = document.getElementById('sort-col-' + col);
+  const isCorrect = job.correct === col;
+
+  const placed = document.createElement('div');
+  placed.className = 'sortable-job-card placed';
+  placed.innerHTML = `<strong>${job.name}</strong>${isCorrect ? ' ✓' : ` (suggested: ${colLabel(job.correct)})`}`;
+  if (targetCol) targetCol.appendChild(placed);
+  state.sortJobSelected = null;
+
+  // Reveal note when enough placed
+  const placedCount = Object.keys(state.sortPlaced).length;
+  if (placedCount >= 4) {
+    const reveal = document.getElementById('sort-reveal');
+    if (reveal && reveal.classList.contains('hidden')) {
+      reveal.classList.remove('hidden');
+      reveal.innerHTML = `<strong>Notice the range:</strong> Some of these roles (like AI Ethicist and MLOps Engineer) didn't exist a few years ago. Others (like secondary teacher and solicitor) are long-standing but being reshaped by digital tools. The key insight is that new technology creates new categories of work — it doesn't simply delete the old ones. <strong>Important:</strong> some roles listed here (like AI Trainer) are still emerging — their long-term scale is uncertain.
+      <div class="source-chips">
+        <a href="https://reports.weforum.org/docs/WEF_Future_of_Jobs_Report_2025.pdf" target="_blank" rel="noopener" class="source-chip">📄 WEF Future of Jobs 2025</a>
+        <a href="https://www.linkedin.com/pulse/linkedin-jobs-rise-2025-25-fastest-growing-roles-uk-lrsnf" target="_blank" rel="noopener" class="source-chip">📄 LinkedIn Jobs on the Rise 2025</a>
+      </div>`;
+    }
+  }
+}
+
+function colLabel(col) {
+  return { new: 'Genuinely New', reshape: 'Reshaped', change: 'Long-standing & Changing' }[col] || col;
+}
+
+/* ----------------------------------------------------------------
+   STAGE 5 — Guess the Role
+---------------------------------------------------------------- */
+function initGuessGame() {
+  const wrap = document.getElementById('guess-game-wrap');
+  if (!wrap) return;
+  renderGuessCard(0);
+}
+
+function renderGuessCard(idx) {
+  const wrap = document.getElementById('guess-game-wrap');
+  if (!wrap) return;
+  if (idx >= GUESS_ROLES.length) {
+    wrap.innerHTML = `<div class="evidence-note"><strong>All three roles explored.</strong> Notice that even the "new" AI roles require a mix of technical and human skills — product thinking, communication, ethical judgement, and attention to detail.</div>`;
+    return;
+  }
+  const q = GUESS_ROLES[idx];
+  wrap.innerHTML = `
+    <div class="guess-role-box animate-in">
+      <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:var(--space-3);">Role ${idx+1} of ${GUESS_ROLES.length}</p>
+      <p class="guess-clue">${q.clue}</p>
+      <div class="guess-options" role="group" aria-label="Choose the job title">
+        ${q.options.map((opt, oi) => `
+          <button class="guess-opt" data-testid="guess-opt-${idx}-${oi}" onclick="chooseGuess(this,'${opt.replace(/'/g,"\\'")}',${idx})">${opt}</button>
+        `).join('')}
+      </div>
+      <div id="guess-reveal-${idx}" class="prediction-reveal" style="border-left-color:var(--color-stage5);"></div>
+    </div>
+  `;
+}
+
+function chooseGuess(btn, choice, idx) {
+  if (state.guessDone[idx]) return;
+  state.guessDone[idx] = true;
+  const q = GUESS_ROLES[idx];
+  const correct = choice === q.correct;
+  const container = btn.closest('.guess-options');
+  container.querySelectorAll('.guess-opt').forEach(b => {
+    b.disabled = true;
+    if (b.textContent === q.correct) b.classList.add('correct');
+    else if (b === btn) b.classList.add('wrong');
+  });
+  const reveal = document.getElementById('guess-reveal-' + idx);
+  if (reveal) {
+    reveal.classList.add('visible');
+    reveal.innerHTML = `${correct ? '✓ Correct! ' : 'Not quite — '}<strong>${q.correct}.</strong> ${q.explanation}
+    <div class="source-chips"><a href="${q.sourceUrl}" target="_blank" rel="noopener" class="source-chip">📄 ${q.source}</a></div>`;
+  }
+  setTimeout(() => renderGuessCard(idx + 1), 1800);
+}
+
+/* ----------------------------------------------------------------
+   STAGE 5 — Skills sort
+---------------------------------------------------------------- */
+function initSkillsSort() {
+  const area = document.getElementById('skills-sort-area');
+  if (!area) return;
+  area.innerHTML = '';
+
+  SKILLS.forEach(skill => {
+    const chip = document.createElement('button');
+    chip.className = 'skill-chip';
+    chip.setAttribute('data-testid', 'skill-chip-' + skill.id);
+    chip.setAttribute('aria-label', skill.text + ' — tap to classify');
+    chip.textContent = skill.text;
+    chip.addEventListener('click', () => {
+      if (!chip.classList.contains('transferable') && !chip.classList.contains('specialist')) {
+        chip.classList.add(skill.type);
+        chip.setAttribute('aria-label', skill.text + ' — ' + (skill.type === 'transferable' ? 'travels widely across roles' : 'specialist technical skill'));
+      }
+    });
+    area.appendChild(chip);
+  });
+}
+
+/* ----------------------------------------------------------------
+   STAGE 6 — Priorities + Pathways
+---------------------------------------------------------------- */
+function initPriorities() {
+  const grid = document.getElementById('priority-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  PRIORITIES.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'priority-card';
+    card.setAttribute('data-testid', 'priority-' + p.id);
+    card.setAttribute('data-id', p.id);
+    card.setAttribute('role', 'checkbox');
+    card.setAttribute('aria-checked', 'false');
+    card.setAttribute('tabindex', '0');
+    card.innerHTML = `<div class="priority-icon">${p.icon}</div><div class="priority-label">${p.label}</div>`;
+    card.addEventListener('click', () => togglePriority(card, p.id));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); togglePriority(card, p.id); }});
+    grid.appendChild(card);
+  });
+}
+
+function togglePriority(card, id) {
+  if (state.prioritiesSelected.has(id)) {
+    state.prioritiesSelected.delete(id);
+    card.classList.remove('selected');
+    card.setAttribute('aria-checked', 'false');
+  } else {
+    state.prioritiesSelected.add(id);
+    card.classList.add('selected');
+    card.setAttribute('aria-checked', 'true');
+  }
+}
+
+function showPathways() {
+  if (state.prioritiesSelected.size === 0) {
+    alert('Please select at least one priority to continue.');
+    return;
+  }
+
+  const clusterScores = {};
+  state.prioritiesSelected.forEach(id => {
+    const priority = PRIORITIES.find(p => p.id === id);
+    if (!priority) return;
+    priority.clusters.forEach(c => {
+      clusterScores[c] = (clusterScores[c] || 0) + 1;
+    });
+  });
+
+  const top = Object.entries(clusterScores)
+    .sort((a,b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([id]) => OPPORTUNITY_CLUSTERS[id])
+    .filter(Boolean);
+
+  const output = document.getElementById('pathways-output');
+  if (!output) return;
+
+  output.innerHTML = `
+    <hr class="section-sep">
+    <h3 style="font-family:var(--font-display);font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-2);">Three areas to explore further</h3>
+    <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-6);">These suggestions are a starting point, not a prescription. Talk to people in these fields, research further, and keep an open mind. Your interests and priorities will continue to evolve.</p>
+    ${top.map(c => `
+      <div class="pathway-result-card animate-in">
+        <div class="pathway-result-header">
+          <div class="pathway-result-icon" style="background:color-mix(in srgb,${c.colour} 15%,var(--color-surface-offset));">${c.icon}</div>
+          <div>
+            <div class="pathway-result-name">${c.name}</div>
+            <div style="font-size:var(--text-sm);color:var(--color-text-muted);">${c.desc}</div>
+          </div>
+        </div>
+        <div class="pathway-sections">
+          <div class="pathway-section">
+            <div class="pathway-section-label">🤖 AI effect</div>
+            <div class="pathway-section-content">${c.aiEffect}</div>
+          </div>
+          <div class="pathway-section">
+            <div class="pathway-section-label">📈 Growth outlook</div>
+            <div class="pathway-section-content">${c.growth}</div>
+          </div>
+          <div class="pathway-section">
+            <div class="pathway-section-label">🎓 Routes in</div>
+            <div class="pathway-section-content">${c.routes.join(' · ')}</div>
+          </div>
+          <div class="pathway-section">
+            <div class="pathway-section-label">🧠 Key skills</div>
+            <div class="pathway-section-content">${c.skills}</div>
+          </div>
+        </div>
+        <div class="caution-box">
+          <strong>Reality check:</strong> ${c.caution}
+        </div>
+        <div class="source-chips">
+          ${c.sources.map(s => `<a href="${s.url}" target="_blank" rel="noopener" class="source-chip">📄 ${s.label}</a>`).join('')}
+        </div>
+      </div>
+    `).join('')}
+    <div class="evidence-note mt-6">
+      <strong>Remember:</strong> These projections are drawn from UK Government and international data — but they are scenarios, not certainties. The future of work depends on technology development, policy, economics, and individual choices. Use this as a conversation starter, not a definitive guide.
+    </div>
+  `;
+
+  output.removeAttribute('hidden');
+  output.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ----------------------------------------------------------------
+   REFLECTION (end stage)
+---------------------------------------------------------------- */
+function chooseReflection(btn, choice) {
+  if (state.reflectionChosen) return;
+  state.reflectionChosen = true;
+  const container = btn.closest('.prediction-options');
+  container.querySelectorAll('.prediction-option').forEach(b => { b.disabled = true; });
+  btn.classList.add('selected');
+  const reveal = document.getElementById('reflection-reveal');
+  if (reveal) reveal.classList.add('visible');
+}
+
+/* ----------------------------------------------------------------
+   SOURCES DRAWER
+---------------------------------------------------------------- */
+function initSources() {
+  const list = document.getElementById('sources-list');
+  if (!list) return;
+  list.innerHTML = SOURCES_DATA.map(s => `
+    <div class="source-entry">
+      <div class="source-org">${s.org}</div>
+      <div class="source-title">${s.title}</div>
+      <p style="font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-2);">${s.note}</p>
+      <a href="${s.url}" target="_blank" rel="noopener" class="source-link">${s.url}</a>
+    </div>
+  `).join('');
+
+  const openBtn = document.getElementById('sources-btn');
+  const closeBtn = document.getElementById('sources-close');
+  const backdrop = document.getElementById('sources-backdrop');
+  const drawer = document.getElementById('sources-drawer');
+
+  openBtn?.addEventListener('click', openSources);
+  closeBtn?.addEventListener('click', closeSources);
+  backdrop?.addEventListener('click', closeSources);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeSources(); });
+}
+
+function openSources() {
+  const backdrop = document.getElementById('sources-backdrop');
+  const drawer = document.getElementById('sources-drawer');
+  backdrop?.classList.add('open');
+  drawer?.classList.add('open');
+  document.getElementById('sources-close')?.focus();
+}
+
+function closeSources() {
+  const backdrop = document.getElementById('sources-backdrop');
+  const drawer = document.getElementById('sources-drawer');
+  backdrop?.classList.remove('open');
+  drawer?.classList.remove('open');
+}
+
+/* ----------------------------------------------------------------
+   DARK MODE TOGGLE
+---------------------------------------------------------------- */
+function initTheme() {
+  const toggle = document.querySelector('[data-theme-toggle]');
+  const html = document.documentElement;
+  let theme = html.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  html.setAttribute('data-theme', theme);
+  updateThemeIcon(toggle, theme);
+
+  toggle?.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', theme);
+    updateThemeIcon(toggle, theme);
+    toggle.setAttribute('aria-label', 'Switch to ' + (theme === 'dark' ? 'light' : 'dark') + ' mode');
+  });
+}
+
+function updateThemeIcon(btn, theme) {
+  if (!btn) return;
+  if (theme === 'dark') {
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+  } else {
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  }
+}
+
+/* ----------------------------------------------------------------
+   INIT
+---------------------------------------------------------------- */
+document.addEventListener('DOMContentLoaded', () => {
+  initTheme();
+  initTimeline();
+  initSources();
+  initMatching();
+  initCareerGrid();
+  initInterests();
+  initCardSort();
+  initGuessGame();
+  initSkillsSort();
+  initPriorities();
+  updateProgress();
+});
+</script>
+</body>
+</html>
